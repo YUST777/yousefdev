@@ -1,0 +1,9 @@
+node_modules
+.next
+Dockerfile
+.dockerignore
+npm-debug.log
+
+.git
+ZeroThrat-All-main
+website.html
