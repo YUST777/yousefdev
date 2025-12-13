@@ -52,11 +52,11 @@ export const metadata: Metadata = {
     description: 'Full-stack developer and cybersecurity engineer building practical tools and applications.',
     images: [
       {
-        url: '/icons/logo.webp',
+        url: '/og',
         width: 1200,
         height: 630,
-        alt: 'yousefdev - Developer',
-        type: 'image/webp',
+        alt: 'yousefdev - Developer | Full-Stack & Cybersecurity',
+        type: 'image/png',
       },
     ],
     emails: ['contact@yousefdev.xyz'],
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'yousefdev - Developer | Full-Stack & Cybersecurity',
     description: 'Full-stack developer and cybersecurity engineer building practical tools and applications.',
-    images: ['/icons/logo.webp'],
+    images: ['/og'],
     creator: '@yousefdev',
     site: '@yousefdev',
   },
