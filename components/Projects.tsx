@@ -164,9 +164,6 @@ export default function Projects() {
           <div>
             <h2 className="text-5xl md:text-8xl font-display font-black text-white tracking-tighter">PROJECTS</h2>
           </div>
-          <button className="hidden md:block border border-white/20 hover:bg-white hover:text-black px-8 py-3 rounded-full transition-all duration-300 text-sm tracking-widest uppercase">
-            View GitHub
-          </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[350px] md:auto-rows-[450px]">
@@ -321,12 +318,6 @@ export default function Projects() {
               </BentoTilt>
             )
           })}
-        </div>
-        
-        <div className="mt-8 text-center md:hidden">
-          <button className="border border-white/20 hover:bg-white hover:text-black px-8 py-3 rounded-full transition-all duration-300 text-sm tracking-widest uppercase w-full">
-            View GitHub
-          </button>
         </div>
       </div>
 

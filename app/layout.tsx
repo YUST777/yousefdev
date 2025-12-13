@@ -115,9 +115,7 @@ export default function RootLayout({
     url: 'https://yousefdev.xyz',
     jobTitle: 'Developer',
     description: 'Full-stack developer and cybersecurity engineer building practical tools and applications.',
-    sameAs: [
-      'https://github.com/YUST777',
-    ],
+    sameAs: [],
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'Business Inquiries',
@@ -152,9 +150,7 @@ export default function RootLayout({
     '@type': 'Person',
     name: 'yousefdev',
     jobTitle: 'Developer',
-    sameAs: [
-      'https://github.com/YUST777',
-    ],
+    sameAs: [],
   }
 
   // Service schema
