@@ -9,7 +9,6 @@ import BentoTilt from '@/components/BentoTilt'
 function TerminalTyping({ text, className }: { text: string; className?: string }) {
   const [displayedText, setDisplayedText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
-  const [showCursor, setShowCursor] = useState(true)
 
   useEffect(() => {
     const typingSpeed = 100 // milliseconds per character
