@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     description: 'Full-stack developer and cybersecurity engineer building practical tools and applications.',
     images: [
       {
-        url: '/og',
+        url: new URL('/og', 'https://yousefdev.xyz').toString(),
         width: 1200,
         height: 630,
         alt: 'yousefdev - Developer | Full-Stack & Cybersecurity',
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'yousefdev - Developer | Full-Stack & Cybersecurity',
     description: 'Full-stack developer and cybersecurity engineer building practical tools and applications.',
-    images: ['/og'],
+    images: [new URL('/og', 'https://yousefdev.xyz').toString()],
     creator: '@yousefdev',
     site: '@yousefdev',
   },

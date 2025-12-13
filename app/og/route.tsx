@@ -1,4 +1,5 @@
-import { ImageResponse } from 'next/og'
+// @ts-ignore
+import { ImageResponse } from '@vercel/og'
 
 export const runtime = 'edge'
 
