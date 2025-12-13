@@ -17,6 +17,9 @@ const nextConfig = {
     return config;
   },
 
+  // Turbopack config to silence Next.js 16 warning
+  turbopack: {},
+
 
   // Optimize images
   images: {
