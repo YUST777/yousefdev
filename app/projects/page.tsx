@@ -1,9 +1,59 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import BentoTilt from '@/components/BentoTilt'
+
+// Terminal Typing Animation Component
+function TerminalTyping({ text, className }: { text: string; className?: string }) {
+  const [displayedText, setDisplayedText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [showCursor, setShowCursor] = useState(true)
+
+  useEffect(() => {
+    const typingSpeed = 100 // milliseconds per character
+    const deletingSpeed = 50
+    const pauseDuration = 2000 // pause before deleting
+    const pauseAfterDelete = 500 // pause after deleting before retyping
+
+    let timeout: NodeJS.Timeout
+
+    if (!isDeleting) {
+      // Typing phase
+      if (displayedText.length < text.length) {
+        timeout = setTimeout(() => {
+          setDisplayedText(text.slice(0, displayedText.length + 1))
+        }, typingSpeed)
+      } else {
+        // Finished typing, wait then start deleting
+        timeout = setTimeout(() => {
+          setIsDeleting(true)
+        }, pauseDuration)
+      }
+    } else {
+      // Deleting phase
+      if (displayedText.length > 0) {
+        timeout = setTimeout(() => {
+          setDisplayedText(displayedText.slice(0, -1))
+        }, deletingSpeed)
+      } else {
+        // Finished deleting, wait then restart typing
+        timeout = setTimeout(() => {
+          setIsDeleting(false)
+        }, pauseAfterDelete)
+      }
+    }
+
+    return () => clearTimeout(timeout)
+  }, [displayedText, isDeleting, text])
+
+  return (
+    <span className={className}>
+      {displayedText}
+    </span>
+  )
+}
 
 export default function ProjectsPage() {
   const [activeTag, setActiveTag] = useState('All Tags')
@@ -124,8 +174,8 @@ export default function ProjectsPage() {
         md:flex flex-col py-12 px-8 overflow-y-auto
       `}>
         <div className="hidden md:block mb-12">
-          <Link href="/" className="text-2xl font-display font-bold tracking-tight hover:text-white/80 transition-colors">
-            yousefdev
+          <Link href="/" className="text-2xl font-display font-bold tracking-tight hover:text-white/80 transition-colors font-mono">
+            <TerminalTyping text="yousefdev |" />
           </Link>
         </div>
 
