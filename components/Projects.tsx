@@ -455,6 +455,19 @@ export default function Projects() {
                   </div>
                 </div>
               </div>
+
+              {/* Visit Project Button */}
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                <a 
+                  href="https://zerothreat.yousefdev.xyz/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
+                >
+                  <span>Visit Zero Threat</span>
+                  <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
+                </a>
+              </div>
             </>
           )}
 
@@ -522,6 +535,19 @@ export default function Projects() {
                   </div>
                 </div>
               </div>
+
+              {/* Visit Project Button */}
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                <a 
+                  href="https://retroos.yousefdev.xyz/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
+                >
+                  <span>Visit retroOS</span>
+                  <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
+                </a>
+              </div>
             </>
           )}
 
@@ -533,6 +559,19 @@ export default function Projects() {
                 <p className="text-sm text-gray-300 leading-relaxed">
                   A creative web project showcasing modern design and interactive elements. Built with cutting-edge technologies for an engaging user experience.
                 </p>
+              </div>
+
+              {/* Visit Project Button */}
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                <a 
+                  href="https://icpchue.xyz" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
+                >
+                  <span>Visit ICPCHUE</span>
+                  <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
+                </a>
               </div>
             </>
           )}
