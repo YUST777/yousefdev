@@ -153,8 +153,7 @@ export default function ProjectsPage() {
       `}>
         <div className="hidden md:block mb-12">
           <Link href="/" className="text-2xl font-display font-bold tracking-tight hover:text-white/80 transition-colors font-mono">
-            {typewriterText}
-            <span className="animate-pulse">|</span>
+            {typewriterText || 'y'}
           </Link>
         </div>
 
