@@ -183,9 +183,9 @@ export default function Projects() {
                 >
                   <div
                     ref={el => { revealRefs.current[index + 1] = el }}
-                    className="w-full h-full"
+                    className="w-full h-full pointer-events-none"
                   >
-                  <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
+                  <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative pointer-events-none">
                     {project.video ? (
                       <video
                         src={project.video}
@@ -227,7 +227,7 @@ export default function Projects() {
                 >
                   <div
                     ref={el => { revealRefs.current[index + 1] = el }}
-                    className="relative w-full h-full"
+                    className="relative w-full h-full pointer-events-none"
                   >
                     {project.video ? (
                       <>
@@ -287,9 +287,9 @@ export default function Projects() {
               >
                 <div
                   ref={el => { revealRefs.current[index + 1] = el }}
-                  className="w-full h-full"
+                  className="w-full h-full pointer-events-none"
                   >
-                  <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
+                  <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative pointer-events-none">
                     {project.video ? (
                       <video
                         src={project.video}
