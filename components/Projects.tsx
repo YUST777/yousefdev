@@ -269,32 +269,30 @@ export default function Projects() {
                 className={`${project.span} rounded-2xl overflow-hidden relative group cursor-pointer`}
               >
                 {/* Clickable overlay for mobile touch */}
-                {!project.isPlaceholder && (
-                  <button
-                    onClick={() => {
-                      if (project.video === '/videos/zerothreat.webm') {
-                        setOpenDrawer('zerothreat')
-                        return
-                      }
-                      if (project.video === '/videos/RetroOS_Project.webm') {
-                        setOpenDrawer('retroOS')
-                        return
-                      }
-                      if (project.video === '/videos/ICPCHUE.webm') {
-                        setOpenDrawer('ICPCHUE')
-                        return
-                      }
-                      if (project.video === '/videos/yousefdev.webm') {
-                        setOpenDrawer('yousefdev')
-                        return
-                      }
-                      setSelectedProject(project)
-                      setIsModalOpen(true)
-                    }}
-                    className="absolute inset-0 z-50 w-full h-full bg-transparent cursor-pointer"
-                    aria-label={`View ${project.title || 'project'} details`}
-                  />
-                )}
+                <button
+                  onClick={() => {
+                    if (project.video === '/videos/zerothreat.webm') {
+                      setOpenDrawer('zerothreat')
+                      return
+                    }
+                    if (project.video === '/videos/RetroOS_Project.webm') {
+                      setOpenDrawer('retroOS')
+                      return
+                    }
+                    if (project.video === '/videos/ICPCHUE.webm') {
+                      setOpenDrawer('ICPCHUE')
+                      return
+                    }
+                    if (project.video === '/videos/yousefdev.webm') {
+                      setOpenDrawer('yousefdev')
+                      return
+                    }
+                    setSelectedProject(project)
+                    setIsModalOpen(true)
+                  }}
+                  className="absolute inset-0 z-50 w-full h-full bg-transparent cursor-pointer"
+                  aria-label={`View ${project.title || 'project'} details`}
+                />
                 <div
                   ref={el => { revealRefs.current[index + 1] = el }}
                   className="w-full h-full"
@@ -309,7 +307,7 @@ export default function Projects() {
                         playsInline
                         className="absolute inset-0 w-full h-full object-cover rounded-2xl pointer-events-none"
                       />
-                    ) : project.isPlaceholder ? null : (
+                    ) : (
                       <i className={`fas ${project.icon} text-8xl md:text-9xl text-white/20 group-hover:text-white/30 transition-colors duration-500`}></i>
                     )}
                     <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
@@ -317,19 +315,17 @@ export default function Projects() {
                       <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500 pointer-events-none"></div>
                     )}
                   </div>
-                  {!project.isPlaceholder && (
-                    <div className="absolute inset-0 bg-transparent group-hover:bg-transparent transition-all duration-500 p-6 md:p-8 flex flex-col justify-between pointer-events-none">
-                      {project.tag && (
-                        <div className="flex justify-between items-start">
-                          <span className="bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold border border-white/20 uppercase tracking-widest text-white shadow-lg">{project.tag}</span>
-                        </div>
-                      )}
-                      <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                        <h3 className="text-2xl md:text-3xl font-display font-bold mb-1 text-white">{project.title}</h3>
-                        <p className="text-gray-300 text-xs md:text-sm font-light">{project.description}</p>
+                  <div className="absolute inset-0 bg-transparent group-hover:bg-transparent transition-all duration-500 p-6 md:p-8 flex flex-col justify-between pointer-events-none">
+                    {project.tag && (
+                      <div className="flex justify-between items-start">
+                        <span className="bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold border border-white/20 uppercase tracking-widest text-white shadow-lg">{project.tag}</span>
                       </div>
+                    )}
+                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                      <h3 className="text-2xl md:text-3xl font-display font-bold mb-1 text-white">{project.title}</h3>
+                      <p className="text-gray-300 text-xs md:text-sm font-light">{project.description}</p>
                     </div>
-                  )}
+                  </div>
                 </div>
               </BentoTilt>
             )
