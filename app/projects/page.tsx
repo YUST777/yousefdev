@@ -313,7 +313,7 @@ export default function ProjectsPage() {
                   {/* Header */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-2">Fazzah – Streetwear E-Commerce Store</h4>
-                    <p className="text-sm text-gray-400">Role: Full-Stack Shopify Developer</p>
+                    <p className="text-sm text-gray-400">December 3, 2025 • Role: Full-Stack Shopify Developer</p>
                   </div>
 
                   {/* Overview */}
@@ -354,7 +354,7 @@ export default function ProjectsPage() {
                   {/* Header */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-2">PanoBlue – Import/Export Corporate Platform</h4>
-                    <p className="text-sm text-gray-400">Role: Frontend Developer & UI Designer</p>
+                    <p className="text-sm text-gray-400">December 8, 2025 • Role: Frontend Developer & UI Designer</p>
                   </div>
 
                   {/* Overview */}
