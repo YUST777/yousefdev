@@ -562,12 +562,32 @@ export default function Projects() {
 
               {openDrawer === 'ICPCHUE' && (
                 <>
-                  {/* Description */}
+                  {/* Header */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4">About Project</h4>
+                    <h4 className="text-xl font-display font-bold text-white mb-2">ICPC HUE Platform</h4>
+                    <p className="text-sm text-gray-400">December 8, 2025 • Lead Full-Stack Developer & Co-Founder</p>
+                  </div>
+
+                  {/* Overview */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4">📋 Overview</h4>
                     <p className="text-sm text-gray-300 leading-relaxed">
-                      A creative web project showcasing modern design and interactive elements. Built with cutting-edge technologies for an engaging user experience.
+                      ICPC HUE is a competitive programming community established at Horus University. Recognizing the lack of a dedicated ICPC chapter in our faculty, I collaborated with my team to build this initiative from the ground up. Over the course of three semesters (Summer Year 1 to Fall Year 2), we developed the branding, curriculum, and digital infrastructure to support our fellow students.
                     </p>
+                  </div>
+
+                  {/* Technical Contributions */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4">🛠️ Technical Contributions</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed mb-4">
+                      I led the development of ICPCHUE.XYZ, a comprehensive platform serving the community:
+                    </p>
+                    <ul className="space-y-3 text-sm text-gray-300">
+                      <li><strong className="text-white">Modern Landing Page:</strong> Built with Next.js and React for a high-performance, clean user interface.</li>
+                      <li><strong className="text-white">Secure Registration:</strong> Implemented a robust candidate application system using Supabase for database management. Security was prioritized using reCAPTCHA, Cloudflare, and Fail2Ban to prevent DDoS attacks and spam.</li>
+                      <li><strong className="text-white">Gamified Dashboard:</strong> Created an interactive student dashboard featuring live 3D assets and "Easter eggs" to increase user motivation. Features include session file downloads, quiz submissions, and a real-time skills tracker.</li>
+                      <li><strong className="text-white">Performance & Security:</strong> The platform is fully responsive for mobile and desktop. Sensitive data is protected via client-side encryption using CryptoJS.</li>
+                    </ul>
                   </div>
 
                   {/* Visit Project Button */}
