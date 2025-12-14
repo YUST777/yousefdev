@@ -405,64 +405,48 @@ export default function Projects() {
               {/* Dynamic Content Based on Project */}
               {openDrawer === 'zerothreat' && (
                 <>
-                  {/* Tech Stack */}
+                  {/* Header */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4">🚀 Tech Stack</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <h5 className="text-sm font-bold text-white/80 mb-2">Frontend</h5>
-                        <ul className="space-y-1 text-sm text-gray-300">
-                          <li>• React 18.3.1 - Modern React with hooks</li>
-                          <li>• Vite 5.4.10 - Fast build tool</li>
-                          <li>• Tailwind CSS 3.4.14 - Utility-first CSS</li>
-                          <li>• GSAP 3.12.5 - Animation library</li>
-                          <li>• React Icons 5.3.0 - Icon library</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h5 className="text-sm font-bold text-white/80 mb-2">Development Tools</h5>
-                        <ul className="space-y-1 text-sm text-gray-300">
-                          <li>• ESLint 9.14.0 - Code quality</li>
-                          <li>• PostCSS 8.4.49 - CSS processing</li>
-                          <li>• Prettier 3.3.3 - Code formatting</li>
-                        </ul>
-                      </div>
-                    </div>
+                    <h4 className="text-xl font-display font-bold text-white mb-2">Zero Threat – AI-Driven Cybersecurity Suite</h4>
+                    <p className="text-sm text-gray-400">🏆 3rd Place at the National Student Forum (Al-Multaqy Al-Qammy), Tanta University</p>
+                    <p className="text-sm text-gray-400 mt-1">Role: Lead Web Developer & UI/UX Designer</p>
                   </div>
 
-                  {/* Features */}
+                  {/* The Achievement */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4">✨ Features</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      <div className="flex items-start gap-2">
-                        <span className="text-lg">🎬</span>
-                        <span className="text-sm text-gray-300">Interactive Video Hero Section with GSAP animations</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-lg">🎨</span>
-                        <span className="text-sm text-gray-300">Modern UI/UX Design with custom animations</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-lg">📱</span>
-                        <span className="text-sm text-gray-300">Fully Responsive for all devices</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-lg">⚡</span>
-                        <span className="text-sm text-gray-300">Performance Optimized with Vite</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-lg">🎭</span>
-                        <span className="text-sm text-gray-300">Smooth GSAP-powered animations</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-lg">🎵</span>
-                        <span className="text-sm text-gray-300">Audio Integration with background music</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-lg">🖼️</span>
-                        <span className="text-sm text-gray-300">Rich Media Content with high-quality assets</span>
-                      </div>
-                    </div>
+                    <h4 className="text-xl font-display font-bold text-white mb-4">🏆 The Achievement</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      This project secured 3rd place in a national competition featuring universities from across Egypt. As freshmen from a private university, my team competed against and outperformed 4th and 5th-year Engineering and Computer Science seniors. Our project was evaluated and commended by the Dean of Computer Science and a Professor of Cybersecurity at Tanta University.
+                    </p>
+                  </div>
+
+                  {/* The Solution */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4">💡 The Solution</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      Zero Threat is a comprehensive security ecosystem combining a web platform, a browser extension, and a Windows application.
+                    </p>
+                  </div>
+
+                  {/* My Contribution */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4">🌐 My Contribution (The Web Platform)</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed mb-4">
+                      I led the development of the web interface using Next.js and React, focusing on a high-performance UI with smooth animations. Key features I implemented include:
+                    </p>
+                    <ul className="space-y-3 text-sm text-gray-300">
+                      <li><strong className="text-white">Universal File Scanner:</strong> An integrated tool to scan various file types (ZIP, PNG, MP4) for hidden malware.</li>
+                      <li><strong className="text-white">Web Security Tools:</strong> Built-in developer tools for open port scanning and vulnerability assessment (similar to OWASP ZAP).</li>
+                      <li><strong className="text-white">Browser Extension:</strong> A companion extension to ensure safe downloads in real-time.</li>
+                    </ul>
+                  </div>
+
+                  {/* The Windows Agent */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4">🖥️ The Windows Agent</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      Developed by my teammate Abdelrahman Mohsen, the desktop client utilizes the YARA protocol and AI integration. In our benchmarks, it achieved a <strong className="text-white">90% detection rate</strong> across 90 test subjects, outperforming many traditional signature-based antivirus solutions.
+                    </p>
                   </div>
 
                   {/* Visit Project Button */}
