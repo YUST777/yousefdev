@@ -198,7 +198,7 @@ export default function Projects() {
           className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-20 px-0 md:px-4"
         >
           <div>
-            <h2 className="text-5xl md:text-8xl font-display font-black text-white tracking-tighter">PROJECTS</h2>
+            <h2 className="text-3xl md:text-8xl font-display font-black text-white tracking-tighter">PROJECTS</h2>
           </div>
           <button className="hidden md:block border border-white/20 hover:bg-white hover:text-black px-8 py-3 rounded-full transition-all duration-300 text-sm tracking-widest uppercase">
             View GitHub

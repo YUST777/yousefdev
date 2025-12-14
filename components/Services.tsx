@@ -67,7 +67,7 @@ export default function Services() {
         <div className="bg-white text-black rounded-[2rem] md:rounded-[3rem] p-8 md:p-16 overflow-hidden relative">
           <div className="absolute top-[-20%] right-[-10%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-gray-100 rounded-full blur-[100px] opacity-60 pointer-events-none"></div>
 
-          <h2 className="text-5xl md:text-8xl font-display font-black mb-12 md:mb-20 tracking-tighter text-center relative z-10">SERVICES</h2>
+          <h2 className="text-3xl md:text-8xl font-display font-black mb-12 md:mb-20 tracking-tighter text-center relative z-10">SERVICES</h2>
 
           <div className="flex flex-col gap-12 md:gap-20 max-w-5xl mx-auto relative z-10">
             {services.map((service, index) => (
