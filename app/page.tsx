@@ -26,7 +26,7 @@ export default function Home() {
           '@type': 'ListItem',
           position: 1,
           name: 'Home',
-          item: 'https://01studio.xyz',
+          item: 'https://yousefdev.xyz',
         },
       ],
     },

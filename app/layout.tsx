@@ -21,16 +21,31 @@ export const metadata: Metadata = {
     default: 'yousefdev - Developer | Full-Stack & Cybersecurity',
     template: '%s | yousefdev'
   },
-  description: 'yousefdev is a full-stack developer and cybersecurity engineer building practical tools and applications with clean design and solid architecture.',
+  description: 'yousefdev is a full-stack developer and cybersecurity engineer building practical tools and applications with clean design and solid architecture. Expert in React, Next.js, TypeScript, and security solutions.',
   keywords: [
-    'Developer',
+    'yousefdev',
     'Full-Stack Developer',
     'Cybersecurity Engineer',
+    'Software Developer',
+    'Web Developer',
+    'React Developer',
+    'Next.js Developer',
+    'TypeScript Developer',
     'Software Development',
     'Web Development',
     'Application Development',
+    'Cybersecurity Services',
+    'Security Engineering',
     'Automation',
-    'System Design'
+    'System Design',
+    'Frontend Development',
+    'Backend Development',
+    'E-commerce Development',
+    'Portfolio Website',
+    'Custom Software Solutions',
+    'Web Application Security',
+    'Penetration Testing',
+    'Security Consulting'
   ],
   authors: [{ name: 'yousefdev', url: 'https://yousefdev.xyz' }],
   creator: 'yousefdev',
@@ -48,14 +63,14 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://yousefdev.xyz',
     siteName: 'yousefdev',
-    title: 'yousefdev - Developer | Full-Stack & Cybersecurity',
-    description: 'Full-stack developer and cybersecurity engineer building practical tools and applications.',
+    title: 'yousefdev - Full-Stack Developer & Cybersecurity Engineer',
+    description: 'Full-stack developer and cybersecurity engineer building practical tools and applications with React, Next.js, and TypeScript. Expert in web development, security solutions, and automation.',
     images: [
       {
-        url: '/icons/logo.webp',
+        url: 'https://yousefdev.xyz/icons/logo.webp',
         width: 1200,
         height: 630,
-        alt: 'yousefdev - Developer',
+        alt: 'yousefdev - Full-Stack Developer & Cybersecurity Engineer',
         type: 'image/webp',
       },
     ],
@@ -63,9 +78,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'yousefdev - Developer | Full-Stack & Cybersecurity',
-    description: 'Full-stack developer and cybersecurity engineer building practical tools and applications.',
-    images: ['/icons/logo.webp'],
+    title: 'yousefdev - Full-Stack Developer & Cybersecurity Engineer',
+    description: 'Full-stack developer and cybersecurity engineer building practical tools and applications with React, Next.js, and TypeScript.',
+    images: ['https://yousefdev.xyz/icons/logo.webp'],
     creator: '@yousefdev',
     site: '@yousefdev',
   },
@@ -112,16 +127,20 @@ export default function RootLayout({
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'yousefdev',
+    alternateName: 'Yousef',
     url: 'https://yousefdev.xyz',
-    jobTitle: 'Developer',
-    description: 'Full-stack developer and cybersecurity engineer building practical tools and applications.',
+    jobTitle: ['Full-Stack Developer', 'Cybersecurity Engineer'],
+    description: 'Full-stack developer and cybersecurity engineer building practical tools and applications with clean design and solid architecture.',
+    image: 'https://yousefdev.xyz/icons/logo.webp',
     sameAs: [
       'https://github.com/YUST777',
     ],
+    email: 'contact@yousefdev.xyz',
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'Business Inquiries',
-      availableLanguage: ['English'],
+      availableLanguage: ['English', 'Arabic'],
+      areaServed: 'Worldwide',
     },
     areaServed: 'Worldwide',
     knowsAbout: [
@@ -131,19 +150,39 @@ export default function RootLayout({
       'Web Development',
       'Application Development',
       'Automation',
+      'React',
+      'Next.js',
+      'TypeScript',
+      'Node.js',
+      'Security Engineering',
+      'Penetration Testing',
     ],
+    alumniOf: {
+      '@type': 'EducationalOrganization',
+      name: 'Horus University',
+    },
   }
 
   const websiteStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'yousefdev',
+    alternateName: 'yousefdev Portfolio',
     url: 'https://yousefdev.xyz',
-    description: 'Full-stack developer and cybersecurity engineer',
+    description: 'Full-stack developer and cybersecurity engineer building practical tools and applications',
     publisher: {
       '@type': 'Person',
       name: 'yousefdev',
     },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://yousefdev.xyz/?s={search_term_string}',
+      },
+      'query-input': 'required name=search_term_string',
+    },
+    inLanguage: 'en-US',
   }
 
   // Person schema
@@ -157,36 +196,68 @@ export default function RootLayout({
     ],
   }
 
+  // Professional Service schema
+  const professionalServiceData = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: 'yousefdev Development Services',
+    description: 'Full-stack development, cybersecurity, and automation services',
+    provider: {
+      '@type': 'Person',
+      name: 'yousefdev',
+      url: 'https://yousefdev.xyz',
+    },
+    areaServed: 'Worldwide',
+    serviceType: ['Software Development', 'Cybersecurity', 'Web Development', 'Automation'],
+    url: 'https://yousefdev.xyz',
+  }
+
   // Service schema
   const servicesStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
+    name: 'Services Offered',
     itemListElement: [
       {
-        '@type': 'Service',
-        name: 'Software Development',
-        description: 'Full-stack web and application development',
-        provider: {
-          '@type': 'Person',
-          name: 'yousefdev',
+        '@type': 'ListItem',
+        position: 1,
+        item: {
+          '@type': 'Service',
+          name: 'Full-Stack Web Development',
+          description: 'Custom web applications built with React, Next.js, and TypeScript',
+          provider: {
+            '@type': 'Person',
+            name: 'yousefdev',
+          },
+          areaServed: 'Worldwide',
         },
       },
       {
-        '@type': 'Service',
-        name: 'Cybersecurity',
-        description: 'Security engineering and threat analysis',
-        provider: {
-          '@type': 'Person',
-          name: 'yousefdev',
+        '@type': 'ListItem',
+        position: 2,
+        item: {
+          '@type': 'Service',
+          name: 'Cybersecurity Services',
+          description: 'Security engineering, penetration testing, and threat analysis',
+          provider: {
+            '@type': 'Person',
+            name: 'yousefdev',
+          },
+          areaServed: 'Worldwide',
         },
       },
       {
-        '@type': 'Service',
-        name: 'Automation',
-        description: 'Automated systems and data processing',
-        provider: {
-          '@type': 'Person',
-          name: 'yousefdev',
+        '@type': 'ListItem',
+        position: 3,
+        item: {
+          '@type': 'Service',
+          name: 'Automation Solutions',
+          description: 'Automated systems and data processing solutions',
+          provider: {
+            '@type': 'Person',
+            name: 'yousefdev',
+          },
+          areaServed: 'Worldwide',
         },
       },
     ],
@@ -225,6 +296,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesStructuredData) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceData) }}
         />
       </head>
       <body className={`${inter.variable} ${syne.variable} font-sans antialiased selection:bg-white selection:text-black overflow-x-hidden`}>
