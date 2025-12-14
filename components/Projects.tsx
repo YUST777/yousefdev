@@ -448,7 +448,7 @@ export default function Projects() {
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4">🏆 The Achievement</h4>
                     <p className="text-sm text-gray-300 leading-relaxed">
-                      This project secured 3rd place in a national competition featuring universities from across Egypt. As freshmen from a private university, my team competed against and outperformed 4th and 5th-year Engineering and Computer Science seniors. Our project was evaluated and commended by the Dean of Computer Science and a Professor of Cybersecurity at Tanta University.
+                      This project secured 3rd place in a national competition featuring <strong className="text-white">20 universities from across Egypt</strong>. As freshmen from a private university, my team competed against and outperformed 4th and 5th-year Engineering and Computer Science seniors. Our project was evaluated and commended by the Dean of Computer Science and a Professor of Cybersecurity at Tanta University.
                     </p>
                   </div>
 
@@ -479,6 +479,29 @@ export default function Projects() {
                     <p className="text-sm text-gray-300 leading-relaxed">
                       Developed by my teammate Abdelrahman Mohsen, the desktop client utilizes the YARA protocol and AI integration. In our benchmarks, it achieved a <strong className="text-white">90% detection rate</strong> across 90 test subjects, outperforming many traditional signature-based antivirus solutions.
                     </p>
+                  </div>
+
+                  {/* Official Documentation */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4">📄 Official Documentation (توثيق)</h4>
+                    <p className="text-sm text-gray-400 mb-4">Official posts from Tanta University and Horus University:</p>
+                    <ul className="space-y-3 text-sm">
+                      <li>
+                        <a href="https://www.facebook.com/share/p/1DAW9yMMH1/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 flex items-center gap-2">
+                          <i className="fab fa-facebook"></i> Tanta University Official Post
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://www.facebook.com/share/p/1XakrE3nLE/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 flex items-center gap-2">
+                          <i className="fab fa-facebook"></i> Horus University Official Post
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://www.facebook.com/share/v/1HBLEF92ep/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 flex items-center gap-2">
+                          <i className="fab fa-facebook"></i> Award Ceremony Video (2:13)
+                        </a>
+                      </li>
+                    </ul>
                   </div>
 
                   {/* Visit Project Button */}
