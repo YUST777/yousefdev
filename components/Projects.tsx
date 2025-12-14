@@ -466,67 +466,35 @@ export default function Projects() {
 
               {openDrawer === 'retroOS' && (
                 <>
-                  {/* Description */}
+                  {/* Header */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4">About Project</h4>
+                    <h4 className="text-xl font-display font-bold text-white mb-2">RetroOS</h4>
+                    <p className="text-sm text-gray-400">🏆 Operating Systems Course Project & Hackathon Winner</p>
+                    <p className="text-sm text-gray-400 mt-1">Tech Stack: Next.js, React</p>
+                  </div>
+
+                  {/* Overview */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4">� Overview</h4>
                     <p className="text-sm text-gray-300 leading-relaxed">
-                      A fully interactive retro operating system built with Next.js and React. Experience a nostalgic desktop environment with working terminal, file system, window management, and multiple applications.
+                      RetroOS is a web-based simulation designed to trigger nostalgia by faithfully recreating the iconic Windows XP user interface. Originally developed as a project for my Operating Systems university course, it serves as a visual mimic of an OS environment entirely within the browser.
                     </p>
                   </div>
 
-                  {/* Technologies */}
+                  {/* The Experience */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4">🛠️ Technologies</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Zustand', 'React Draggable'].map((tech) => (
-                        <span key={tech} className="px-3 py-1 bg-white/10 rounded-full text-xs text-white border border-white/20">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+                    <h4 className="text-xl font-display font-bold text-white mb-4">💻 The Experience</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      While it doesn't run on a low-level kernel, the application uses advanced React state management to simulate windowing systems, taskbars, and file navigation. The attention to detail in the UI/UX design made the project stand out immediately.
+                    </p>
                   </div>
 
-                  {/* Features */}
+                  {/* Key Achievement */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4">✨ Key Features</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <h5 className="text-sm font-bold text-white/80 mb-2">🖥️ Desktop Environment</h5>
-                        <ul className="space-y-1 text-sm text-gray-300">
-                          <li>• Interactive desktop</li>
-                          <li>• Window management</li>
-                          <li>• Drag and drop</li>
-                          <li>• Multiple wallpapers</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h5 className="text-sm font-bold text-white/80 mb-2">💻 Terminal</h5>
-                        <ul className="space-y-1 text-sm text-gray-300">
-                          <li>• Full terminal emulator</li>
-                          <li>• File system commands</li>
-                          <li>• Process management</li>
-                          <li>• Command history</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h5 className="text-sm font-bold text-white/80 mb-2">📁 File System</h5>
-                        <ul className="space-y-1 text-sm text-gray-300">
-                          <li>• Hierarchical structure</li>
-                          <li>• CRUD operations</li>
-                          <li>• Trash and restore</li>
-                          <li>• File editor</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h5 className="text-sm font-bold text-white/80 mb-2">⚙️ OS Concepts</h5>
-                        <ul className="space-y-1 text-sm text-gray-300">
-                          <li>• Process management</li>
-                          <li>• Memory tracking</li>
-                          <li>• User sessions</li>
-                          <li>• Resource allocation</li>
-                        </ul>
-                      </div>
-                    </div>
+                    <h4 className="text-xl font-display font-bold text-white mb-4">🏆 Key Achievement</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      We took this project to a hackathon, where its unique concept and execution earned us a <strong className="text-white">$150 cash prize</strong>. It was a wild experience turning a course assignment into a winning hackathon entry.
+                    </p>
                   </div>
 
                   {/* Visit Project Button */}
