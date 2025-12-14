@@ -465,12 +465,12 @@ export default function Projects() {
                     <p className="text-sm text-gray-400 mb-4">Official posts from Tanta University and Horus University:</p>
                     <ul className="space-y-3 text-sm">
                       <li>
-                        <a href="https://www.facebook.com/share/p/1XakrE3nLE/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 flex items-center gap-2">
+                        <a href="https://www.facebook.com/share/p/1DAW9yMMH1/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 flex items-center gap-2">
                           <i className="fab fa-facebook"></i> Horus University Official Post
                         </a>
                       </li>
                       <li>
-                        <a href="https://www.facebook.com/share/p/1DAW9yMMH1/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 flex items-center gap-2">
+                        <a href="https://www.facebook.com/share/p/1XakrE3nLE/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 flex items-center gap-2">
                           <i className="fab fa-facebook"></i> Tanta University Official Post
                         </a>
                       </li>
