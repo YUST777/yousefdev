@@ -421,7 +421,9 @@ export default function Projects() {
                       openDrawer === 'zerothreat' ? '/videos/zerothreat.webm' :
                         openDrawer === 'retroOS' ? '/videos/RetroOS_Project.webm' :
                           openDrawer === 'ICPCHUE' ? '/videos/ICPCHUE.webm' :
-                            openDrawer === 'yousefdev' ? '/videos/yousefdev.webm' : ''
+                            openDrawer === 'yousefdev' ? '/videos/yousefdev.webm' :
+                              openDrawer === 'panoblue' ? '/videos/panoblue.webm' :
+                                openDrawer === 'fazzah' ? '/videos/fazzah.webm' : ''
                     }
                     autoPlay
                     loop
