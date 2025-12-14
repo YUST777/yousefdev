@@ -153,9 +153,9 @@ export default function ProjectsPage() {
         ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
         md:flex flex-col py-12 px-8 overflow-y-auto
       `}>
-        <div className="hidden md:block mb-12">
-          <Link href="/" className="text-2xl font-display font-bold tracking-tight hover:text-white/80 transition-colors font-mono">
-            {typewriterText}
+        <div className="hidden md:block mb-12 min-h-[40px]">
+          <Link href="/" className="text-2xl font-display font-bold tracking-tight hover:text-white/80 transition-colors font-mono inline-block min-w-[180px]">
+            {typewriterText || '\u00A0'}
           </Link>
         </div>
 
