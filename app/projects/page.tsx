@@ -476,9 +476,15 @@ export default function ProjectsPage() {
 
               {openDrawer === 'retroos' && (
                 <>
+                  {/* Header */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-2">retroOS – Retro Operating System UI</h4>
+                    <p className="text-sm text-gray-400">December 5, 2025 • Operating Systems Course Project & Hackathon Winner</p>
+                  </div>
+
                   {/* Description */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4">About Project</h4>
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-info-circle mr-2"></i>About Project</h4>
                     <p className="text-sm text-gray-300 leading-relaxed">
                       A fully interactive retro operating system built with Next.js and React. Experience a nostalgic desktop environment with working terminal, file system, window management, and multiple applications.
                     </p>
