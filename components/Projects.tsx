@@ -81,28 +81,6 @@ export default function Projects() {
       video: '/videos/ICPCHUE.webm',
     },
     {
-      id: 7,
-      title: 'PanoBlue',
-      description: 'Import/Export Corporate Platform',
-      fullDescription: 'A modern corporate website for an import/export company with custom architecture and interactive UI.',
-      tag: 'Corporate',
-      icon: 'fa-building',
-      span: 'md:col-span-1 md:row-span-1',
-      delay: 'delay-100',
-      video: '/videos/panoblue.webm',
-    },
-    {
-      id: 8,
-      title: 'Fazzah',
-      description: 'Streetwear E-Commerce',
-      fullDescription: 'A modern streetwear e-commerce store built with Shopify featuring payment gateway and warehouse management.',
-      tag: 'E-Commerce',
-      icon: 'fa-shopping-bag',
-      span: 'md:col-span-1 md:row-span-1',
-      delay: 'delay-100',
-      video: '/videos/fazzah.webm',
-    },
-    {
       id: 2,
       title: 'retroOS',
       description: 'Retro operating system UI',
@@ -483,7 +461,7 @@ export default function Projects() {
 
                   {/* Official Documentation */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4">📄 Official Documentation (توثيق)</h4>
+                    <h4 className="text-xl font-display font-bold text-white mb-4">📄 Official Documentation</h4>
                     <p className="text-sm text-gray-400 mb-4">Official posts from Tanta University and Horus University:</p>
                     <ul className="space-y-3 text-sm">
                       <li>
