@@ -179,15 +179,11 @@ export default function Projects() {
                 <BentoTilt
                   key={project.id}
                   className={`${project.span} rounded-2xl overflow-hidden relative group cursor-pointer`}
+                  onClick={handleCardClick}
                 >
                   <div
                     ref={el => { revealRefs.current[index + 1] = el }}
                     className="w-full h-full"
-                    onClick={handleCardClick}
-                    onTouchEnd={(e) => {
-                      e.preventDefault()
-                      handleCardClick()
-                    }}
                   >
                   <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
                     {project.video ? (
@@ -227,15 +223,11 @@ export default function Projects() {
                 <BentoTilt
                   key={project.id}
                   className={`${project.span} rounded-2xl overflow-hidden relative group cursor-pointer bg-white/5 backdrop-blur-xl border border-white/10 hover:border-white/30 shadow-2xl transition-all duration-300`}
+                  onClick={handleCardClick}
                 >
                   <div
                     ref={el => { revealRefs.current[index + 1] = el }}
                     className="relative w-full h-full"
-                    onClick={handleCardClick}
-                    onTouchEnd={(e) => {
-                      e.preventDefault()
-                      handleCardClick()
-                    }}
                   >
                     {project.video ? (
                       <>
@@ -291,15 +283,11 @@ export default function Projects() {
               <BentoTilt
                 key={project.id}
                 className={`${project.span} rounded-2xl overflow-hidden relative group cursor-pointer`}
+                onClick={handleCardClick}
               >
                 <div
                   ref={el => { revealRefs.current[index + 1] = el }}
                   className="w-full h-full"
-                  onClick={handleCardClick}
-                  onTouchEnd={(e) => {
-                    e.preventDefault()
-                    handleCardClick()
-                  }}
                   >
                   <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
                     {project.video ? (

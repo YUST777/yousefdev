@@ -36,6 +36,13 @@ export default function BentoTilt({ children, className = '', onClick }: BentoTi
     })
   }
 
+  const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (onClick) {
+      e.preventDefault()
+      onClick()
+    }
+  }
+
   return (
     <div
       ref={itemRef}
@@ -43,9 +50,11 @@ export default function BentoTilt({ children, className = '', onClick }: BentoTi
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
+      onTouchEnd={handleTouchEnd}
       style={{ 
         transform: transformStyle,
-        transition: 'transform 0.1s ease-out'
+        transition: 'transform 0.1s ease-out',
+        touchAction: 'manipulation'
       }}
     >
       {children}
