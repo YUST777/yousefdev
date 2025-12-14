@@ -200,6 +200,9 @@ export default function Projects() {
           <div className="w-full md:w-auto">
             <h2 className="text-3xl md:text-8xl font-display font-black text-white tracking-tighter text-center md:text-left">PROJECTS</h2>
           </div>
+          <span className="hidden md:block border border-white/20 px-8 py-3 rounded-full text-sm tracking-widest uppercase cursor-default">
+            View GitHub
+          </span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[350px] md:auto-rows-[450px]">
@@ -373,6 +376,12 @@ export default function Projects() {
               </BentoTilt>
             )
           })}
+        </div>
+
+        <div className="mt-8 text-center md:hidden">
+          <span className="border border-white/20 px-8 py-3 rounded-full text-sm tracking-widest uppercase w-full inline-block cursor-default">
+            View GitHub
+          </span>
         </div>
       </div>
 
