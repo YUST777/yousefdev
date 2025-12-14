@@ -418,7 +418,8 @@ export default function Projects() {
                   {/* Header */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-2">Zero Threat – AI-Driven Cybersecurity Suite</h4>
-                    <p className="text-sm text-gray-400">🏆 3rd Place at the National Student Forum (Al-Multaqy Al-Qammy), Tanta University</p>
+                    <p className="text-sm text-gray-400">📅 August 1 – August 28, 2025</p>
+                    <p className="text-sm text-gray-400 mt-1">🏆 3rd Place at the National Student Forum (Al-Multaqy Al-Qammy), Tanta University</p>
                     <p className="text-sm text-gray-400 mt-1">Role: Lead Web Developer & UI/UX Designer</p>
                   </div>
 
