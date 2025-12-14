@@ -133,7 +133,7 @@ export default function ProjectsPage() {
 
       {/* Mobile Header */}
       <div className="md:hidden flex justify-between items-center p-6 border-b border-white/10 sticky top-0 bg-dark/80 backdrop-blur-xl z-50">
-        <Link href="/" className="text-xl font-display font-bold font-mono">{typewriterText}<span className="animate-pulse">|</span></Link>
+        <Link href="/" className="text-xl font-display font-bold font-mono">{typewriterText}</Link>
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="text-white"
@@ -155,7 +155,7 @@ export default function ProjectsPage() {
       `}>
         <div className="hidden md:block mb-12">
           <Link href="/" className="text-2xl font-display font-bold tracking-tight hover:text-white/80 transition-colors font-mono">
-            {typewriterText}<span className="animate-pulse">|</span>
+            {typewriterText}
           </Link>
         </div>
 
