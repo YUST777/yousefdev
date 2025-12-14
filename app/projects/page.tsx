@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import BentoTilt from '@/components/BentoTilt'
@@ -10,6 +10,44 @@ export default function ProjectsPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [openDrawer, setOpenDrawer] = useState<string | null>(null) // Unified drawer state
   const router = useRouter()
+  const [typewriterText, setTypewriterText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  // Typewriter animation effect
+  useEffect(() => {
+    if (openDrawer !== 'yousefdev') return
+
+    const fullText = 'yousefdev |'
+    const typingSpeed = 150
+    const deletingSpeed = 100
+    const pauseTime = 2000
+
+    const typewriterInterval = setInterval(() => {
+      if (!isDeleting) {
+        if (typewriterText.length < fullText.length) {
+          setTypewriterText(fullText.slice(0, typewriterText.length + 1))
+        } else {
+          setTimeout(() => setIsDeleting(true), pauseTime)
+        }
+      } else {
+        if (typewriterText.length > 0) {
+          setTypewriterText(fullText.slice(0, typewriterText.length - 1))
+        } else {
+          setIsDeleting(false)
+        }
+      }
+    }, isDeleting ? deletingSpeed : typingSpeed)
+
+    return () => clearInterval(typewriterInterval)
+  }, [openDrawer, typewriterText, isDeleting])
+
+  // Reset typewriter when drawer opens
+  useEffect(() => {
+    if (openDrawer === 'yousefdev') {
+      setTypewriterText('')
+      setIsDeleting(false)
+    }
+  }, [openDrawer])
 
   const tags = [
     "All Tags",
@@ -266,7 +304,12 @@ export default function ProjectsPage() {
                       openDrawer === 'zerothreat' ? 'Zero Threat' :
                         openDrawer === 'retroos' ? 'retroOS' :
                           openDrawer === 'icpchue' ? 'ICPCHUE' :
-                            openDrawer === 'yousefdev' ? 'yousefdev' : ''}
+                            openDrawer === 'yousefdev' ? (
+                              <span className="font-mono">
+                                {typewriterText}
+                                <span className="animate-pulse">|</span>
+                              </span>
+                            ) : ''}
                 </p>
                 <h3 className="text-2xl md:text-4xl font-display font-black text-white">
                   {openDrawer === 'fazzah' ? 'FAZAAH - Outerwear Studio' :
