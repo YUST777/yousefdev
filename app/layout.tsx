@@ -98,7 +98,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'google51847f29e39a2d39',
+    google: 'ozdDj18j8TF3lqLZ1MD3kbtVhKnV8Dp8XYo4TwmAWsI',
   },
   category: 'Technology',
 }
@@ -195,6 +195,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        {/* Google Search Console Verification */}
+        <meta name="google-site-verification" content="ozdDj18j8TF3lqLZ1MD3kbtVhKnV8Dp8XYo4TwmAWsI" />
+        
         {/* Resource Hints for Performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
