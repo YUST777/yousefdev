@@ -170,6 +170,11 @@ export default function Projects() {
           {projectsData.map((project, index) => {
             // --- Large Card (e.g. YousefDev) ---
             if (project.isLarge) {
+              const handleCardClick = () => {
+                setSelectedProject(project)
+                setIsModalOpen(true)
+              }
+              
               return (
                 <BentoTilt
                   key={project.id}
@@ -178,9 +183,10 @@ export default function Projects() {
                   <div
                     ref={el => { revealRefs.current[index + 1] = el }}
                     className="w-full h-full"
-                    onClick={() => {
-                      setSelectedProject(project)
-                      setIsModalOpen(true)
+                    onClick={handleCardClick}
+                    onTouchEnd={(e) => {
+                      e.preventDefault()
+                      handleCardClick()
                     }}
                   >
                   <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
@@ -191,14 +197,14 @@ export default function Projects() {
                         loop
                         muted
                         playsInline
-                        className="absolute inset-0 w-full h-full object-cover rounded-2xl"
+                        className="absolute inset-0 w-full h-full object-cover rounded-2xl pointer-events-none"
                       />
                     ) : (
-                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-black" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-black pointer-events-none" />
                     )}
                     <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
                     {project.video && project.video !== '/videos/yousefdev.webm' && (
-                      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500"></div>
+                      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500 pointer-events-none"></div>
                     )}
                   </div>
                   </div>
@@ -208,6 +214,15 @@ export default function Projects() {
 
             // --- Minimal Card (e.g. Archive) ---
             if (project.isMinimal) {
+              const handleCardClick = () => {
+                if (project.isArchive) {
+                  router.push('/projects')
+                  return
+                }
+                setSelectedProject(project)
+                setIsModalOpen(true)
+              }
+              
               return (
                 <BentoTilt
                   key={project.id}
@@ -216,13 +231,10 @@ export default function Projects() {
                   <div
                     ref={el => { revealRefs.current[index + 1] = el }}
                     className="relative w-full h-full"
-                    onClick={() => {
-                      if (project.isArchive) {
-                        router.push('/projects')
-                        return
-                      }
-                      setSelectedProject(project)
-                      setIsModalOpen(true)
+                    onClick={handleCardClick}
+                    onTouchEnd={(e) => {
+                      e.preventDefault()
+                      handleCardClick()
                     }}
                   >
                     {project.video ? (
@@ -233,7 +245,7 @@ export default function Projects() {
                           loop
                           muted
                           playsInline
-                          className="absolute inset-0 w-full h-full object-cover rounded-2xl"
+                          className="absolute inset-0 w-full h-full object-cover rounded-2xl pointer-events-none"
                         />
                         {project.video !== '/videos/moreprojects.webm' && (
                           <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500 pointer-events-none"></div>
@@ -252,6 +264,29 @@ export default function Projects() {
             }
 
             // --- Standard Card (e.g. RetroOS, ICPCHUE) ---
+            const handleCardClick = () => {
+              if (project.video === '/videos/zerothreat.webm') {
+                setOpenDrawer('zerothreat')
+                return
+              }
+              if (project.video === '/videos/RetroOS_Project.webm') {
+                setOpenDrawer('retroOS')
+                return
+              }
+              if (project.video === '/videos/ICPCHUE.webm') {
+                setOpenDrawer('ICPCHUE')
+                return
+              }
+              if (project.video === '/videos/yousefdev.webm') {
+                setOpenDrawer('yousefdev')
+                return
+              }
+              if (!project.isPlaceholder) {
+                setSelectedProject(project)
+                setIsModalOpen(true)
+              }
+            }
+            
             return (
               <BentoTilt
                 key={project.id}
@@ -260,27 +295,10 @@ export default function Projects() {
                 <div
                   ref={el => { revealRefs.current[index + 1] = el }}
                   className="w-full h-full"
-                  onClick={() => {
-                    if (project.video === '/videos/zerothreat.webm') {
-                      setOpenDrawer('zerothreat')
-                      return
-                    }
-                    if (project.video === '/videos/RetroOS_Project.webm') {
-                      setOpenDrawer('retroOS')
-                      return
-                    }
-                    if (project.video === '/videos/ICPCHUE.webm') {
-                      setOpenDrawer('ICPCHUE')
-                      return
-                    }
-                    if (project.video === '/videos/yousefdev.webm') {
-                      setOpenDrawer('yousefdev')
-                      return
-                    }
-                    if (!project.isPlaceholder) {
-                      setSelectedProject(project)
-                      setIsModalOpen(true)
-                    }
+                  onClick={handleCardClick}
+                  onTouchEnd={(e) => {
+                    e.preventDefault()
+                    handleCardClick()
                   }}
                   >
                   <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
@@ -291,14 +309,14 @@ export default function Projects() {
                         loop
                         muted
                         playsInline
-                        className="absolute inset-0 w-full h-full object-cover rounded-2xl"
+                        className="absolute inset-0 w-full h-full object-cover rounded-2xl pointer-events-none"
                       />
                     ) : project.isPlaceholder ? null : (
-                      <i className={`fas ${project.icon} text-8xl md:text-9xl text-white/20 group-hover:text-white/30 transition-colors duration-500`}></i>
+                      <i className={`fas ${project.icon} text-8xl md:text-9xl text-white/20 group-hover:text-white/30 transition-colors duration-500 pointer-events-none`}></i>
                     )}
                     <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
                     {project.video && (
-                      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500"></div>
+                      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500 pointer-events-none"></div>
                     )}
                   </div>
                   {!project.isPlaceholder && (
