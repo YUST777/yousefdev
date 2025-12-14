@@ -18,6 +18,44 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<any>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [openDrawer, setOpenDrawer] = useState<string | null>(null)
+  const [typewriterText, setTypewriterText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  // Typewriter animation effect
+  useEffect(() => {
+    if (openDrawer !== 'yousefdev') return
+
+    const fullText = 'yousefdev |'
+    const typingSpeed = 150
+    const deletingSpeed = 100
+    const pauseTime = 2000
+
+    const typewriterInterval = setInterval(() => {
+      if (!isDeleting) {
+        if (typewriterText.length < fullText.length) {
+          setTypewriterText(fullText.slice(0, typewriterText.length + 1))
+        } else {
+          setTimeout(() => setIsDeleting(true), pauseTime)
+        }
+      } else {
+        if (typewriterText.length > 0) {
+          setTypewriterText(fullText.slice(0, typewriterText.length - 1))
+        } else {
+          setIsDeleting(false)
+        }
+      }
+    }, isDeleting ? deletingSpeed : typingSpeed)
+
+    return () => clearInterval(typewriterInterval)
+  }, [openDrawer, typewriterText, isDeleting])
+
+  // Reset typewriter when drawer opens
+  useEffect(() => {
+    if (openDrawer === 'yousefdev') {
+      setTypewriterText('')
+      setIsDeleting(false)
+    }
+  }, [openDrawer])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -60,27 +98,25 @@ export default function Projects() {
   const projectsData = [
     {
       id: 1,
-      title: '',
-      description: '',
-      fullDescription: '',
-      tag: '',
-      icon: 'fa-shapes',
+      title: 'Zero Threat',
+      description: 'Cybersecurity website',
+      fullDescription: 'A modern cybersecurity-focused website showcasing security services and expertise.',
+      tag: 'Cybersecurity',
+      icon: 'fa-shield-alt',
       span: 'md:col-span-2 md:row-span-1',
       delay: 'delay-100',
       video: '/videos/zerothreat.webm',
-      isPlaceholder: true,
     },
     {
       id: 4,
-      title: '',
-      description: '',
-      fullDescription: '',
-      tag: '',
-      icon: 'fa-chart-line',
+      title: 'ICPCHUE',
+      description: 'ICPC HUE Platform',
+      fullDescription: 'A creative web platform for ICPC HUE community.',
+      tag: 'Platform',
+      icon: 'fa-code',
       span: 'md:col-span-1 md:row-span-1 md:col-start-3',
       delay: 'delay-100',
       video: '/videos/ICPCHUE.webm',
-      isPlaceholder: true,
     },
     {
       id: 2,
@@ -157,7 +193,7 @@ export default function Projects() {
   return (
     <section ref={sectionRef} id="projects" className="py-20 md:py-32 bg-dark">
       <div className="max-w-7xl mx-auto px-6">
-        <div 
+        <div
           ref={headerRef}
           className="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-20 px-0 md:px-4"
         >
@@ -178,32 +214,37 @@ export default function Projects() {
                   key={project.id}
                   className={`${project.span} rounded-2xl overflow-hidden relative group cursor-pointer`}
                 >
-                  <div
-                    ref={el => { revealRefs.current[index + 1] = el }}
-                    className="w-full h-full"
+                  {/* Clickable overlay for mobile touch */}
+                  <button
                     onClick={() => {
                       setSelectedProject(project)
                       setIsModalOpen(true)
                     }}
+                    className="absolute inset-0 z-50 w-full h-full bg-transparent cursor-pointer"
+                    aria-label={`View ${project.title || 'project'} details`}
+                  />
+                  <div
+                    ref={el => { revealRefs.current[index + 1] = el }}
+                    className="w-full h-full"
                   >
-                  <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
-                    {project.video ? (
-                      <video
-                        src={project.video}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="absolute inset-0 w-full h-full object-cover rounded-2xl"
-                      />
-                    ) : (
-                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-black" />
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
-                    {project.video && project.video !== '/videos/yousefdev.webm' && (
-                      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500"></div>
-                    )}
-                  </div>
+                    <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
+                      {project.video ? (
+                        <video
+                          src={project.video}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="absolute inset-0 w-full h-full object-cover rounded-2xl pointer-events-none"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-black pointer-events-none" />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
+                      {project.video && project.video !== '/videos/yousefdev.webm' && (
+                        <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500 pointer-events-none"></div>
+                      )}
+                    </div>
                   </div>
                 </BentoTilt>
               )
@@ -216,9 +257,8 @@ export default function Projects() {
                   key={project.id}
                   className={`${project.span} rounded-2xl overflow-hidden relative group cursor-pointer bg-white/5 backdrop-blur-xl border border-white/10 hover:border-white/30 shadow-2xl transition-all duration-300`}
                 >
-                  <div
-                    ref={el => { revealRefs.current[index + 1] = el }}
-                    className="relative w-full h-full"
+                  {/* Clickable overlay for mobile touch */}
+                  <button
                     onClick={() => {
                       if (project.isArchive) {
                         router.push('/projects')
@@ -227,6 +267,12 @@ export default function Projects() {
                       setSelectedProject(project)
                       setIsModalOpen(true)
                     }}
+                    className="absolute inset-0 z-50 w-full h-full bg-transparent cursor-pointer"
+                    aria-label={`View ${project.title || 'project'} details`}
+                  />
+                  <div
+                    ref={el => { revealRefs.current[index + 1] = el }}
+                    className="relative w-full h-full"
                   >
                     {project.video ? (
                       <>
@@ -236,14 +282,14 @@ export default function Projects() {
                           loop
                           muted
                           playsInline
-                          className="absolute inset-0 w-full h-full object-cover rounded-2xl"
+                          className="absolute inset-0 w-full h-full object-cover rounded-2xl pointer-events-none"
                         />
                         {project.video !== '/videos/moreprojects.webm' && (
                           <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500 pointer-events-none"></div>
                         )}
                       </>
                     ) : (
-                      <div className="bg-white/5 backdrop-blur-xl flex flex-col items-center justify-center h-full text-center p-4 border border-white/10 w-full h-full">
+                      <div className="bg-white/5 backdrop-blur-xl flex flex-col items-center justify-center h-full text-center p-4 border border-white/10 w-full h-full pointer-events-none">
                         <i className={`fas ${project.icon} w-10 h-10 text-white/40 mb-4 group-hover:text-white/60 transition-colors`}></i>
                         <h3 className="text-lg md:text-xl font-display font-bold text-white">{project.title}</h3>
                         <p className="text-white/60 mt-2 text-[10px] md:text-xs uppercase tracking-widest">{project.description}</p>
@@ -260,9 +306,8 @@ export default function Projects() {
                 key={project.id}
                 className={`${project.span} rounded-2xl overflow-hidden relative group cursor-pointer`}
               >
-                <div
-                  ref={el => { revealRefs.current[index + 1] = el }}
-                  className="w-full h-full"
+                {/* Clickable overlay for mobile touch */}
+                <button
                   onClick={() => {
                     if (project.video === '/videos/zerothreat.webm') {
                       setOpenDrawer('zerothreat')
@@ -280,12 +325,24 @@ export default function Projects() {
                       setOpenDrawer('yousefdev')
                       return
                     }
-                    if (!project.isPlaceholder) {
-                      setSelectedProject(project)
-                      setIsModalOpen(true)
+                    if (project.video === '/videos/fazzah.webm') {
+                      setOpenDrawer('fazzah')
+                      return
                     }
+                    if (project.video === '/videos/panoblue.webm') {
+                      setOpenDrawer('panoblue')
+                      return
+                    }
+                    setSelectedProject(project)
+                    setIsModalOpen(true)
                   }}
-                  >
+                  className="absolute inset-0 z-50 w-full h-full bg-transparent cursor-pointer"
+                  aria-label={`View ${project.title || 'project'} details`}
+                />
+                <div
+                  ref={el => { revealRefs.current[index + 1] = el }}
+                  className="w-full h-full"
+                >
                   <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
                     {project.video ? (
                       <video
@@ -294,35 +351,33 @@ export default function Projects() {
                         loop
                         muted
                         playsInline
-                        className="absolute inset-0 w-full h-full object-cover rounded-2xl"
+                        className="absolute inset-0 w-full h-full object-cover rounded-2xl pointer-events-none"
                       />
-                    ) : project.isPlaceholder ? null : (
+                    ) : (
                       <i className={`fas ${project.icon} text-8xl md:text-9xl text-white/20 group-hover:text-white/30 transition-colors duration-500`}></i>
                     )}
                     <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
                     {project.video && (
-                      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500"></div>
+                      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500 pointer-events-none"></div>
                     )}
                   </div>
-                  {!project.isPlaceholder && (
-                    <div className="absolute inset-0 bg-transparent group-hover:bg-transparent transition-all duration-500 p-6 md:p-8 flex flex-col justify-between pointer-events-none">
-                      {project.tag && (
-                        <div className="flex justify-between items-start">
-                          <span className="bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold border border-white/20 uppercase tracking-widest text-white shadow-lg">{project.tag}</span>
-                        </div>
-                      )}
-                      <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                        <h3 className="text-2xl md:text-3xl font-display font-bold mb-1 text-white">{project.title}</h3>
-                        <p className="text-gray-300 text-xs md:text-sm font-light">{project.description}</p>
+                  <div className="absolute inset-0 bg-transparent group-hover:bg-transparent transition-all duration-500 p-6 md:p-8 flex flex-col justify-between pointer-events-none">
+                    {project.tag && (
+                      <div className="flex justify-between items-start">
+                        <span className="bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold border border-white/20 uppercase tracking-widest text-white shadow-lg">{project.tag}</span>
                       </div>
+                    )}
+                    <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                      <h3 className="text-2xl md:text-3xl font-display font-bold mb-1 text-white">{project.title}</h3>
+                      <p className="text-gray-300 text-xs md:text-sm font-light">{project.description}</p>
                     </div>
-                  )}
+                  </div>
                 </div>
               </BentoTilt>
             )
           })}
         </div>
-        
+
         <div className="mt-8 text-center md:hidden">
           <button className="border border-white/20 hover:bg-white hover:text-black px-8 py-3 rounded-full transition-all duration-300 text-sm tracking-widest uppercase w-full">
             View GitHub
@@ -351,238 +406,364 @@ export default function Projects() {
             className="fixed inset-x-0 bottom-0 z-50 bg-black/90 backdrop-blur-2xl border-t border-white/20 rounded-t-3xl px-6 md:px-10 pb-10 pt-6 transition-transform duration-500 shadow-2xl max-h-[90vh] overflow-hidden flex flex-col translate-y-0"
           >
             <div className="flex items-center justify-between mb-6 flex-shrink-0">
-          <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-gray-400">
-              {openDrawer === 'zerothreat' ? 'Zero Threat' :
-               openDrawer === 'retroOS' ? 'retroOS' :
-               openDrawer === 'ICPCHUE' ? 'ICPCHUE' :
-               openDrawer === 'yousefdev' ? 'yousefdev' : ''}
-            </p>
-            <h3 className="text-2xl md:text-4xl font-display font-black text-white">
-              {openDrawer === 'zerothreat' ? 'Zero Threat - Cybersecurity Website Project' :
-               openDrawer === 'retroOS' ? 'retroOS - Retro Operating System UI' :
-               openDrawer === 'ICPCHUE' ? 'ICPCHUE - Creative Web Project' :
-               openDrawer === 'yousefdev' ? 'yousefdev - Building Practical Solutions' : ''}
-            </h3>
-          </div>
-          <button
-            onClick={() => setOpenDrawer(null)}
-            className="w-10 h-10 rounded-full border border-white/20 text-white hover:bg-white/10 transition-colors flex items-center justify-center"
-          >
-            <i className="fas fa-times w-5 h-5"></i>
-          </button>
+              <div>
+                <p className="text-xs uppercase tracking-[0.3em] text-gray-400">
+                  {openDrawer === 'zerothreat' ? 'Zero Threat' :
+                    openDrawer === 'retroOS' ? 'retroOS' :
+                      openDrawer === 'ICPCHUE' ? 'ICPCHUE' :
+                        openDrawer === 'yousefdev' ? (
+                          <span className="font-mono">
+                            {typewriterText}
+                            <span className="animate-pulse">|</span>
+                          </span>
+                        ) :
+                          openDrawer === 'panoblue' ? 'PanoBlue' :
+                            openDrawer === 'fazzah' ? 'Fazzah' : ''}
+                </p>
+                <h3 className="text-2xl md:text-4xl font-display font-black text-white">
+                  {openDrawer === 'zerothreat' ? 'Zero Threat - Cybersecurity Website Project' :
+                    openDrawer === 'retroOS' ? 'retroOS - Retro Operating System UI' :
+                      openDrawer === 'ICPCHUE' ? 'ICPCHUE - Creative Web Project' :
+                        openDrawer === 'yousefdev' ? 'yousefdev - Building Practical Solutions' : ''}
+                </h3>
+              </div>
+              <button
+                onClick={() => setOpenDrawer(null)}
+                className="w-10 h-10 rounded-full border border-white/20 text-white hover:bg-white/10 transition-colors flex items-center justify-center"
+              >
+                <i className="fas fa-times w-5 h-5"></i>
+              </button>
             </div>
 
             <div className="overflow-y-auto flex-1 pr-2 space-y-6 custom-scrollbar">
-          {/* Video Hero */}
-          {openDrawer && (
-            <div className="w-full aspect-video rounded-xl overflow-hidden bg-black/50 border border-white/5 mb-6 flex-shrink-0">
-              <video
-                src={
-                  openDrawer === 'zerothreat' ? '/videos/zerothreat.webm' :
-                  openDrawer === 'retroOS' ? '/videos/RetroOS_Project.webm' :
-                  openDrawer === 'ICPCHUE' ? '/videos/ICPCHUE.webm' :
-                  openDrawer === 'yousefdev' ? '/videos/yousefdev.webm' : ''
-                }
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
-
-          {/* Dynamic Content Based on Project */}
-          {openDrawer === 'zerothreat' && (
-            <>
-              {/* Tech Stack */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <h4 className="text-xl font-display font-bold text-white mb-4">🚀 Tech Stack</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <h5 className="text-sm font-bold text-white/80 mb-2">Frontend</h5>
-                    <ul className="space-y-1 text-sm text-gray-300">
-                      <li>• React 18.3.1 - Modern React with hooks</li>
-                      <li>• Vite 5.4.10 - Fast build tool</li>
-                      <li>• Tailwind CSS 3.4.14 - Utility-first CSS</li>
-                      <li>• GSAP 3.12.5 - Animation library</li>
-                      <li>• React Icons 5.3.0 - Icon library</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h5 className="text-sm font-bold text-white/80 mb-2">Development Tools</h5>
-                    <ul className="space-y-1 text-sm text-gray-300">
-                      <li>• ESLint 9.14.0 - Code quality</li>
-                      <li>• PostCSS 8.4.49 - CSS processing</li>
-                      <li>• Prettier 3.3.3 - Code formatting</li>
-                    </ul>
-                  </div>
+              {/* Video Hero */}
+              {openDrawer && (
+                <div className="w-full aspect-video rounded-xl overflow-hidden bg-black/50 border border-white/5 mb-6 flex-shrink-0">
+                  <video
+                    src={
+                      openDrawer === 'zerothreat' ? '/videos/zerothreat.webm' :
+                        openDrawer === 'retroOS' ? '/videos/RetroOS_Project.webm' :
+                          openDrawer === 'ICPCHUE' ? '/videos/ICPCHUE.webm' :
+                            openDrawer === 'yousefdev' ? '/videos/yousefdev.webm' :
+                              openDrawer === 'panoblue' ? '/videos/panoblue.webm' :
+                                openDrawer === 'fazzah' ? '/videos/fazzah.webm' : ''
+                    }
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-              </div>
+              )}
 
-              {/* Features */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <h4 className="text-xl font-display font-bold text-white mb-4">✨ Features</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div className="flex items-start gap-2">
-                    <span className="text-lg">🎬</span>
-                    <span className="text-sm text-gray-300">Interactive Video Hero Section with GSAP animations</span>
+              {/* Dynamic Content Based on Project */}
+              {openDrawer === 'zerothreat' && (
+                <>
+                  {/* Header */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-2">Zero Threat – AI-Driven Cybersecurity Suite</h4>
+                    <p className="text-sm text-gray-400"><i className="fas fa-calendar-alt mr-2"></i>August 1 – August 28, 2025</p>
+                    <p className="text-sm text-gray-400 mt-1"><i className="fas fa-trophy mr-2"></i>3rd Place at the National Student Forum (Al-Multaqy Al-Qammy), Tanta University</p>
+                    <p className="text-sm text-gray-400 mt-1">Role: Lead Web Developer & UI/UX Designer</p>
                   </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-lg">🎨</span>
-                    <span className="text-sm text-gray-300">Modern UI/UX Design with custom animations</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-lg">📱</span>
-                    <span className="text-sm text-gray-300">Fully Responsive for all devices</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-lg">⚡</span>
-                    <span className="text-sm text-gray-300">Performance Optimized with Vite</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-lg">🎭</span>
-                    <span className="text-sm text-gray-300">Smooth GSAP-powered animations</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-lg">🎵</span>
-                    <span className="text-sm text-gray-300">Audio Integration with background music</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-lg">🖼️</span>
-                    <span className="text-sm text-gray-300">Rich Media Content with high-quality assets</span>
-                  </div>
-                </div>
-              </div>
-            </>
-          )}
 
-          {openDrawer === 'retroOS' && (
-            <>
-              {/* Description */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <h4 className="text-xl font-display font-bold text-white mb-4">About Project</h4>
-                <p className="text-sm text-gray-300 leading-relaxed">
-                  A fully interactive retro operating system built with Next.js and React. Experience a nostalgic desktop environment with working terminal, file system, window management, and multiple applications.
-                </p>
-              </div>
+                  {/* The Achievement */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-trophy mr-2"></i>The Achievement</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      This project secured 3rd place in a national competition featuring <strong className="text-white">20 universities from across Egypt</strong>. As freshmen from a private university, my team competed against and outperformed 4th and 5th-year Engineering and Computer Science seniors. Our project was evaluated and commended by the Dean of Computer Science and a Professor of Cybersecurity at Tanta University.
+                    </p>
+                  </div>
 
-              {/* Technologies */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <h4 className="text-xl font-display font-bold text-white mb-4">🛠️ Technologies</h4>
-                <div className="flex flex-wrap gap-2">
-                  {['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Zustand', 'React Draggable'].map((tech) => (
-                    <span key={tech} className="px-3 py-1 bg-white/10 rounded-full text-xs text-white border border-white/20">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
+                  {/* The Solution */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-lightbulb mr-2"></i>The Solution</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      Zero Threat is a comprehensive security ecosystem combining a web platform, a browser extension, and a Windows application.
+                    </p>
+                  </div>
 
-              {/* Features */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <h4 className="text-xl font-display font-bold text-white mb-4">✨ Key Features</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <h5 className="text-sm font-bold text-white/80 mb-2">🖥️ Desktop Environment</h5>
-                    <ul className="space-y-1 text-sm text-gray-300">
-                      <li>• Interactive desktop</li>
-                      <li>• Window management</li>
-                      <li>• Drag and drop</li>
-                      <li>• Multiple wallpapers</li>
+                  {/* My Contribution */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-globe mr-2"></i>My Contribution (The Web Platform)</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed mb-4">
+                      I led the development of the web interface using Next.js and React, focusing on a high-performance UI with smooth animations. Key features I implemented include:
+                    </p>
+                    <ul className="space-y-3 text-sm text-gray-300">
+                      <li><strong className="text-white">Universal File Scanner:</strong> An integrated tool to scan various file types (ZIP, PNG, MP4) for hidden malware.</li>
+                      <li><strong className="text-white">Web Security Tools:</strong> Built-in developer tools for open port scanning and vulnerability assessment (similar to OWASP ZAP).</li>
+                      <li><strong className="text-white">Browser Extension:</strong> A companion extension to ensure safe downloads in real-time.</li>
                     </ul>
                   </div>
-                  <div>
-                    <h5 className="text-sm font-bold text-white/80 mb-2">💻 Terminal</h5>
-                    <ul className="space-y-1 text-sm text-gray-300">
-                      <li>• Full terminal emulator</li>
-                      <li>• File system commands</li>
-                      <li>• Process management</li>
-                      <li>• Command history</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h5 className="text-sm font-bold text-white/80 mb-2">📁 File System</h5>
-                    <ul className="space-y-1 text-sm text-gray-300">
-                      <li>• Hierarchical structure</li>
-                      <li>• CRUD operations</li>
-                      <li>• Trash and restore</li>
-                      <li>• File editor</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h5 className="text-sm font-bold text-white/80 mb-2">⚙️ OS Concepts</h5>
-                    <ul className="space-y-1 text-sm text-gray-300">
-                      <li>• Process management</li>
-                      <li>• Memory tracking</li>
-                      <li>• User sessions</li>
-                      <li>• Resource allocation</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </>
-          )}
 
-          {openDrawer === 'ICPCHUE' && (
-            <>
-              {/* Description */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <h4 className="text-xl font-display font-bold text-white mb-4">About Project</h4>
-                <p className="text-sm text-gray-300 leading-relaxed">
-                  A creative web project showcasing modern design and interactive elements. Built with cutting-edge technologies for an engaging user experience.
-                </p>
-              </div>
-            </>
-          )}
+                  {/* The Windows Agent */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-desktop mr-2"></i>The Windows Agent</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      Developed by my teammate Abdelrahman Mohsen, the desktop client utilizes the YARA protocol and AI integration. In our benchmarks, it achieved a <strong className="text-white">90% detection rate</strong> across 90 test subjects, outperforming many traditional signature-based antivirus solutions.
+                    </p>
+                  </div>
 
-          {openDrawer === 'yousefdev' && (
-            <>
-              {/* Description */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <h4 className="text-xl font-display font-bold text-white mb-4">About Project</h4>
-                <p className="text-sm text-gray-300 leading-relaxed">
-                  A developer focused on building practical tools and applications. Creating clean, well-architected solutions with a focus on user experience and impact.
-                </p>
-              </div>
-
-              {/* Technologies */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <h4 className="text-xl font-display font-bold text-white mb-4">🛠️ Expertise</h4>
-                <div className="flex flex-wrap gap-2">
-                  {['Full-Stack Development', 'Cybersecurity', 'Automation'].map((tech) => (
-                    <span key={tech} className="px-3 py-1 bg-white/10 rounded-full text-xs text-white border border-white/20">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Features */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <h4 className="text-xl font-display font-bold text-white mb-4">✨ Services</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <h5 className="text-sm font-bold text-white/80 mb-2">💻 Services</h5>
-                    <ul className="space-y-1 text-sm text-gray-300">
-                      <li>• Web development</li>
-                      <li>• Application development</li>
-                      <li>• System design</li>
+                  {/* Official Documentation */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-file-alt mr-2"></i>Official Documentation</h4>
+                    <p className="text-sm text-gray-400 mb-4">Official posts from Tanta University and Horus University:</p>
+                    <ul className="space-y-3 text-sm">
+                      <li>
+                        <a href="https://www.facebook.com/share/p/1DAW9yMMH1/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 flex items-center gap-2">
+                          <i className="fab fa-facebook"></i> Horus University Official Post
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://www.facebook.com/share/p/1XakrE3nLE/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 flex items-center gap-2">
+                          <i className="fab fa-facebook"></i> Tanta University Official Post
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://www.facebook.com/share/v/1HBLEF92ep/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 flex items-center gap-2">
+                          <i className="fab fa-facebook"></i> Award Ceremony Video (2:13)
+                        </a>
+                      </li>
                     </ul>
                   </div>
-                  <div>
-                    <h5 className="text-sm font-bold text-white/80 mb-2">🎯 Expertise</h5>
-                    <ul className="space-y-1 text-sm text-gray-300">
-                      <li>• Full-stack development</li>
-                      <li>• Cybersecurity engineering</li>
-                      <li>• Automation systems</li>
+
+                  {/* Visit Project Button */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <a
+                      href="https://zerothreat.yousefdev.xyz/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
+                    >
+                      <span>Visit Zero Threat</span>
+                      <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                  </div>
+                </>
+              )}
+
+              {openDrawer === 'retroOS' && (
+                <>
+                  {/* Header */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-2">RetroOS</h4>
+                    <p className="text-sm text-gray-400"><i className="fas fa-trophy mr-2"></i>Operating Systems Course Project & Hackathon Winner</p>
+                    <p className="text-sm text-gray-400 mt-1">Tech Stack: Next.js, React</p>
+                  </div>
+
+                  {/* Overview */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-info-circle mr-2"></i>Overview</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      RetroOS is a web-based simulation designed to trigger nostalgia by faithfully recreating the iconic Windows XP user interface. Originally developed as a project for my Operating Systems university course, it serves as a visual mimic of an OS environment entirely within the browser.
+                    </p>
+                  </div>
+
+                  {/* The Experience */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-laptop-code mr-2"></i>The Experience</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      While it doesn't run on a low-level kernel, the application uses advanced React state management to simulate windowing systems, taskbars, and file navigation. The attention to detail in the UI/UX design made the project stand out immediately.
+                    </p>
+                  </div>
+
+                  {/* Key Achievement */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-trophy mr-2"></i>Key Achievement</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      We took this project to a hackathon, where its unique concept and execution earned us a <strong className="text-white">$150 cash prize</strong>. It was a wild experience turning a course assignment into a winning hackathon entry.
+                    </p>
+                  </div>
+
+                  {/* Visit Project Button */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <a
+                      href="https://retroos.yousefdev.xyz/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
+                    >
+                      <span>Visit retroOS</span>
+                      <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                  </div>
+                </>
+              )}
+
+              {openDrawer === 'ICPCHUE' && (
+                <>
+                  {/* Header */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-2">ICPC HUE Platform</h4>
+                    <p className="text-sm text-gray-400">December 8, 2025 • Lead Full-Stack Developer & Co-Founder</p>
+                  </div>
+
+                  {/* Overview */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-info-circle mr-2"></i>Overview</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      ICPC HUE is a competitive programming community established at Horus University. Recognizing the lack of a dedicated ICPC chapter in our faculty, I collaborated with my team to build this initiative from the ground up. Over the course of three semesters (Summer Year 1 to Fall Year 2), we developed the branding, curriculum, and digital infrastructure to support our fellow students.
+                    </p>
+                  </div>
+
+                  {/* Technical Contributions */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-tools mr-2"></i>Technical Contributions</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed mb-4">
+                      I led the development of ICPCHUE.XYZ, a comprehensive platform serving the community:
+                    </p>
+                    <ul className="space-y-3 text-sm text-gray-300">
+                      <li><strong className="text-white">Modern Landing Page:</strong> Built with Next.js and React for a high-performance, clean user interface.</li>
+                      <li><strong className="text-white">Secure Registration:</strong> Implemented a robust candidate application system using Supabase for database management. Security was prioritized using reCAPTCHA, Cloudflare, and Fail2Ban to prevent DDoS attacks and spam.</li>
+                      <li><strong className="text-white">Gamified Dashboard:</strong> Created an interactive student dashboard featuring live 3D assets and "Easter eggs" to increase user motivation. Features include session file downloads, quiz submissions, and a real-time skills tracker.</li>
+                      <li><strong className="text-white">Performance & Security:</strong> The platform is fully responsive for mobile and desktop. Sensitive data is protected via client-side encryption using CryptoJS.</li>
                     </ul>
                   </div>
-                </div>
-              </div>
-            </>
-          )}
+
+                  {/* Visit Project Button */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <a
+                      href="https://icpchue.xyz"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
+                    >
+                      <span>Visit ICPCHUE</span>
+                      <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                  </div>
+                </>
+              )}
+
+              {openDrawer === 'yousefdev' && (
+                <>
+                  {/* Description */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4">About Project</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      A developer focused on building practical tools and applications. Creating clean, well-architected solutions with a focus on user experience and impact.
+                    </p>
+                  </div>
+
+                  {/* Technologies */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-tools mr-2"></i>Expertise</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {['Full-Stack Development', 'Cybersecurity', 'Automation'].map((tech) => (
+                        <span key={tech} className="px-3 py-1 bg-white/10 rounded-full text-xs text-white border border-white/20">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Features */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-star mr-2"></i>Services</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <h5 className="text-sm font-bold text-white/80 mb-2"><i className="fas fa-code mr-2"></i>Services</h5>
+                        <ul className="space-y-1 text-sm text-gray-300">
+                          <li>• Web development</li>
+                          <li>• Application development</li>
+                          <li>• System design</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h5 className="text-sm font-bold text-white/80 mb-2"><i className="fas fa-bullseye mr-2"></i>Expertise</h5>
+                        <ul className="space-y-1 text-sm text-gray-300">
+                          <li>• Full-stack development</li>
+                          <li>• Cybersecurity engineering</li>
+                          <li>• Automation systems</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {openDrawer === 'panoblue' && (
+                <>
+                  {/* Header */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-2">PanoBlue – Import/Export Corporate Platform</h4>
+                    <p className="text-sm text-gray-400">Role: Frontend Developer & UI Designer</p>
+                  </div>
+
+                  {/* Overview */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-info-circle mr-2"></i>Overview</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      PanoBlue is an established import/export company that needed to modernize its digital presence to compete in the international market. The client required a shift away from restrictive WordPress templates to a fully custom, unique web solution.
+                    </p>
+                  </div>
+
+                  {/* Key Contributions */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-tools mr-2"></i>Key Contributions</h4>
+                    <ul className="space-y-3 text-sm text-gray-300">
+                      <li><strong className="text-white">Custom Architecture:</strong> Migrated the client from a generic template to a bespoke codebase, allowing for limitless customization and improved performance.</li>
+                      <li><strong className="text-white">Interactive UI:</strong> Implemented advanced animations and interactivity to create a premium user experience that reflects the company's market standing.</li>
+                      <li><strong className="text-white">Market-Ready:</strong> Delivered a polished, production-ready site that currently serves real customers and facilitates actual business operations.</li>
+                    </ul>
+                  </div>
+
+                  {/* Visit Project Button */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <a
+                      href="https://panoblue.yousefdev.xyz/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
+                    >
+                      <span>Visit PanoBlue</span>
+                      <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                  </div>
+                </>
+              )}
+
+              {openDrawer === 'fazzah' && (
+                <>
+                  {/* Header */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-2">Fazzah – Streetwear E-Commerce Store</h4>
+                    <p className="text-sm text-gray-400">Role: Full-Stack Shopify Developer</p>
+                  </div>
+
+                  {/* Overview */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-info-circle mr-2"></i>Overview</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      Fazzah is a modern streetwear brand launched to capitalize on the rising demand for high-quality hoodies and apparel. The client needed a rapid-deployment e-commerce solution to enter the market quickly without sacrificing quality.
+                    </p>
+                  </div>
+
+                  {/* Key Contributions */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-tools mr-2"></i>Key Contributions</h4>
+                    <ul className="space-y-3 text-sm text-gray-300">
+                      <li><strong className="text-white">End-to-End Development:</strong> Built a comprehensive landing page and storefront using the Shopify ecosystem.</li>
+                      <li><strong className="text-white">Logistics & Payments:</strong> Integrated a secure payment gateway and set up a backend warehouse management system to track inventory and orders.</li>
+                      <li><strong className="text-white">Brand Identity:</strong> Designed a clean, minimalist GUI that highlights the products and aligns with current streetwear aesthetics.</li>
+                    </ul>
+                  </div>
+
+                  {/* Visit Project Button */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <a
+                      href="https://fazzah.yousefdev.xyz/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
+                    >
+                      <span>Visit Fazzah</span>
+                      <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </>
