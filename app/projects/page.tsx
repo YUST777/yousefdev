@@ -631,23 +631,62 @@ export default function ProjectsPage() {
 
               {openDrawer === 'yousefdev' && (
                 <>
-                  {/* Description */}
+                  {/* Header */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4">About Project</h4>
+                    <h4 className="text-xl font-display font-bold text-white mb-2">yousefdev – Personal Portfolio</h4>
+                    <p className="text-sm text-gray-400">December 15, 2025 • Full-Stack Developer & Cybersecurity Engineer</p>
+                  </div>
+
+                  {/* Overview */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-info-circle mr-2"></i>Overview</h4>
                     <p className="text-sm text-gray-300 leading-relaxed">
-                      A developer focused on building practical tools and applications. Creating clean, well-architected solutions with a focus on user experience and impact.
+                      This is my personal portfolio website showcasing my journey as a full-stack developer and cybersecurity engineer. Built with Next.js 15, React 19, and modern web technologies, it features smooth GSAP animations, a unique bento grid layout, and an interactive project showcase with detailed case studies.
                     </p>
                   </div>
 
-                  {/* Technologies */}
+                  {/* Key Achievements */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4">🛠️ Expertise</h4>
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-trophy mr-2"></i>Key Achievements</h4>
+                    <ul className="space-y-3 text-sm text-gray-300">
+                      <li><strong className="text-white">3rd Place National Competition:</strong> Zero Threat project won at Al-Multaqy Al-Qammy, Tanta University, competing against 20 universities.</li>
+                      <li><strong className="text-white">Hackathon Winner:</strong> RetroOS earned $150 cash prize for its unique Windows XP simulation concept.</li>
+                      <li><strong className="text-white">Community Builder:</strong> Co-founded ICPC HUE, building the digital infrastructure from scratch.</li>
+                    </ul>
+                  </div>
+
+                  {/* Tech Stack */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-code mr-2"></i>Tech Stack</h4>
                     <div className="flex flex-wrap gap-2">
-                      {['Full-Stack Development', 'Cybersecurity', 'Automation'].map((tech) => (
+                      {['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'GSAP', 'Node.js', 'Supabase', 'Vercel'].map((tech) => (
                         <span key={tech} className="px-3 py-1 bg-white/10 rounded-full text-xs text-white border border-white/20">
                           {tech}
                         </span>
                       ))}
+                    </div>
+                  </div>
+
+                  {/* Services */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-briefcase mr-2"></i>Services</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <h5 className="text-sm font-bold text-white/80 mb-2">Development</h5>
+                        <ul className="space-y-1 text-sm text-gray-300">
+                          <li>• Full-stack web applications</li>
+                          <li>• E-commerce solutions</li>
+                          <li>• Custom dashboards & admin panels</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h5 className="text-sm font-bold text-white/80 mb-2">Security & Automation</h5>
+                        <ul className="space-y-1 text-sm text-gray-300">
+                          <li>• Security audits & hardening</li>
+                          <li>• Bot development & automation</li>
+                          <li>• API integrations</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </>
