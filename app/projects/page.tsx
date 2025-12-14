@@ -13,10 +13,8 @@ export default function ProjectsPage() {
   const [typewriterText, setTypewriterText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
 
-  // Typewriter animation effect
+  // Typewriter animation effect for sidebar logo
   useEffect(() => {
-    if (openDrawer !== 'yousefdev') return
-
     const fullText = 'yousefdev |'
     const typingSpeed = 150
     const deletingSpeed = 100
@@ -39,15 +37,7 @@ export default function ProjectsPage() {
     }, isDeleting ? deletingSpeed : typingSpeed)
 
     return () => clearInterval(typewriterInterval)
-  }, [openDrawer, typewriterText, isDeleting])
-
-  // Reset typewriter when drawer opens
-  useEffect(() => {
-    if (openDrawer === 'yousefdev') {
-      setTypewriterText('')
-      setIsDeleting(false)
-    }
-  }, [openDrawer])
+  }, [typewriterText, isDeleting])
 
   const tags = [
     "All Tags",
@@ -162,8 +152,9 @@ export default function ProjectsPage() {
         md:flex flex-col py-12 px-8 overflow-y-auto
       `}>
         <div className="hidden md:block mb-12">
-          <Link href="/" className="text-2xl font-display font-bold tracking-tight hover:text-white/80 transition-colors">
-            yousefdev
+          <Link href="/" className="text-2xl font-display font-bold tracking-tight hover:text-white/80 transition-colors font-mono">
+            {typewriterText}
+            <span className="animate-pulse">|</span>
           </Link>
         </div>
 
