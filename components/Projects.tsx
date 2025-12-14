@@ -197,7 +197,7 @@ export default function Projects() {
           ref={headerRef}
           className="flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end mb-12 md:mb-20 px-0 md:px-4"
         >
-          <div>
+          <div className="w-full md:w-auto">
             <h2 className="text-3xl md:text-8xl font-display font-black text-white tracking-tighter text-center md:text-left">PROJECTS</h2>
           </div>
           <button className="hidden md:block border border-white/20 hover:bg-white hover:text-black px-8 py-3 rounded-full transition-all duration-300 text-sm tracking-widest uppercase">
