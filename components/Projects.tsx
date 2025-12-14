@@ -164,29 +164,29 @@ export default function Projects() {
           <div>
             <h2 className="text-5xl md:text-8xl font-display font-black text-white tracking-tighter">PROJECTS</h2>
           </div>
+          <button className="hidden md:block border border-white/20 hover:bg-white hover:text-black px-8 py-3 rounded-full transition-all duration-300 text-sm tracking-widest uppercase">
+            View GitHub
+          </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[350px] md:auto-rows-[450px]">
           {projectsData.map((project, index) => {
             // --- Large Card (e.g. YousefDev) ---
             if (project.isLarge) {
-              const handleCardClick = () => {
-                setSelectedProject(project)
-                setIsModalOpen(true)
-              }
-              
               return (
                 <BentoTilt
                   key={project.id}
                   className={`${project.span} rounded-2xl overflow-hidden relative group cursor-pointer`}
-                  onClick={handleCardClick}
                 >
                   <div
                     ref={el => { revealRefs.current[index + 1] = el }}
                     className="w-full h-full"
-                    style={{ pointerEvents: 'none' }}
+                    onClick={() => {
+                      setSelectedProject(project)
+                      setIsModalOpen(true)
+                    }}
                   >
-                  <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative" style={{ pointerEvents: 'none' }}>
+                  <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
                     {project.video ? (
                       <video
                         src={project.video}
@@ -194,14 +194,14 @@ export default function Projects() {
                         loop
                         muted
                         playsInline
-                        className="absolute inset-0 w-full h-full object-cover rounded-2xl pointer-events-none"
+                        className="absolute inset-0 w-full h-full object-cover rounded-2xl"
                       />
                     ) : (
-                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-black pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-black" />
                     )}
                     <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
                     {project.video && project.video !== '/videos/yousefdev.webm' && (
-                      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500 pointer-events-none"></div>
+                      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500"></div>
                     )}
                   </div>
                   </div>
@@ -211,25 +211,22 @@ export default function Projects() {
 
             // --- Minimal Card (e.g. Archive) ---
             if (project.isMinimal) {
-              const handleCardClick = () => {
-                if (project.isArchive) {
-                  router.push('/projects')
-                  return
-                }
-                setSelectedProject(project)
-                setIsModalOpen(true)
-              }
-              
               return (
                 <BentoTilt
                   key={project.id}
                   className={`${project.span} rounded-2xl overflow-hidden relative group cursor-pointer bg-white/5 backdrop-blur-xl border border-white/10 hover:border-white/30 shadow-2xl transition-all duration-300`}
-                  onClick={handleCardClick}
                 >
                   <div
                     ref={el => { revealRefs.current[index + 1] = el }}
                     className="relative w-full h-full"
-                    style={{ pointerEvents: 'none' }}
+                    onClick={() => {
+                      if (project.isArchive) {
+                        router.push('/projects')
+                        return
+                      }
+                      setSelectedProject(project)
+                      setIsModalOpen(true)
+                    }}
                   >
                     {project.video ? (
                       <>
@@ -239,7 +236,7 @@ export default function Projects() {
                           loop
                           muted
                           playsInline
-                          className="absolute inset-0 w-full h-full object-cover rounded-2xl pointer-events-none"
+                          className="absolute inset-0 w-full h-full object-cover rounded-2xl"
                         />
                         {project.video !== '/videos/moreprojects.webm' && (
                           <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500 pointer-events-none"></div>
@@ -258,41 +255,38 @@ export default function Projects() {
             }
 
             // --- Standard Card (e.g. RetroOS, ICPCHUE) ---
-            const handleCardClick = () => {
-              if (project.video === '/videos/zerothreat.webm') {
-                setOpenDrawer('zerothreat')
-                return
-              }
-              if (project.video === '/videos/RetroOS_Project.webm') {
-                setOpenDrawer('retroOS')
-                return
-              }
-              if (project.video === '/videos/ICPCHUE.webm') {
-                setOpenDrawer('ICPCHUE')
-                return
-              }
-              if (project.video === '/videos/yousefdev.webm') {
-                setOpenDrawer('yousefdev')
-                return
-              }
-              if (!project.isPlaceholder) {
-                setSelectedProject(project)
-                setIsModalOpen(true)
-              }
-            }
-            
             return (
               <BentoTilt
                 key={project.id}
                 className={`${project.span} rounded-2xl overflow-hidden relative group cursor-pointer`}
-                onClick={handleCardClick}
               >
                 <div
                   ref={el => { revealRefs.current[index + 1] = el }}
                   className="w-full h-full"
-                  style={{ pointerEvents: 'none' }}
+                  onClick={() => {
+                    if (project.video === '/videos/zerothreat.webm') {
+                      setOpenDrawer('zerothreat')
+                      return
+                    }
+                    if (project.video === '/videos/RetroOS_Project.webm') {
+                      setOpenDrawer('retroOS')
+                      return
+                    }
+                    if (project.video === '/videos/ICPCHUE.webm') {
+                      setOpenDrawer('ICPCHUE')
+                      return
+                    }
+                    if (project.video === '/videos/yousefdev.webm') {
+                      setOpenDrawer('yousefdev')
+                      return
+                    }
+                    if (!project.isPlaceholder) {
+                      setSelectedProject(project)
+                      setIsModalOpen(true)
+                    }
+                  }}
                   >
-                  <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative" style={{ pointerEvents: 'none' }}>
+                  <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
                     {project.video ? (
                       <video
                         src={project.video}
@@ -301,18 +295,17 @@ export default function Projects() {
                         muted
                         playsInline
                         className="absolute inset-0 w-full h-full object-cover rounded-2xl"
-                        style={{ pointerEvents: 'none' }}
                       />
                     ) : project.isPlaceholder ? null : (
-                      <i className={`fas ${project.icon} text-8xl md:text-9xl text-white/20 group-hover:text-white/30 transition-colors duration-500`} style={{ pointerEvents: 'none' }}></i>
+                      <i className={`fas ${project.icon} text-8xl md:text-9xl text-white/20 group-hover:text-white/30 transition-colors duration-500`}></i>
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" style={{ pointerEvents: 'none' }}></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
                     {project.video && (
-                      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500" style={{ pointerEvents: 'none' }}></div>
+                      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500"></div>
                     )}
                   </div>
                   {!project.isPlaceholder && (
-                    <div className="absolute inset-0 bg-transparent group-hover:bg-transparent transition-all duration-500 p-6 md:p-8 flex flex-col justify-between" style={{ pointerEvents: 'none' }}>
+                    <div className="absolute inset-0 bg-transparent group-hover:bg-transparent transition-all duration-500 p-6 md:p-8 flex flex-col justify-between pointer-events-none">
                       {project.tag && (
                         <div className="flex justify-between items-start">
                           <span className="bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold border border-white/20 uppercase tracking-widest text-white shadow-lg">{project.tag}</span>
@@ -328,6 +321,12 @@ export default function Projects() {
               </BentoTilt>
             )
           })}
+        </div>
+        
+        <div className="mt-8 text-center md:hidden">
+          <button className="border border-white/20 hover:bg-white hover:text-black px-8 py-3 rounded-full transition-all duration-300 text-sm tracking-widest uppercase w-full">
+            View GitHub
+          </button>
         </div>
       </div>
 
@@ -456,19 +455,6 @@ export default function Projects() {
                   </div>
                 </div>
               </div>
-
-              {/* Visit Project Button */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <a 
-                  href="https://zerothreat.yousefdev.xyz/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
-                >
-                  <span>Visit Zero Threat</span>
-                  <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
-                </a>
-              </div>
             </>
           )}
 
@@ -536,19 +522,6 @@ export default function Projects() {
                   </div>
                 </div>
               </div>
-
-              {/* Visit Project Button */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <a 
-                  href="https://retroos.yousefdev.xyz/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
-                >
-                  <span>Visit retroOS</span>
-                  <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
-                </a>
-              </div>
             </>
           )}
 
@@ -560,19 +533,6 @@ export default function Projects() {
                 <p className="text-sm text-gray-300 leading-relaxed">
                   A creative web project showcasing modern design and interactive elements. Built with cutting-edge technologies for an engaging user experience.
                 </p>
-              </div>
-
-              {/* Visit Project Button */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <a 
-                  href="https://icpchue.xyz" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
-                >
-                  <span>Visit ICPCHUE</span>
-                  <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
-                </a>
               </div>
             </>
           )}

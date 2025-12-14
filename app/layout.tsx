@@ -52,11 +52,11 @@ export const metadata: Metadata = {
     description: 'Full-stack developer and cybersecurity engineer building practical tools and applications.',
     images: [
       {
-        url: new URL('/og', 'https://yousefdev.xyz').toString(),
+        url: '/icons/logo.webp',
         width: 1200,
         height: 630,
-        alt: 'yousefdev - Developer | Full-Stack & Cybersecurity',
-        type: 'image/png',
+        alt: 'yousefdev - Developer',
+        type: 'image/webp',
       },
     ],
     emails: ['contact@yousefdev.xyz'],
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'yousefdev - Developer | Full-Stack & Cybersecurity',
     description: 'Full-stack developer and cybersecurity engineer building practical tools and applications.',
-    images: [new URL('/og', 'https://yousefdev.xyz').toString()],
+    images: ['/icons/logo.webp'],
     creator: '@yousefdev',
     site: '@yousefdev',
   },
@@ -115,7 +115,9 @@ export default function RootLayout({
     url: 'https://yousefdev.xyz',
     jobTitle: 'Developer',
     description: 'Full-stack developer and cybersecurity engineer building practical tools and applications.',
-    sameAs: [],
+    sameAs: [
+      'https://github.com/YUST777',
+    ],
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'Business Inquiries',
@@ -150,7 +152,9 @@ export default function RootLayout({
     '@type': 'Person',
     name: 'yousefdev',
     jobTitle: 'Developer',
-    sameAs: [],
+    sameAs: [
+      'https://github.com/YUST777',
+    ],
   }
 
   // Service schema

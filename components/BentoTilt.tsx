@@ -36,37 +36,6 @@ export default function BentoTilt({ children, className = '', onClick }: BentoTi
     })
   }
 
-  const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null)
-
-  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (onClick && e.touches.length === 1) {
-      const touch = e.touches[0]
-      touchStartRef.current = {
-        x: touch.clientX,
-        y: touch.clientY,
-        time: Date.now()
-      }
-    }
-  }
-
-  const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (!onClick || !touchStartRef.current) return
-
-    const touch = e.changedTouches[0]
-    const deltaX = Math.abs(touch.clientX - touchStartRef.current.x)
-    const deltaY = Math.abs(touch.clientY - touchStartRef.current.y)
-    const deltaTime = Date.now() - touchStartRef.current.time
-
-    // Only trigger if it was a tap (not a swipe) and within reasonable time
-    if (deltaX < 10 && deltaY < 10 && deltaTime < 300) {
-      e.preventDefault()
-      e.stopPropagation()
-      onClick()
-    }
-
-    touchStartRef.current = null
-  }
-
   return (
     <div
       ref={itemRef}
@@ -74,15 +43,9 @@ export default function BentoTilt({ children, className = '', onClick }: BentoTi
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
       style={{ 
         transform: transformStyle,
-        transition: 'transform 0.1s ease-out',
-        touchAction: 'manipulation',
-        WebkitTapHighlightColor: 'transparent',
-        WebkitTouchCallout: 'none',
-        userSelect: 'none'
+        transition: 'transform 0.1s ease-out'
       }}
     >
       {children}

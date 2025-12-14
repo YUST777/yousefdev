@@ -1,58 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import BentoTilt from '@/components/BentoTilt'
-
-// Terminal Typing Animation Component
-function TerminalTyping({ text, className }: { text: string; className?: string }) {
-  const [displayedText, setDisplayedText] = useState('')
-  const [isDeleting, setIsDeleting] = useState(false)
-
-  useEffect(() => {
-    const typingSpeed = 100 // milliseconds per character
-    const deletingSpeed = 50
-    const pauseDuration = 2000 // pause before deleting
-    const pauseAfterDelete = 500 // pause after deleting before retyping
-
-    let timeout: NodeJS.Timeout
-
-    if (!isDeleting) {
-      // Typing phase
-      if (displayedText.length < text.length) {
-        timeout = setTimeout(() => {
-          setDisplayedText(text.slice(0, displayedText.length + 1))
-        }, typingSpeed)
-      } else {
-        // Finished typing, wait then start deleting
-        timeout = setTimeout(() => {
-          setIsDeleting(true)
-        }, pauseDuration)
-      }
-    } else {
-      // Deleting phase
-      if (displayedText.length > 0) {
-        timeout = setTimeout(() => {
-          setDisplayedText(displayedText.slice(0, -1))
-        }, deletingSpeed)
-      } else {
-        // Finished deleting, wait then restart typing
-        timeout = setTimeout(() => {
-          setIsDeleting(false)
-        }, pauseAfterDelete)
-      }
-    }
-
-    return () => clearTimeout(timeout)
-  }, [displayedText, isDeleting, text])
-
-  return (
-    <span className={className}>
-      {displayedText}
-    </span>
-  )
-}
 
 export default function ProjectsPage() {
   const [activeTag, setActiveTag] = useState('All Tags')
@@ -172,9 +123,9 @@ export default function ProjectsPage() {
         ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
         md:flex flex-col py-12 px-8 overflow-y-auto
       `}>
-        <div className="hidden md:block mb-12 h-8 flex items-center">
-          <Link href="/" className="text-2xl font-display font-bold tracking-tight hover:text-white/80 transition-colors font-mono block">
-            <TerminalTyping text="yousefdev |" />
+        <div className="hidden md:block mb-12">
+          <Link href="/" className="text-2xl font-display font-bold tracking-tight hover:text-white/80 transition-colors">
+            yousefdev
           </Link>
         </div>
 
@@ -420,19 +371,6 @@ export default function ProjectsPage() {
                   </div>
                 </div>
               </div>
-
-              {/* Visit Project Button */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <a 
-                  href="https://fazzah.yousefdev.xyz/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
-                >
-                  <span>Visit FAZAAH</span>
-                  <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
-                </a>
-              </div>
             </>
           )}
 
@@ -492,19 +430,6 @@ export default function ProjectsPage() {
                   </div>
                 </div>
               </div>
-
-              {/* Visit Project Button */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <a 
-                  href="https://panoblue.yousefdev.xyz/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
-                >
-                  <span>Visit PanoBlue</span>
-                  <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
-                </a>
-              </div>
             </>
           )}
 
@@ -556,19 +481,6 @@ export default function ProjectsPage() {
                   </div>
                 </div>
               </div>
-
-              {/* Visit Project Button */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <a 
-                  href="https://zerothreat.yousefdev.xyz/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
-                >
-                  <span>Visit Zero Threat</span>
-                  <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
-                </a>
-              </div>
             </>
           )}
 
@@ -592,19 +504,6 @@ export default function ProjectsPage() {
                     </span>
                   ))}
                 </div>
-              </div>
-
-              {/* Visit Project Button */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <a 
-                  href="https://retroos.yousefdev.xyz/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
-                >
-                  <span>Visit retroOS</span>
-                  <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
-                </a>
               </div>
             </>
           )}
@@ -730,19 +629,6 @@ export default function ProjectsPage() {
                     <p className="text-xs text-gray-400">10 requests per minute</p>
                   </div>
                 </div>
-              </div>
-
-              {/* Visit Project Button */}
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                <a 
-                  href="https://icpchue.xyz" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
-                >
-                  <span>Visit ICPCHUE</span>
-                  <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
-                </a>
               </div>
             </>
           )}
