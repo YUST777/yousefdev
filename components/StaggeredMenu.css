@@ -13,6 +13,8 @@
   height: 100vh;
   z-index: 40;
   overflow: hidden;
+  pointer-events: none;
+  /* Allow touches to pass through to content below */
 }
 
 .staggered-menu-header {
@@ -29,7 +31,7 @@
   z-index: 20;
 }
 
-.staggered-menu-header > * {
+.staggered-menu-header>* {
   pointer-events: auto;
 }
 
