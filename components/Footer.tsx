@@ -21,14 +21,13 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="flex flex-col items-center text-center">
           <p className="text-xs md:text-sm font-mono mb-6 md:mb-8 uppercase tracking-widest animate-pulse">Ready for new projects</p>
-          <a href="https://github.com/YUST777" target="_blank" rel="noopener noreferrer" className="group relative inline-block">
+          <div className="group relative inline-block">
             <h2 className="text-5xl md:text-9xl font-display font-black tracking-tighter hover:scale-105 transition-transform duration-500 cursor-pointer text-black">
               yousef
             </h2>
-          </a>
-          
+          </div>
+
           <div className="mt-12 md:mt-20 flex flex-wrap justify-center gap-6 md:gap-20 items-center">
-            <a href="https://github.com/YUST777" target="_blank" rel="noopener noreferrer" className="text-base md:text-lg font-bold hover:line-through decoration-2 transition-all">GitHub</a>
             <span className="text-base md:text-lg font-bold">Twitter / X</span>
             <a href="https://t.me/yousefmsm1" target="_blank" rel="noopener noreferrer" className="text-base md:text-lg font-bold hover:line-through decoration-2 transition-all">Telegram</a>
           </div>
