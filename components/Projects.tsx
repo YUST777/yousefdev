@@ -18,6 +18,44 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<any>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [openDrawer, setOpenDrawer] = useState<string | null>(null)
+  const [typewriterText, setTypewriterText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  // Typewriter animation effect
+  useEffect(() => {
+    if (openDrawer !== 'yousefdev') return
+
+    const fullText = 'yousefdev |'
+    const typingSpeed = 150
+    const deletingSpeed = 100
+    const pauseTime = 2000
+
+    const typewriterInterval = setInterval(() => {
+      if (!isDeleting) {
+        if (typewriterText.length < fullText.length) {
+          setTypewriterText(fullText.slice(0, typewriterText.length + 1))
+        } else {
+          setTimeout(() => setIsDeleting(true), pauseTime)
+        }
+      } else {
+        if (typewriterText.length > 0) {
+          setTypewriterText(fullText.slice(0, typewriterText.length - 1))
+        } else {
+          setIsDeleting(false)
+        }
+      }
+    }, isDeleting ? deletingSpeed : typingSpeed)
+
+    return () => clearInterval(typewriterInterval)
+  }, [openDrawer, typewriterText, isDeleting])
+
+  // Reset typewriter when drawer opens
+  useEffect(() => {
+    if (openDrawer === 'yousefdev') {
+      setTypewriterText('')
+      setIsDeleting(false)
+    }
+  }, [openDrawer])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -373,7 +411,14 @@ export default function Projects() {
                   {openDrawer === 'zerothreat' ? 'Zero Threat' :
                     openDrawer === 'retroOS' ? 'retroOS' :
                       openDrawer === 'ICPCHUE' ? 'ICPCHUE' :
-                        openDrawer === 'yousefdev' ? 'yousefdev' : ''}
+                        openDrawer === 'yousefdev' ? (
+                          <span className="font-mono">
+                            {typewriterText}
+                            <span className="animate-pulse">|</span>
+                          </span>
+                        ) :
+                          openDrawer === 'panoblue' ? 'PanoBlue' :
+                            openDrawer === 'fazzah' ? 'Fazzah' : ''}
                 </p>
                 <h3 className="text-2xl md:text-4xl font-display font-black text-white">
                   {openDrawer === 'zerothreat' ? 'Zero Threat - Cybersecurity Website Project' :
