@@ -1,0 +1,606 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YUST777 - TON Blockchain Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: '#030303',
+                        card: '#0a0a0a',
+                        surface: '#121212',
+                    },
+                    animation: {
+                        'marquee': 'marquee 40s linear infinite',
+                        'float': 'float 8s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 15s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #030303;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Subtle Noise Texture */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        
+        /* Modern Text Outline */
+        .text-outline {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+            color: transparent;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .group:hover .text-outline {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 1);
+            color: #fff;
+        }
+
+        /* Clean Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+            filter: blur(10px);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+
+        /* Card Interactions */
+        .bento-card {
+            background: #0a0a0a;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .bento-card:hover {
+            border-color: rgba(255,255,255,0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 30px 60px -15px rgba(255, 255, 255, 0.05);
+        }
+
+        .sticky-card {
+            position: sticky;
+            /* Top is set inline to ensure stacking works */
+            box-shadow: 0 -20px 60px rgba(0,0,0,0.8);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #030303; }
+        ::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
+        
+        /* Spotlight Effect for Hero */
+        .spotlight {
+            background: radial-gradient(circle at center, rgba(255,255,255,0.08) 0%, transparent 70%);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-white selection:text-black">
+
+    <div class="noise-overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 left-0 px-6 py-6 transition-all duration-300 mix-blend-difference">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-display font-black tracking-tighter text-white">Y7.</a>
+            
+            <div class="hidden md:flex items-center space-x-1 bg-white/5 backdrop-blur-md px-2 py-2 rounded-full border border-white/10">
+                <a href="#about" class="px-5 py-2 rounded-full text-sm font-medium text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300">About</a>
+                <a href="#services" class="px-5 py-2 rounded-full text-sm font-medium text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300">Services</a>
+                <a href="#projects" class="px-5 py-2 rounded-full text-sm font-medium text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300">Repo</a>
+                <a href="#contact" class="px-5 py-2 rounded-full text-sm font-medium bg-white text-black hover:bg-gray-200 transition-all duration-300">Contact</a>
+            </div>
+
+            <button class="md:hidden text-white text-xl p-2" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-20 left-4 right-4 bg-[#111] border border-white/10 rounded-2xl p-4 flex flex-col space-y-2 text-center shadow-2xl z-50">
+            <a href="#about" class="block py-3 rounded-xl hover:bg-white/5 text-gray-200" onclick="document.getElementById('mobile-menu').classList.add('hidden')">About</a>
+            <a href="#services" class="block py-3 rounded-xl hover:bg-white/5 text-gray-200" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Services</a>
+            <a href="#projects" class="block py-3 rounded-xl hover:bg-white/5 text-gray-200" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Projects</a>
+            <a href="#contact" class="block py-3 rounded-xl bg-white text-black font-bold" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative pt-32 pb-20 overflow-hidden flex flex-col items-center justify-center min-h-screen">
+        <!-- Minimal Spotlight Background -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] md:w-[800px] h-[300px] md:h-[800px] spotlight opacity-50 pointer-events-none"></div>
+
+        <div class="text-center z-10 px-4 relative max-w-5xl mx-auto">
+            <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-8 md:mb-12 reveal">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-50"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                </span>
+                <span class="text-xs uppercase tracking-widest text-gray-400 font-semibold">Open for Contributions</span>
+            </div>
+
+            <h1 class="text-6xl md:text-9xl font-display font-black leading-[0.9] md:leading-[0.85] mb-6 md:mb-8 tracking-tighter reveal delay-100 uppercase">
+                TON <br>
+                <span class="relative inline-block text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-600">
+                    Developer
+                </span>
+            </h1>
+            
+            <p class="text-base md:text-xl text-gray-500 max-w-xl mx-auto mb-12 md:mb-16 reveal delay-200 font-light leading-relaxed px-4">
+                Building innovative blockchain solutions on The Open Network. Specialized in web scraping, database management, and full-stack development.
+            </p>
+
+            <!-- B&W Avatar -->
+            <div class="relative w-full max-w-xs md:max-w-lg mx-auto h-64 md:h-80 reveal delay-300 group">
+                <!-- Duck themed placeholder avatar -->
+                <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=BusinessDuck1&backgroundColor=transparent&accessories=sunglasses&clothing=hoodie&clothingColor=1a1a1a&hairColor=000000&skinColor=f1f1f1" alt="YUST777 Avatar" class="relative w-full h-full object-contain drop-shadow-2xl grayscale group-hover:grayscale-0 transition-all duration-700 animate-float">
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-6 md:bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-3 opacity-30">
+            <span class="text-[10px] uppercase tracking-[0.3em]">Scroll</span>
+            <div class="w-[1px] h-12 md:h-16 bg-gradient-to-b from-white via-white to-transparent"></div>
+        </div>
+    </header>
+
+    <!-- Clean Marquee -->
+    <div class="w-full bg-white text-black py-4 md:py-6 overflow-hidden border-y border-white/10 z-20 relative">
+        <div class="inline-block animate-marquee whitespace-nowrap">
+            <span class="text-4xl md:text-6xl font-display font-black mx-6 md:mx-12 tracking-tighter">TON BLOCKCHAIN <span class="text-gray-400 mx-4">•</span> VIBE CODER <span class="text-gray-400 mx-4">•</span> TYPESCRIPT <span class="text-gray-400 mx-4">•</span> PYTHON <span class="text-gray-400 mx-4">•</span></span>
+            <span class="text-4xl md:text-6xl font-display font-black mx-6 md:mx-12 tracking-tighter">TON BLOCKCHAIN <span class="text-gray-400 mx-4">•</span> VIBE CODER <span class="text-gray-400 mx-4">•</span> TYPESCRIPT <span class="text-gray-400 mx-4">•</span> PYTHON <span class="text-gray-400 mx-4">•</span></span>
+        </div>
+    </div>
+
+    <!-- About Me Section with Scroll Reveal Text -->
+    <section id="about" class="relative bg-dark min-h-[120vh] md:min-h-[150vh] flex flex-col justify-center items-center">
+        <!-- Floating Elements -->
+        <div class="hidden md:block absolute top-20 left-10 text-8xl opacity-20 animate-float grayscale blur-[2px] pointer-events-none select-none fixed-element">💎</div>
+        <div class="hidden md:block absolute bottom-20 right-10 text-8xl opacity-20 animate-float animation-delay-2000 grayscale blur-[2px] pointer-events-none select-none fixed-element">🦆</div>
+        <div class="hidden md:block absolute top-1/2 right-20 text-6xl opacity-10 animate-pulse-slow grayscale blur-[1px] pointer-events-none select-none fixed-element">❤️</div>
+
+        <!-- Sticky Container for the Content so it stays centered while we scroll to animate -->
+        <div class="sticky top-20 md:top-0 h-auto md:h-screen flex flex-col items-center justify-center max-w-4xl mx-auto px-4 md:px-6 text-center z-10 py-20 md:py-0">
+            
+            <!-- Massive Headline -->
+            <h2 class="text-5xl md:text-9xl font-display font-black mb-8 md:mb-12 tracking-widest text-outline select-none uppercase">
+                ABOUT ME
+            </h2>
+            
+            <!-- Scroll Reveal Text Container -->
+            <div class="relative bg-dark/50 backdrop-blur-sm p-6 md:p-8 rounded-3xl border border-white/5 w-full">
+                <!-- We put the raw text here, JS will process it -->
+                <p id="scroll-text" class="text-xl md:text-4xl font-display font-bold leading-tight flex flex-wrap justify-center gap-x-2 md:gap-x-3 gap-y-1 md:gap-y-2">
+                    I'm YUST777 (aka BusinessDuck1), a passionate developer focused on the TON ecosystem. From web scraping to full-stack dApps, I build tools that solve real problems. Expert in database optimization and data automation. 
+                </p>
+
+                <!-- Stats Row (Appears after text) -->
+                <div id="stats-row" class="mt-8 md:mt-12 grid grid-cols-3 gap-4 md:gap-8 border-t border-white/10 pt-6 md:pt-8 opacity-0 transition-opacity duration-500">
+                    <div>
+                        <h3 class="text-2xl md:text-3xl font-display font-bold text-white mb-1 md:mb-2">06+</h3>
+                        <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest">TON Projects</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl md:text-3xl font-display font-bold text-white mb-1 md:mb-2">16</h3>
+                        <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest">Repos</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl md:text-3xl font-display font-bold text-white mb-1 md:mb-2">100%</h3>
+                        <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest">Commitment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Drawer Section -->
+    <section id="services" class="py-10 md:py-20 bg-dark relative z-20">
+        <div class="max-w-7xl mx-auto px-2 md:px-4">
+            <!-- White Drawer Container -->
+            <div class="bg-white text-black rounded-[2rem] md:rounded-[3rem] p-6 md:p-20 overflow-hidden relative min-h-screen">
+                
+                <!-- Background decoration inside the drawer -->
+                <div class="absolute top-[-20%] right-[-10%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-gray-100 rounded-full blur-[100px] opacity-60 pointer-events-none"></div>
+
+                <h2 class="text-5xl md:text-9xl font-display font-black mb-16 md:mb-32 tracking-tighter text-center relative z-10">SERVICES</h2>
+
+                <div class="flex flex-col gap-16 md:gap-32 max-w-5xl mx-auto relative z-10">
+                    
+                    <!-- Service 1 -->
+                    <div class="service-reveal flex flex-col md:flex-row gap-6 md:gap-20 items-start border-b border-gray-200 pb-12 md:pb-16">
+                        <span class="text-4xl md:text-6xl font-display font-bold text-gray-300">01</span>
+                        <div>
+                            <h3 class="text-3xl md:text-6xl font-display font-bold mb-4 md:mb-6 hover:text-gray-600 transition-colors">Smart Contracts</h3>
+                            <p class="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl">
+                                Secure and efficient FunC/Tact smart contract development for the TON blockchain. From simple tokens to scalable ecosystems, automation pipelines, and NFT collections.
+                            </p>
+                            <div class="flex flex-wrap gap-2 md:gap-3 mt-4 md:mt-6">
+                                <span class="px-3 md:px-4 py-1 bg-gray-100 rounded-full text-xs md:text-sm font-bold">FunC</span>
+                                <span class="px-3 md:px-4 py-1 bg-gray-100 rounded-full text-xs md:text-sm font-bold">Tact</span>
+                                <span class="px-3 md:px-4 py-1 bg-gray-100 rounded-full text-xs md:text-sm font-bold">Blueprint</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="service-reveal flex flex-col md:flex-row gap-6 md:gap-20 items-start border-b border-gray-200 pb-12 md:pb-16">
+                        <span class="text-4xl md:text-6xl font-display font-bold text-gray-300">02</span>
+                        <div>
+                            <h3 class="text-3xl md:text-6xl font-display font-bold mb-4 md:mb-6 hover:text-gray-600 transition-colors">Telegram Mini Apps</h3>
+                            <p class="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl">
+                                Full-stack development of Telegram Mini Apps (TMA). Seamlessly integrating Web3 wallet connections, UI/UX, and bot logic into the Telegram interface.
+                            </p>
+                             <div class="flex flex-wrap gap-2 md:gap-3 mt-4 md:mt-6">
+                                <span class="px-3 md:px-4 py-1 bg-gray-100 rounded-full text-xs md:text-sm font-bold">React</span>
+                                <span class="px-3 md:px-4 py-1 bg-gray-100 rounded-full text-xs md:text-sm font-bold">twa-sdk</span>
+                                <span class="px-3 md:px-4 py-1 bg-gray-100 rounded-full text-xs md:text-sm font-bold">Node.js</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="service-reveal flex flex-col md:flex-row gap-6 md:gap-20 items-start border-b border-gray-200 pb-12 md:pb-16">
+                        <span class="text-4xl md:text-6xl font-display font-bold text-gray-300">03</span>
+                        <div>
+                            <h3 class="text-3xl md:text-6xl font-display font-bold mb-4 md:mb-6 hover:text-gray-600 transition-colors">Data Automation</h3>
+                            <p class="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl">
+                                High-performance web scraping and data processing pipelines. Building custom tools to gather, analyze, and visualize on-chain and off-chain data.
+                            </p>
+                             <div class="flex flex-wrap gap-2 md:gap-3 mt-4 md:mt-6">
+                                <span class="px-3 md:px-4 py-1 bg-gray-100 rounded-full text-xs md:text-sm font-bold">Python</span>
+                                <span class="px-3 md:px-4 py-1 bg-gray-100 rounded-full text-xs md:text-sm font-bold">Selenium</span>
+                                <span class="px-3 md:px-4 py-1 bg-gray-100 rounded-full text-xs md:text-sm font-bold">PostgreSQL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="service-reveal flex flex-col md:flex-row gap-6 md:gap-20 items-start">
+                        <span class="text-4xl md:text-6xl font-display font-bold text-gray-300">04</span>
+                        <div>
+                            <h3 class="text-3xl md:text-6xl font-display font-bold mb-4 md:mb-6 hover:text-gray-600 transition-colors">Full Stack dApps</h3>
+                            <p class="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl">
+                                End-to-end development of decentralized applications. Bridging robust backends with intuitive frontend interfaces for a seamless user experience.
+                            </p>
+                             <div class="flex flex-wrap gap-2 md:gap-3 mt-4 md:mt-6">
+                                <span class="px-3 md:px-4 py-1 bg-gray-100 rounded-full text-xs md:text-sm font-bold">Next.js</span>
+                                <span class="px-3 md:px-4 py-1 bg-gray-100 rounded-full text-xs md:text-sm font-bold">Tailwind</span>
+                                <span class="px-3 md:px-4 py-1 bg-gray-100 rounded-full text-xs md:text-sm font-bold">TON Connect</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bento Grid Projects -->
+    <section id="projects" class="py-20 md:py-32 bg-dark">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-20 px-0 md:px-4 reveal">
+                <div>
+                    <h2 class="text-5xl md:text-8xl font-display font-black text-white tracking-tighter">PROJECTS</h2>
+                </div>
+                <button class="hidden md:block border border-white/20 hover:bg-white hover:text-black px-8 py-3 rounded-full transition-all duration-300 text-sm tracking-widest uppercase">
+                    View GitHub
+                </button>
+            </div>
+
+            <!-- Bento Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[350px] md:auto-rows-[450px]">
+                
+                <!-- Project 1: CollectibleKIT -->
+                <div class="bento-card md:col-span-2 md:row-span-1 rounded-2xl overflow-hidden relative group cursor-pointer reveal delay-100">
+                    <div class="w-full h-full bg-[#111] flex items-center justify-center">
+                        <i class="fas fa-shapes text-8xl md:text-9xl text-[#222] group-hover:text-[#333] transition-colors duration-500"></i>
+                    </div>
+                    <div class="absolute inset-0 bg-black/50 group-hover:bg-transparent transition-all duration-500 p-6 md:p-8 flex flex-col justify-between">
+                        <div class="flex justify-between items-start">
+                            <span class="bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold border border-white/20 uppercase tracking-widest text-white">TON Blockchain</span>
+                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center transform translate-x-20 -translate-y-20 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-500 delay-75">
+                                <i class="fas fa-arrow-right text-black -rotate-45"></i>
+                            </div>
+                        </div>
+                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <h3 class="text-2xl md:text-3xl font-display font-bold mb-1 text-white">CollectibleKIT</h3>
+                            <p class="text-gray-300 text-xs md:text-sm font-light">Collectible management toolkit on TON</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: GiftsChart -->
+                <div class="bento-card md:col-span-1 md:row-span-2 rounded-2xl overflow-hidden relative group cursor-pointer reveal delay-200">
+                    <div class="w-full h-full bg-[#111] flex items-center justify-center">
+                         <i class="fas fa-chart-line text-8xl md:text-9xl text-[#222] group-hover:text-[#333] transition-colors duration-500"></i>
+                    </div>
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all duration-500 p-6 md:p-8 flex flex-col justify-end">
+                        <span class="bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold border border-white/20 uppercase tracking-widest text-white self-start mb-auto">Analytics</span>
+                        <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <h3 class="text-2xl md:text-3xl font-display font-bold mb-1 text-white">GiftsChart 4</h3>
+                            <p class="text-gray-300 text-xs md:text-sm font-light">Advanced charting system</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: RetroOS -->
+                <div class="bento-card rounded-2xl overflow-hidden relative group cursor-pointer reveal delay-300">
+                     <div class="w-full h-full bg-[#111] flex items-center justify-center">
+                        <i class="fas fa-desktop text-8xl md:text-9xl text-[#222] group-hover:text-[#333] transition-colors duration-500"></i>
+                    </div>
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-all duration-500 p-6 md:p-8 flex flex-col justify-end">
+                         <div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <h3 class="text-xl md:text-2xl font-display font-bold mb-1 text-white">retroOS</h3>
+                            <p class="text-gray-300 text-xs md:text-sm font-light">Retro operating system UI</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: GiftCatalog -->
+                <div class="bento-card rounded-2xl overflow-hidden relative group cursor-pointer reveal delay-300 bg-[#0f0f0f] flex flex-col items-center justify-center border border-white/5 hover:border-white/20">
+                     <div class="text-center p-4">
+                        <i class="fas fa-gift text-3xl md:text-4xl text-gray-600 mb-4 md:mb-6 group-hover:text-white transition-colors"></i>
+                        <h3 class="text-lg md:text-xl font-display font-bold text-white">GiftCatalog</h3>
+                        <p class="text-gray-500 mt-2 text-[10px] md:text-xs uppercase tracking-widest">Comprehensive Management</p>
+                     </div>
+                </div>
+
+                 <!-- Project 5: CanvasStory -->
+                 <div class="bento-card md:col-span-3 md:row-span-1 rounded-2xl overflow-hidden relative group cursor-pointer reveal delay-300">
+                     <div class="w-full h-full bg-[#111] flex items-center justify-center relative">
+                         <!-- Placeholder abstract pattern -->
+                         <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#333 1px, transparent 1px); background-size: 20px 20px;"></div>
+                     </div>
+                     <div class="absolute inset-0 p-6 md:p-10 flex items-center justify-between">
+                        <div class="max-w-xl z-10">
+                            <span class="text-gray-400 font-bold tracking-widest text-[10px] md:text-xs mb-4 block uppercase border-l-2 border-white pl-4">Latest Innovation</span>
+                            <h3 class="text-3xl md:text-6xl font-display font-bold mb-4 text-white">CanvasStory</h3>
+                            <p class="text-gray-300 max-w-md text-xs md:text-sm leading-relaxed">A canvas-based storytelling platform built directly on the TON blockchain.</p>
+                        </div>
+                        <div class="hidden md:flex w-24 h-24 bg-white/10 backdrop-blur-md border border-white/10 rounded-full items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-500 group-hover:scale-110">
+                            <i class="fas fa-arrow-right text-3xl -rotate-45 group-hover:rotate-0 transition-transform duration-500"></i>
+                        </div>
+                     </div>
+                 </div>
+
+            </div>
+            
+            <div class="mt-8 text-center md:hidden">
+                 <button class="border border-white/20 hover:bg-white hover:text-black px-8 py-3 rounded-full transition-all duration-300 text-sm tracking-widest uppercase w-full">
+                    View GitHub
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Minimal Testimonials / Stats -->
+    <section class="py-20 md:py-40 border-t border-white/5 bg-black">
+        <div class="max-w-7xl mx-auto px-6">
+             <div class="flex items-center gap-4 mb-12 md:mb-20 reveal">
+                <span class="h-[1px] w-8 bg-white/20"></span>
+                <span class="text-xs font-mono uppercase tracking-widest text-gray-500">Feedback & Stats</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-24">
+                <!-- T1 -->
+                <div class="reveal delay-100 flex flex-col justify-between h-full group cursor-default">
+                    <p class="text-xl md:text-2xl text-gray-300 font-light leading-relaxed mb-6 md:mb-8 group-hover:text-white transition-colors">"YUST777's understanding of the TON ecosystem is unmatched. CollectibleKIT saved us weeks of development time."</p>
+                    
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-xs text-white font-mono">TB</div>
+                        <div>
+                            <h4 class="font-bold text-sm text-white">TON Builder</h4>
+                            <p class="text-xs text-gray-500 font-mono mt-1">COMMUNITY MEMBER</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- T2 -->
+                <div class="reveal delay-200 flex flex-col justify-between h-full group cursor-default">
+                    <p class="text-xl md:text-2xl text-gray-300 font-light leading-relaxed mb-6 md:mb-8 group-hover:text-white transition-colors">"A true 'Vibe Coder'. The tools are efficient, the code is clean, and the documentation is spot on. "</p>
+                    
+                    <div class="flex items-center gap-4">
+                         <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-xs text-white font-mono">BD</div>
+                        <div>
+                            <h4 class="font-bold text-sm text-white">Business Duck</h4>
+                            <p class="text-xs text-gray-500 font-mono mt-1">COLLABORATOR</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- T3 -->
+                <div class="reveal delay-300 flex flex-col justify-between h-full group cursor-default">
+                    <p class="text-xl md:text-2xl text-gray-300 font-light leading-relaxed mb-6 md:mb-8 group-hover:text-white transition-colors">"From zero to fully deployed dApp in record time. The ZeroThreat security solutions provided peace of mind."</p>
+                    
+                    <div class="flex items-center gap-4">
+                         <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-xs text-white font-mono">SA</div>
+                        <div>
+                            <h4 class="font-bold text-sm text-white">Security Audit</h4>
+                            <p class="text-xs text-gray-500 font-mono mt-1">CLIENT</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="bg-white text-black py-20 md:py-32 rounded-t-[2rem] md:rounded-t-[3rem] relative overflow-hidden mt-10 md:mt-20">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="flex flex-col items-center text-center">
+                <p class="text-xs md:text-sm font-mono mb-6 md:mb-8 uppercase tracking-widest animate-pulse">Ready for new projects</p>
+                <a href="https://github.com/YUST777" target="_blank" class="group relative inline-block">
+                    <h2 class="text-5xl md:text-9xl font-display font-black tracking-tighter hover:scale-105 transition-transform duration-500 cursor-pointer text-black">
+                        YUST777
+                    </h2>
+                </a>
+                
+                <div class="mt-12 md:mt-20 flex flex-wrap justify-center gap-6 md:gap-20 items-center">
+                    <a href="https://github.com/YUST777" target="_blank" class="text-base md:text-lg font-bold hover:line-through decoration-2 transition-all">GitHub</a>
+                    <a href="#" class="text-base md:text-lg font-bold hover:line-through decoration-2 transition-all">Twitter / X</a>
+                    <a href="#" class="text-base md:text-lg font-bold hover:line-through decoration-2 transition-all">Telegram</a>
+                </div>
+
+                <div class="mt-16 md:mt-24 w-full flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs font-mono text-gray-500 border-t border-black/10 pt-6 md:pt-8 gap-4">
+                    <p>© 2025 BusinessDuck1. All Rights Reserved.</p>
+                    <p>LOCAL TIME: <span id="time">00:00 AM</span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Update Time
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('time').innerText = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZoneName: 'short' });
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // SCROLL REVEAL TEXT ANIMATION (About Section)
+        document.addEventListener('DOMContentLoaded', () => {
+            const textElement = document.getElementById('scroll-text');
+            const aboutSection = document.getElementById('about');
+            const statsRow = document.getElementById('stats-row');
+            
+            // 1. Split text into spans
+            const textContent = textElement.innerText;
+            textElement.innerHTML = '';
+            
+            const words = textContent.split(' ');
+            words.forEach(word => {
+                const span = document.createElement('span');
+                span.textContent = word;
+                span.className = 'opacity-20 transition-opacity duration-200'; // Start dim
+                textElement.appendChild(span);
+                // Add a space after each word
+                textElement.appendChild(document.createTextNode(' ')); 
+            });
+
+            const spans = textElement.querySelectorAll('span');
+
+            // 2. Scroll Listener
+            window.addEventListener('scroll', () => {
+                // About Section Logic
+                const sectionTop = aboutSection.offsetTop;
+                const sectionHeight = aboutSection.offsetHeight;
+                const scrollY = window.scrollY;
+                const windowHeight = window.innerHeight;
+
+                const startOffset = sectionTop - windowHeight / 2;
+                const endOffset = sectionTop + sectionHeight - windowHeight;
+                
+                let progress = (scrollY - startOffset) / (endOffset - startOffset);
+                progress = Math.max(0, Math.min(1, progress));
+
+                const totalSpans = spans.length;
+                const activeCount = Math.floor(progress * totalSpans);
+
+                spans.forEach((span, index) => {
+                    if (index < activeCount) {
+                        span.classList.remove('opacity-20');
+                        span.classList.add('opacity-100', 'text-white');
+                    } else {
+                        span.classList.add('opacity-20');
+                        span.classList.remove('opacity-100', 'text-white');
+                    }
+                });
+
+                if (progress > 0.8) {
+                    statsRow.classList.remove('opacity-0');
+                } else {
+                    statsRow.classList.add('opacity-0');
+                }
+            });
+
+            // SERVICE REVEAL ANIMATION (Top to Bottom Fade)
+            const serviceObserverOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.2
+            };
+
+            const serviceObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // When visible, remove translation and set opacity
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }
+                });
+            }, serviceObserverOptions);
+
+            const serviceItems = document.querySelectorAll('.service-reveal');
+            serviceItems.forEach(item => {
+                // Initial State set via JS to ensure graceful fallback if JS fails
+                item.style.opacity = "0";
+                item.style.transform = "translateY(-50px)"; // Start slightly above
+                item.style.transition = "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)";
+                serviceObserver.observe(item);
+            });
+        });
+
+        // General Reveal Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        const reveals = document.querySelectorAll('.reveal');
+        reveals.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
