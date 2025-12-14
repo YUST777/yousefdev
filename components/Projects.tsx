@@ -183,9 +183,10 @@ export default function Projects() {
                 >
                   <div
                     ref={el => { revealRefs.current[index + 1] = el }}
-                    className="w-full h-full pointer-events-none"
+                    className="w-full h-full"
+                    style={{ pointerEvents: 'none' }}
                   >
-                  <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative pointer-events-none">
+                  <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative" style={{ pointerEvents: 'none' }}>
                     {project.video ? (
                       <video
                         src={project.video}
@@ -227,7 +228,8 @@ export default function Projects() {
                 >
                   <div
                     ref={el => { revealRefs.current[index + 1] = el }}
-                    className="relative w-full h-full pointer-events-none"
+                    className="relative w-full h-full"
+                    style={{ pointerEvents: 'none' }}
                   >
                     {project.video ? (
                       <>
@@ -287,9 +289,10 @@ export default function Projects() {
               >
                 <div
                   ref={el => { revealRefs.current[index + 1] = el }}
-                  className="w-full h-full pointer-events-none"
+                  className="w-full h-full"
+                  style={{ pointerEvents: 'none' }}
                   >
-                  <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative pointer-events-none">
+                  <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative" style={{ pointerEvents: 'none' }}>
                     {project.video ? (
                       <video
                         src={project.video}
@@ -297,18 +300,19 @@ export default function Projects() {
                         loop
                         muted
                         playsInline
-                        className="absolute inset-0 w-full h-full object-cover rounded-2xl pointer-events-none"
+                        className="absolute inset-0 w-full h-full object-cover rounded-2xl"
+                        style={{ pointerEvents: 'none' }}
                       />
                     ) : project.isPlaceholder ? null : (
-                      <i className={`fas ${project.icon} text-8xl md:text-9xl text-white/20 group-hover:text-white/30 transition-colors duration-500 pointer-events-none`}></i>
+                      <i className={`fas ${project.icon} text-8xl md:text-9xl text-white/20 group-hover:text-white/30 transition-colors duration-500`} style={{ pointerEvents: 'none' }}></i>
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" style={{ pointerEvents: 'none' }}></div>
                     {project.video && (
-                      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500 pointer-events-none"></div>
+                      <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500" style={{ pointerEvents: 'none' }}></div>
                     )}
                   </div>
                   {!project.isPlaceholder && (
-                    <div className="absolute inset-0 bg-transparent group-hover:bg-transparent transition-all duration-500 p-6 md:p-8 flex flex-col justify-between pointer-events-none">
+                    <div className="absolute inset-0 bg-transparent group-hover:bg-transparent transition-all duration-500 p-6 md:p-8 flex flex-col justify-between" style={{ pointerEvents: 'none' }}>
                       {project.tag && (
                         <div className="flex justify-between items-start">
                           <span className="bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold border border-white/20 uppercase tracking-widest text-white shadow-lg">{project.tag}</span>

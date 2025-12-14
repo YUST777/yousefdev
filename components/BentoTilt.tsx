@@ -51,10 +51,17 @@ export default function BentoTilt({ children, className = '', onClick }: BentoTi
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
       onTouchEnd={handleTouchEnd}
+      onTouchStart={(e) => {
+        // Prevent default to avoid double-tap zoom on mobile
+        if (onClick) {
+          e.preventDefault()
+        }
+      }}
       style={{ 
         transform: transformStyle,
         transition: 'transform 0.1s ease-out',
-        touchAction: 'manipulation'
+        touchAction: onClick ? 'manipulation' : 'auto',
+        WebkitTapHighlightColor: 'transparent'
       }}
     >
       {children}
