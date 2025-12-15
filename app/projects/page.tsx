@@ -425,51 +425,85 @@ export default function ProjectsPage() {
 
               {openDrawer === 'zerothreat' && (
                 <>
-                  {/* Tech Stack */}
+                  {/* Header */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4">🚀 Tech Stack</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <h5 className="text-sm font-bold text-white/80 mb-2">Frontend</h5>
-                        <ul className="space-y-1 text-sm text-gray-300">
-                          <li>• React 18.3.1 - Modern React with hooks</li>
-                          <li>• Vite 5.4.10 - Fast build tool</li>
-                          <li>• Tailwind CSS 3.4.14 - Utility-first CSS</li>
-                          <li>• GSAP 3.12.5 - Animation library</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h5 className="text-sm font-bold text-white/80 mb-2">Development Tools</h5>
-                        <ul className="space-y-1 text-sm text-gray-300">
-                          <li>• ESLint 9.14.0 - Code quality</li>
-                          <li>• PostCSS 8.4.49 - CSS processing</li>
-                          <li>• Prettier 3.3.3 - Code formatting</li>
-                        </ul>
-                      </div>
-                    </div>
+                    <h4 className="text-xl font-display font-bold text-white mb-2">Zero Threat – AI-Driven Cybersecurity Suite</h4>
+                    <p className="text-sm text-gray-400"><i className="fas fa-calendar-alt mr-2"></i>August 1 – August 28, 2025</p>
+                    <p className="text-sm text-gray-400 mt-1"><i className="fas fa-trophy mr-2"></i>3rd Place at the National Student Forum (Al-Multaqy Al-Qammy), Tanta University</p>
+                    <p className="text-sm text-gray-400 mt-1">Role: Lead Web Developer & UI/UX Designer</p>
                   </div>
 
-                  {/* Features */}
+                  {/* The Achievement */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4">✨ Features</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      <div className="flex items-start gap-2">
-                        <span className="text-lg">🎬</span>
-                        <span className="text-sm text-gray-300">Interactive Video Hero Section with GSAP animations</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-lg">🎨</span>
-                        <span className="text-sm text-gray-300">Modern UI/UX Design with custom animations</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-lg">📱</span>
-                        <span className="text-sm text-gray-300">Fully Responsive for all devices</span>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-lg">⚡</span>
-                        <span className="text-sm text-gray-300">Performance Optimized with Vite</span>
-                      </div>
-                    </div>
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-trophy mr-2"></i>The Achievement</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      This project secured 3rd place in a national competition featuring <strong className="text-white">20 universities from across Egypt</strong>. As freshmen from a private university, my team competed against and outperformed 4th and 5th-year Engineering and Computer Science seniors. Our project was evaluated and commended by the Dean of Computer Science and a Professor of Cybersecurity at Tanta University.
+                    </p>
+                  </div>
+
+                  {/* The Solution */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-lightbulb mr-2"></i>The Solution</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      Zero Threat is a comprehensive security ecosystem combining a web platform, a browser extension, and a Windows application.
+                    </p>
+                  </div>
+
+                  {/* My Contribution */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-globe mr-2"></i>My Contribution (The Web Platform)</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed mb-4">
+                      I led the development of the web interface using Next.js and React, focusing on a high-performance UI with smooth animations. Key features I implemented include:
+                    </p>
+                    <ul className="space-y-3 text-sm text-gray-300">
+                      <li><strong className="text-white">Universal File Scanner:</strong> An integrated tool to scan various file types (ZIP, PNG, MP4) for hidden malware.</li>
+                      <li><strong className="text-white">Web Security Tools:</strong> Built-in developer tools for open port scanning and vulnerability assessment (similar to OWASP ZAP).</li>
+                      <li><strong className="text-white">Browser Extension:</strong> A companion extension to ensure safe downloads in real-time.</li>
+                    </ul>
+                  </div>
+
+                  {/* The Windows Agent */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-desktop mr-2"></i>The Windows Agent</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      Developed by my teammate Abdelrahman Mohsen, the desktop client utilizes the YARA protocol and AI integration. In our benchmarks, it achieved a <strong className="text-white">90% detection rate</strong> across 90 test subjects, outperforming many traditional signature-based antivirus solutions.
+                    </p>
+                  </div>
+
+                  {/* Official Documentation */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-file-alt mr-2"></i>Official Documentation</h4>
+                    <p className="text-sm text-gray-400 mb-4">Official posts from Tanta University and Horus University:</p>
+                    <ul className="space-y-3 text-sm">
+                      <li>
+                        <a href="https://www.facebook.com/share/p/1DAW9yMMH1/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 flex items-center gap-2">
+                          <i className="fab fa-facebook"></i> Horus University Official Post
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://www.facebook.com/share/p/1XakrE3nLE/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 flex items-center gap-2">
+                          <i className="fab fa-facebook"></i> Tanta University Official Post
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://www.facebook.com/share/v/1HBLEF92ep/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 flex items-center gap-2">
+                          <i className="fab fa-facebook"></i> Award Ceremony Video (2:13)
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Visit Project Button */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <a
+                      href="https://zerothreat.yousefdev.xyz/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
+                    >
+                      <span>Visit Zero Threat</span>
+                      <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
+                    </a>
                   </div>
                 </>
               )}
@@ -478,28 +512,46 @@ export default function ProjectsPage() {
                 <>
                   {/* Header */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-2">retroOS – Retro Operating System UI</h4>
-                    <p className="text-sm text-gray-400">December 5, 2025 • Operating Systems Course Project & Hackathon Winner</p>
+                    <h4 className="text-xl font-display font-bold text-white mb-2">RetroOS</h4>
+                    <p className="text-sm text-gray-400"><i className="fas fa-trophy mr-2"></i>Operating Systems Course Project & Hackathon Winner</p>
+                    <p className="text-sm text-gray-400 mt-1">Tech Stack: Next.js, React</p>
                   </div>
 
-                  {/* Description */}
+                  {/* Overview */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-info-circle mr-2"></i>About Project</h4>
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-info-circle mr-2"></i>Overview</h4>
                     <p className="text-sm text-gray-300 leading-relaxed">
-                      A fully interactive retro operating system built with Next.js and React. Experience a nostalgic desktop environment with working terminal, file system, window management, and multiple applications.
+                      RetroOS is a web-based simulation designed to trigger nostalgia by faithfully recreating the iconic Windows XP user interface. Originally developed as a project for my Operating Systems university course, it serves as a visual mimic of an OS environment entirely within the browser.
                     </p>
                   </div>
 
-                  {/* Technologies */}
+                  {/* The Experience */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4">🛠️ Technologies</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Zustand', 'React Draggable'].map((tech) => (
-                        <span key={tech} className="px-3 py-1 bg-white/10 rounded-full text-xs text-white border border-white/20">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-laptop-code mr-2"></i>The Experience</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      While it doesn't run on a low-level kernel, the application uses advanced React state management to simulate windowing systems, taskbars, and file navigation. The attention to detail in the UI/UX design made the project stand out immediately.
+                    </p>
+                  </div>
+
+                  {/* Key Achievement */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-trophy mr-2"></i>Key Achievement</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      We took this project to a hackathon, where its unique concept and execution earned us a <strong className="text-white">$150 cash prize</strong>. It was a wild experience turning a course assignment into a winning hackathon entry.
+                    </p>
+                  </div>
+
+                  {/* Visit Project Button */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <a
+                      href="https://retroos.yousefdev.xyz/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
+                    >
+                      <span>Visit retroOS</span>
+                      <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
+                    </a>
                   </div>
                 </>
               )}
