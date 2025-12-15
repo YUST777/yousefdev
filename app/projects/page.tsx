@@ -506,125 +506,45 @@ export default function ProjectsPage() {
 
               {openDrawer === 'icpchue' && (
                 <>
+                  {/* Header */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-2">ICPC HUE Platform</h4>
+                    <p className="text-sm text-gray-400">December 8, 2025 • Lead Full-Stack Developer & Co-Founder</p>
+                  </div>
+
                   {/* Overview */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4">🔒 Security Overview</h4>
-                    <p className="text-sm text-gray-300 leading-relaxed mb-3">
-                      ICPC HUE application follows industry best practices for web application security with comprehensive security measures implemented throughout the application.
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-info-circle mr-2"></i>Overview</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      ICPC HUE is a competitive programming community established at Horus University. Recognizing the lack of a dedicated ICPC chapter in our faculty, I collaborated with my team to build this initiative from the ground up. Over the course of three semesters (Summer Year 1 to Fall Year 2), we developed the branding, curriculum, and digital infrastructure to support our fellow students.
                     </p>
-                    <div className="bg-green-500/20 border border-green-500/30 rounded-lg p-3">
-                      <p className="text-green-400 font-bold text-sm">Security Score: 9/10</p>
-                    </div>
                   </div>
 
-                  {/* Authentication & Authorization */}
+                  {/* Technical Contributions */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4">🔐 Authentication & Authorization</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <h5 className="text-sm font-bold text-white/80 mb-2">JWT Authentication</h5>
-                        <ul className="space-y-1 text-sm text-gray-300">
-                          <li>• Secure token-based authentication</li>
-                          <li>• Token expiration: 1 day</li>
-                          <li>• Secret key validation required</li>
-                          <li>• No fallback secrets in production</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h5 className="text-sm font-bold text-white/80 mb-2">Password Security</h5>
-                        <ul className="space-y-1 text-sm text-gray-300">
-                          <li>• Minimum 8 characters</li>
-                          <li>• Strength requirements enforced</li>
-                          <li>• bcrypt hashing (10 rounds)</li>
-                          <li>• Multi-Factor Authentication (MFA)</li>
-                        </ul>
-                      </div>
-                    </div>
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-tools mr-2"></i>Technical Contributions</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed mb-4">
+                      I led the development of ICPCHUE.XYZ, a comprehensive platform serving the community:
+                    </p>
+                    <ul className="space-y-3 text-sm text-gray-300">
+                      <li><strong className="text-white">Modern Landing Page:</strong> Built with Next.js and React for a high-performance, clean user interface.</li>
+                      <li><strong className="text-white">Secure Registration:</strong> Implemented a robust candidate application system using Supabase for database management. Security was prioritized using reCAPTCHA, Cloudflare, and Fail2Ban to prevent DDoS attacks and spam.</li>
+                      <li><strong className="text-white">Gamified Dashboard:</strong> Created an interactive student dashboard featuring live 3D assets and "Easter eggs" to increase user motivation. Features include session file downloads, quiz submissions, and a real-time skills tracker.</li>
+                      <li><strong className="text-white">Performance & Security:</strong> The platform is fully responsive for mobile and desktop. Sensitive data is protected via client-side encryption using CryptoJS.</li>
+                    </ul>
                   </div>
 
-                  {/* Protection Measures */}
+                  {/* Visit Project Button */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4">🛡️ Protection Measures</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      <div className="flex items-start gap-2">
-                        <span className="text-lg">🔒</span>
-                        <div>
-                          <span className="text-sm font-bold text-white">SQL Injection Protection</span>
-                          <p className="text-xs text-gray-400">Parameterized queries with PostgreSQL</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-lg">🚫</span>
-                        <div>
-                          <span className="text-sm font-bold text-white">XSS Protection</span>
-                          <p className="text-xs text-gray-400">Input sanitization & CSP headers</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-lg">⏱️</span>
-                        <div>
-                          <span className="text-sm font-bold text-white">Rate Limiting</span>
-                          <p className="text-xs text-gray-400">Protected endpoints with IP-based limits</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-lg">🤖</span>
-                        <div>
-                          <span className="text-sm font-bold text-white">Bot Protection</span>
-                          <p className="text-xs text-gray-400">reCAPTCHA v3 integration</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-lg">🔐</span>
-                        <div>
-                          <span className="text-sm font-bold text-white">Data Encryption</span>
-                          <p className="text-xs text-gray-400">Encryption at rest for sensitive data</p>
-                        </div>
-                      </div>
-                      <div className="flex items-start gap-2">
-                        <span className="text-lg">🌐</span>
-                        <div>
-                          <span className="text-sm font-bold text-white">HTTPS Enforcement</span>
-                          <p className="text-xs text-gray-400">HSTS headers with 1-year max-age</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Security Headers */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4">📋 Security Headers</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                      <span className="px-3 py-1 bg-white/10 rounded-full text-xs text-white border border-white/20">Content Security Policy (CSP)</span>
-                      <span className="px-3 py-1 bg-white/10 rounded-full text-xs text-white border border-white/20">HSTS</span>
-                      <span className="px-3 py-1 bg-white/10 rounded-full text-xs text-white border border-white/20">X-Frame-Options</span>
-                      <span className="px-3 py-1 bg-white/10 rounded-full text-xs text-white border border-white/20">X-Content-Type-Options</span>
-                      <span className="px-3 py-1 bg-white/10 rounded-full text-xs text-white border border-white/20">X-XSS-Protection</span>
-                      <span className="px-3 py-1 bg-white/10 rounded-full text-xs text-white border border-white/20">CORP</span>
-                    </div>
-                  </div>
-
-                  {/* Rate Limiting Details */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4">⏱️ Rate Limiting</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      <div className="bg-white/5 p-3 rounded-lg border border-white/10">
-                        <p className="text-xs font-bold text-white mb-1">Application Submission</p>
-                        <p className="text-xs text-gray-400">5 requests per 15 minutes</p>
-                      </div>
-                      <div className="bg-white/5 p-3 rounded-lg border border-white/10">
-                        <p className="text-xs font-bold text-white mb-1">Login Attempts</p>
-                        <p className="text-xs text-gray-400">5 requests per 15 minutes</p>
-                      </div>
-                      <div className="bg-white/5 p-3 rounded-lg border border-white/10">
-                        <p className="text-xs font-bold text-white mb-1">Registration</p>
-                        <p className="text-xs text-gray-400">3 requests per hour</p>
-                      </div>
-                      <div className="bg-white/5 p-3 rounded-lg border border-white/10">
-                        <p className="text-xs font-bold text-white mb-1">Admin Endpoints</p>
-                        <p className="text-xs text-gray-400">10 requests per minute</p>
-                      </div>
-                    </div>
+                    <a
+                      href="https://icpchue.xyz"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
+                    >
+                      <span>Visit ICPCHUE</span>
+                      <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
+                    </a>
                   </div>
                 </>
               )}
