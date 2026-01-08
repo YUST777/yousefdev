@@ -158,6 +158,8 @@ export default function Hero() {
             alt="Yousef - Developer"
             fill
             priority
+            fetchPriority="high"
+            sizes="(max-width: 768px) 280px, 352px"
             className={`relative object-contain drop-shadow-2xl animate-wiggle hover:scale-105 transition-transform duration-300 ${showGlitch ? 'glitch-effect' : ''}`}
             style={{
               transformStyle: 'preserve-3d',

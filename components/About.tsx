@@ -167,16 +167,16 @@ export default function About() {
   return (
     <section id="about" ref={aboutSectionRef} className="relative bg-dark min-h-[120vh] md:min-h-[150vh] flex flex-col justify-center items-center">
       {/* Floating Elements - Lottie Animations */}
-      <div ref={emoji1Ref} className="hidden md:block absolute top-[30%] left-10 w-40 h-40 opacity-30 pointer-events-none select-none" aria-label="Animated mascot: coding duck">
+      <div ref={emoji1Ref} className="hidden md:block absolute top-[30%] left-10 w-40 h-40 opacity-30 pointer-events-none select-none" role="img" aria-label="Animated mascot: coding duck">
         {codingDuckData && <Lottie animationData={codingDuckData} loop={true} />}
       </div>
-      <div ref={emoji4Ref} className="hidden md:block absolute bottom-20 left-10 w-32 h-32 opacity-30 pointer-events-none select-none" aria-label="Animated mascot: duck">
+      <div ref={emoji4Ref} className="hidden md:block absolute bottom-20 left-10 w-32 h-32 opacity-30 pointer-events-none select-none" role="img" aria-label="Animated mascot: duck">
         {duckData && <Lottie animationData={duckData} loop={true} />}
       </div>
-      <div ref={emoji2Ref} className="hidden md:block absolute bottom-20 right-10 w-32 h-32 opacity-30 pointer-events-none select-none" aria-label="Animated mascot: code duck 2">
+      <div ref={emoji2Ref} className="hidden md:block absolute bottom-20 right-10 w-32 h-32 opacity-30 pointer-events-none select-none" role="img" aria-label="Animated mascot: code duck 2">
         {codeDuck2Data && <Lottie animationData={codeDuck2Data} loop={true} />}
       </div>
-      <div ref={emoji3Ref} className="hidden md:block absolute top-[40%] right-20 w-24 h-24 opacity-20 pointer-events-none select-none" aria-label="Animated mascot: heart">
+      <div ref={emoji3Ref} className="hidden md:block absolute top-[40%] right-20 w-24 h-24 opacity-20 pointer-events-none select-none" role="img" aria-label="Animated mascot: heart">
         {heartData && <Lottie animationData={heartData} loop={true} />}
       </div>
 

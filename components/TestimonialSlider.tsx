@@ -184,10 +184,11 @@ export default function TestimonialSlider() {
                   <button
                     key={index}
                     onClick={() => setCurrentIndex(index)}
-                    className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex ? 'w-12 bg-white' : 'w-2 bg-white/30'
-                      }`}
+                    className={`min-h-[44px] min-w-[44px] flex items-center justify-center rounded-full transition-all duration-300`}
                     aria-label={`Go to testimonial ${index + 1}`}
-                  />
+                  >
+                    <span className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex ? 'w-12 bg-white' : 'w-2 bg-white/30'}`} />
+                  </button>
                 ))}
               </div>
 
