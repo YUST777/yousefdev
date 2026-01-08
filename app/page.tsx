@@ -1,11 +1,13 @@
+import dynamic from 'next/dynamic'
 import Navigation from '@/components/Navigation'
 import Hero from '@/components/Hero'
 import Marquee from '@/components/Marquee'
 import About from '@/components/About'
 import Services from '@/components/Services'
-import Projects from '@/components/Projects'
-import BuildingPublicly from '@/components/BuildingPublicly'
 import Footer from '@/components/Footer'
+
+const Projects = dynamic(() => import('@/components/Projects'))
+const BuildingPublicly = dynamic(() => import('@/components/BuildingPublicly'))
 
 export default function Home() {
   const pageStructuredData = {
