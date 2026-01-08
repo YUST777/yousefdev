@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Image from 'next/image'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -61,7 +62,7 @@ export default function Testimonials() {
   return (
     <section ref={sectionRef} className="py-20 md:py-40 border-t border-white/5 bg-black">
       <div className="max-w-7xl mx-auto px-6">
-        <div 
+        <div
           ref={el => { revealRefs.current[0] = el }}
           className="flex items-center gap-4 mb-12 md:mb-20"
         >
@@ -80,11 +81,13 @@ export default function Testimonials() {
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 font-light leading-relaxed mb-6 md:mb-8 group-hover:text-white transition-colors">
                 {testimonial.text}
               </p>
-              
+
               <div className="flex items-center gap-3 sm:gap-4 justify-center md:justify-start">
-                <img 
-                  src={testimonial.avatar} 
+                <Image
+                  src={testimonial.avatar}
                   alt={testimonial.name}
+                  width={56}
+                  height={56}
                   className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover border-2 border-white/20 group-hover:border-white/40 transition-all"
                 />
                 <div className="text-left">

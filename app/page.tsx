@@ -32,11 +32,61 @@ export default function Home() {
     },
   }
 
-  // SoftwareApplication schema for projects
   const projectsStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    itemListElement: [],
+    'name': 'Featured Projects',
+    'description': 'A collection of advanced software engineering and cybersecurity projects.',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'item': {
+          '@type': 'SoftwareApplication',
+          'name': 'Zero Threat',
+          'operatingSystem': 'Windows, Web',
+          'applicationCategory': 'SecurityApplication',
+          'description': 'National award-winning AI-driven security ecosystem featuring a file scanner, browser extension, and Windows agent.',
+          'offers': {
+            '@type': 'Offer',
+            'price': '0',
+            'priceCurrency': 'USD'
+          }
+        }
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'item': {
+          '@type': 'SoftwareApplication',
+          'name': 'ICPCHUE',
+          'operatingSystem': 'Web',
+          'applicationCategory': 'EducationalApplication',
+          'description': 'Hardened, sandboxed online judge platform for competitive programming training.',
+          'offers': {
+            '@type': 'Offer',
+            'price': '0',
+            'priceCurrency': 'USD'
+          }
+        }
+      },
+      {
+        '@type': 'ListItem',
+        'position': 3,
+        'item': {
+          '@type': 'SoftwareApplication',
+          'name': 'retroOS',
+          'operatingSystem': 'Web',
+          'applicationCategory': 'DeveloperApplication',
+          'description': 'Advanced React OS simulation with custom windowing and file systems.',
+          'offers': {
+            '@type': 'Offer',
+            'price': '0',
+            'priceCurrency': 'USD'
+          }
+        }
+      }
+    ],
   }
 
   // Review schema for testimonials

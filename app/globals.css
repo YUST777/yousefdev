@@ -10,6 +10,29 @@
 html {
   overflow-x: hidden;
   overflow-y: auto;
+  scroll-behavior: auto !important;
+}
+
+/* Lenis recommended CSS */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
 
 body {
@@ -64,38 +87,38 @@ body {
 /* Card Interactions */
 .bento-card {
   background: #0a0a0a;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .bento-card:hover {
-  border-color: rgba(255,255,255,0.3);
+  border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-4px);
   box-shadow: 0 30px 60px -15px rgba(255, 255, 255, 0.05);
 }
 
 .sticky-card {
   position: sticky;
-  box-shadow: 0 -20px 60px rgba(0,0,0,0.8);
+  box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.8);
 }
 
 /* Custom Scrollbar */
-::-webkit-scrollbar { 
-  width: 4px; 
+::-webkit-scrollbar {
+  width: 4px;
 }
 
-::-webkit-scrollbar-track { 
-  background: #030303; 
+::-webkit-scrollbar-track {
+  background: #030303;
 }
 
-::-webkit-scrollbar-thumb { 
-  background: #444; 
-  border-radius: 4px; 
+::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
 }
 
 /* Spotlight Effect for Hero */
 .spotlight {
-  background: radial-gradient(circle at center, rgba(255,255,255,0.08) 0%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
 }
 
 /* Animated Title Styles (ZeroThreat-inspired) */
@@ -105,7 +128,7 @@ body {
   gap: 0.25rem;
   font-size: 4.5rem;
   text-transform: uppercase;
-  leading: 0.8;
+  line-height: 0.8;
   color: white;
 }
 
@@ -130,6 +153,9 @@ body {
   transform: translate3d(10px, 51px, -60px) rotateY(60deg) rotateX(-40deg);
   transform-origin: 50% 50% -150px !important;
   will-change: opacity, transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
 
 .flex-center {
@@ -146,24 +172,32 @@ body {
 
 /* Wiggle Animation - Smooth floating with subtle rotation */
 @keyframes wiggle {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: rotate(0deg) translateY(0px) translateX(0px);
   }
+
   15% {
     transform: rotate(-2deg) translateY(-8px) translateX(-3px);
   }
+
   30% {
     transform: rotate(1deg) translateY(-5px) translateX(2px);
   }
+
   45% {
     transform: rotate(-1deg) translateY(-10px) translateX(-2px);
   }
+
   60% {
     transform: rotate(2deg) translateY(-6px) translateX(3px);
   }
+
   75% {
     transform: rotate(-1deg) translateY(-8px) translateX(-1px);
   }
+
   90% {
     transform: rotate(1deg) translateY(-4px) translateX(2px);
   }
@@ -180,9 +214,12 @@ body {
 
 /* Floating glow effect */
 @keyframes glow-pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.3));
   }
+
   50% {
     filter: drop-shadow(0 0 40px rgba(59, 130, 246, 0.6));
   }
@@ -203,42 +240,52 @@ body {
     transform: translate(0);
     filter: hue-rotate(0deg);
   }
+
   10% {
     transform: translate(-5px, 5px);
     filter: hue-rotate(90deg);
   }
+
   20% {
     transform: translate(-10px, -5px);
     filter: hue-rotate(180deg);
   }
+
   30% {
     transform: translate(10px, 5px);
     filter: hue-rotate(270deg);
   }
+
   40% {
     transform: translate(-5px, -10px);
     filter: hue-rotate(360deg);
   }
+
   50% {
     transform: translate(5px, 10px);
     filter: hue-rotate(90deg) saturate(3);
   }
+
   60% {
     transform: translate(-10px, 5px);
     filter: hue-rotate(180deg);
   }
+
   70% {
     transform: translate(10px, -5px);
     filter: hue-rotate(270deg);
   }
+
   80% {
     transform: translate(-5px, 10px);
     filter: hue-rotate(360deg);
   }
+
   90% {
     transform: translate(5px, -10px);
     filter: hue-rotate(90deg);
   }
+
   100% {
     transform: translate(0);
     filter: hue-rotate(0deg);
@@ -247,9 +294,12 @@ body {
 
 /* Slow bounce animation for doodle arrow */
 @keyframes bounce-slow {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-8px);
   }

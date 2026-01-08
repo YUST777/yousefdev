@@ -3,14 +3,15 @@ import { Inter, Syne } from 'next/font/google'
 import './globals.css'
 import FontAwesomeLoader from '@/components/FontAwesomeLoader'
 import ClarityAnalytics from '@/components/ClarityAnalytics'
+import SmoothScroll from '@/components/SmoothScroll'
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   weight: ['300', '400', '500', '600']
 })
 
-const syne = Syne({ 
+const syne = Syne({
   subsets: ['latin'],
   variable: '--font-syne',
   weight: ['400', '700', '800']
@@ -18,34 +19,31 @@ const syne = Syne({
 
 export const metadata: Metadata = {
   title: {
-    default: 'yousefdev - Developer | Full-Stack & Cybersecurity',
+    default: 'yousefdev - Cybersecurity Engineer & Full-Stack Developer',
     template: '%s | yousefdev'
   },
-  description: 'yousefdev is a full-stack developer and cybersecurity engineer building practical tools and applications with clean design and solid architecture. Expert in React, Next.js, TypeScript, and security solutions.',
+  description: 'yousefdev is a Lead Cybersecurity Engineer and Full-Stack Developer specializing in hardened web systems, secure execution engines, and production-grade architecture. Expert in Next.js, React, Node.js, and OWASP compliance.',
   keywords: [
     'yousefdev',
-    'Full-Stack Developer',
     'Cybersecurity Engineer',
-    'Software Developer',
-    'Web Developer',
-    'React Developer',
-    'Next.js Developer',
-    'TypeScript Developer',
-    'Software Development',
-    'Web Development',
-    'Application Development',
-    'Cybersecurity Services',
-    'Security Engineering',
-    'Automation',
-    'System Design',
-    'Frontend Development',
-    'Backend Development',
-    'E-commerce Development',
-    'Portfolio Website',
-    'Custom Software Solutions',
-    'Web Application Security',
+    'Full-Stack Developer',
+    'Lead Software Engineer',
+    'Hardened Web Systems',
+    'Secure Online Judge',
+    'Sandboxed Code Execution',
+    'Next.js 16 Developer',
+    'React 19 Specialist',
+    'OWASP Compliance',
+    'Defense-in-Depth',
+    'Cybersecurity Portfolio',
+    'Award-winning Developer',
+    'Zero Threat AI',
+    'ICPC HUE Ecosystem',
     'Penetration Testing',
-    'Security Consulting'
+    'Security Engineering',
+    'Web Application Security',
+    'System Architect',
+    'Node.js Security',
   ],
   authors: [{ name: 'yousefdev', url: 'https://yousefdev.xyz' }],
   creator: 'yousefdev',
@@ -116,6 +114,17 @@ export const metadata: Metadata = {
     google: 'ozdDj18j8TF3lqLZ1MD3kbtVhKnV8Dp8XYo4TwmAWsI',
   },
   category: 'Technology',
+  referrer: 'origin-when-cross-origin',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'yousefdev',
+  },
 }
 
 export default function RootLayout({
@@ -263,23 +272,55 @@ export default function RootLayout({
     ],
   }
 
+  // FAQ schema for recruiters
+  const faqStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': [
+      {
+        '@type': 'Question',
+        'name': 'What are your core security specialties?',
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': 'I specialize in hardened web systems, secure code execution engines, sandboxed environments (Zero Threat), and OWASP-compliant architecture.'
+        }
+      },
+      {
+        '@type': 'Question',
+        'name': 'What is your primary tech stack?',
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': 'My primary stack includes Next.js, React, Node.js, TypeScript, and Supabase, with a heavy focus on security-by-design.'
+        }
+      },
+      {
+        '@type': 'Question',
+        'name': 'Have you won any competitions?',
+        'acceptedAnswer': {
+          '@type': 'Answer',
+          'text': 'Yes, my project Zero Threat secured 3rd place in a national student forum at Tanta University, outperforming senior-level entries.'
+        }
+      }
+    ]
+  }
+
   return (
     <html lang="en" className="scroll-smooth">
       <head>
         {/* Google Search Console Verification */}
         <meta name="google-site-verification" content="ozdDj18j8TF3lqLZ1MD3kbtVhKnV8Dp8XYo4TwmAWsI" />
-        
+
         {/* Resource Hints for Performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.clarity.ms" />
         <link rel="dns-prefetch" href="https://telegram.org" />
         <link rel="dns-prefetch" href="https://tganalytics.xyz" />
-        
+
         {/* Preload critical resources */}
         <link rel="preload" href="/icons/logo.webp" as="image" type="image/webp" />
         <link rel="preload" href="/images/hero.webp" as="image" type="image/webp" />
-        
+
         {/* Structured Data */}
         <script
           type="application/ld+json"
@@ -301,12 +342,18 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceData) }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+        />
       </head>
       <body className={`${inter.variable} ${syne.variable} font-sans antialiased selection:bg-white selection:text-black overflow-x-hidden`}>
-        <FontAwesomeLoader />
-        <ClarityAnalytics />
-        <div className="noise-overlay"></div>
-        {children}
+        <SmoothScroll>
+          <FontAwesomeLoader />
+          <ClarityAnalytics />
+          <div className="noise-overlay"></div>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   )

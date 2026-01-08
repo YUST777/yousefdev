@@ -28,9 +28,9 @@ export default function Footer() {
           </div>
 
           <div className="mt-12 md:mt-20 flex flex-wrap justify-center gap-6 md:gap-20 items-center">
-            <span className="text-base md:text-lg font-bold cursor-default">GitHub</span>
-            <span className="text-base md:text-lg font-bold">Twitter / X</span>
-            <a href="https://t.me/yousefmsm1" target="_blank" rel="noopener noreferrer" className="text-base md:text-lg font-bold hover:line-through decoration-2 transition-all">Telegram</a>
+            <span className="text-base md:text-lg font-bold cursor-default" aria-label="GitHub">GitHub</span>
+            <span className="text-base md:text-lg font-bold" aria-label="Twitter / X">Twitter / X</span>
+            <a href="https://t.me/yousefmsm1" target="_blank" rel="noopener noreferrer" className="text-base md:text-lg font-bold hover:line-through decoration-2 transition-all" aria-label="Contact me on Telegram">Telegram</a>
           </div>
 
           <div className="mt-16 md:mt-24 w-full flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs font-mono text-gray-500 border-t border-black/10 pt-6 md:pt-8 gap-4">

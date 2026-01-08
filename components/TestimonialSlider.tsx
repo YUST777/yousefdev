@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Image from 'next/image'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -128,11 +129,10 @@ export default function TestimonialSlider() {
                 ref={(el) => {
                   cardsRef.current[index] = el
                 }}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl border transition-all duration-500 cursor-pointer ${
-                  index === currentIndex
-                    ? 'bg-white/10 border-white/30 scale-105'
-                    : 'bg-white/5 border-white/10 hover:border-white/20'
-                }`}
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl border transition-all duration-500 cursor-pointer ${index === currentIndex
+                  ? 'bg-white/10 border-white/30 scale-105'
+                  : 'bg-white/5 border-white/10 hover:border-white/20'
+                  }`}
                 onClick={() => setCurrentIndex(index)}
               >
                 <span className="text-2xl md:text-3xl font-display font-black text-white">
@@ -154,12 +154,12 @@ export default function TestimonialSlider() {
           <div className="relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-8 md:p-12 flex flex-col">
             {/* Avatar and Client Info */}
             <div className="flex items-center gap-4 mb-8">
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden border border-white/20 bg-white/5 flex-shrink-0">
-                <img
+              <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden border border-white/20 bg-white/5 flex-shrink-0">
+                <Image
                   src={testimonials[currentIndex].avatar}
                   alt={`${testimonials[currentIndex].client} portrait`}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
+                  fill
+                  className="object-cover"
                 />
               </div>
               <div>
@@ -184,9 +184,8 @@ export default function TestimonialSlider() {
                   <button
                     key={index}
                     onClick={() => setCurrentIndex(index)}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      index === currentIndex ? 'w-12 bg-white' : 'w-2 bg-white/30'
-                    }`}
+                    className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex ? 'w-12 bg-white' : 'w-2 bg-white/30'
+                      }`}
                     aria-label={`Go to testimonial ${index + 1}`}
                   />
                 ))}

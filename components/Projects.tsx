@@ -6,6 +6,8 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import BentoTilt from './BentoTilt'
 import ProjectModal from './ProjectModal'
+import { useLenis } from './SmoothScroll'
+import ScopedSmoothScroll from './ScopedSmoothScroll'
 // Icons will use FontAwesome classes instead
 
 gsap.registerPlugin(ScrollTrigger)
@@ -20,6 +22,21 @@ export default function Projects() {
   const [openDrawer, setOpenDrawer] = useState<string | null>(null)
   const [typewriterText, setTypewriterText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
+  const [hasMounted, setHasMounted] = useState(false)
+  const { stop: stopLenis, start: startLenis } = useLenis()
+
+  useEffect(() => {
+    setHasMounted(true)
+  }, [])
+
+  // Stop/Start Lenis when drawer opens/closes
+  useEffect(() => {
+    if (openDrawer) {
+      stopLenis()
+    } else {
+      startLenis()
+    }
+  }, [openDrawer, stopLenis, startLenis])
 
   // Typewriter animation effect
   useEffect(() => {
@@ -86,7 +103,8 @@ export default function Projects() {
             y: 50,
             duration: 0.8,
             ease: 'back.out(1.4)',
-            delay: index * 0.1
+            delay: index * 0.1,
+            force3D: true
           })
         }
       })
@@ -97,35 +115,14 @@ export default function Projects() {
 
   const projectsData = [
     {
-      id: 1,
-      title: 'Zero Threat',
-      description: 'Cybersecurity website',
-      fullDescription: 'A modern cybersecurity-focused website showcasing security services and expertise.',
-      tag: 'Cybersecurity',
-      icon: 'fa-shield-alt',
-      span: 'md:col-span-2 md:row-span-1',
-      delay: 'delay-100',
-      video: '/videos/zerothreat.webm',
-    },
-    {
-      id: 4,
-      title: 'ICPCHUE',
-      description: 'ICPC HUE Platform',
-      fullDescription: 'A creative web platform for ICPC HUE community.',
-      tag: 'Platform',
-      icon: 'fa-code',
-      span: 'md:col-span-1 md:row-span-1 md:col-start-3',
-      delay: 'delay-100',
-      video: '/videos/ICPCHUE.webm',
-    },
-    {
       id: 2,
       title: 'retroOS',
-      description: 'Retro operating system UI',
-      fullDescription: 'A fully interactive retro operating system built with Next.js and React. Experience a nostalgic desktop environment with working terminal, file system, window management, and multiple applications.',
+      description: 'Advanced React OS simulation with custom windowing & file systems.',
+      fullDescription: 'A technical showcase of complex state management and UI engineering, featuring an interactive windowing system, functional terminal, and virtual file system built entirely with React and Next.js.',
+      tag: 'UI/UX',
       icon: 'fa-desktop',
-      span: 'md:col-span-2 md:row-span-1',
-      delay: 'delay-200',
+      span: 'md:col-span-1 md:row-span-1',
+      delay: 'delay-100',
       video: '/videos/RetroOS_Project.webm',
       technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Zustand', 'React Draggable'],
       features: [
@@ -152,12 +149,34 @@ export default function Projects() {
       ]
     },
     {
+      id: 4,
+      title: 'ICPCHUE',
+      description: 'Hardened, sandboxed online judge platform.',
+      fullDescription: 'I led the development of ICPCHUE.XYZ, a comprehensive platform serving the community. Built with Next.js, featuring secure registration, gamified dashboards, and Skill trackers.',
+      tag: 'Platform',
+      icon: 'fa-code',
+      span: 'md:col-span-2 md:row-span-1',
+      delay: 'delay-100',
+      video: '/videos/icpchue2.webm',
+    },
+    {
+      id: 1,
+      title: 'Zero Threat',
+      description: 'National award-winning AI-driven security ecosystem.',
+      fullDescription: 'A comprehensive AI-powered cybersecurity suite comprising a web platform, browser extension, and Windows agent, designed for advanced threat intelligence and real-time protection.',
+      tag: 'Cybersecurity',
+      icon: 'fa-shield-alt',
+      span: 'md:col-span-2 md:row-span-1',
+      delay: 'delay-200',
+      video: '/videos/zerothreat.webm',
+    },
+    {
       id: 5,
       title: 'More Projects',
       description: 'Additional projects and experiments',
       fullDescription: 'Explore additional projects, experiments, and creative work showcasing various technologies and solutions.',
       icon: 'fa-archive',
-      span: 'md:col-span-1 md:row-span-1 md:col-start-3',
+      span: 'md:col-span-1 md:row-span-1',
       delay: 'delay-200',
       isMinimal: true,
       isArchive: true,
@@ -206,7 +225,7 @@ export default function Projects() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[350px] md:auto-rows-[450px]">
-          {projectsData.map((project, index) => {
+          {hasMounted && projectsData.map((project, index) => {
             // --- Large Card (e.g. YousefDev) ---
             if (project.isLarge) {
               return (
@@ -236,6 +255,7 @@ export default function Projects() {
                           muted
                           playsInline
                           className="absolute inset-0 w-full h-full object-cover rounded-2xl pointer-events-none"
+                          title={`${project.title} project preview video`}
                         />
                       ) : (
                         <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-black pointer-events-none" />
@@ -283,6 +303,7 @@ export default function Projects() {
                           muted
                           playsInline
                           className="absolute inset-0 w-full h-full object-cover rounded-2xl pointer-events-none"
+                          title={`${project.title} archive preview video`}
                         />
                         {project.video !== '/videos/moreprojects.webm' && (
                           <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500 pointer-events-none"></div>
@@ -317,7 +338,7 @@ export default function Projects() {
                       setOpenDrawer('retroOS')
                       return
                     }
-                    if (project.video === '/videos/ICPCHUE.webm') {
+                    if (project.video === '/videos/icpchue2.webm' || project.video === '/videos/ICPCHUE.webm') {
                       setOpenDrawer('ICPCHUE')
                       return
                     }
@@ -352,6 +373,7 @@ export default function Projects() {
                         muted
                         playsInline
                         className="absolute inset-0 w-full h-full object-cover rounded-2xl pointer-events-none"
+                        title={`${project.title} showcase video`}
                       />
                     ) : (
                       <i className={`fas ${project.icon} text-8xl md:text-9xl text-white/20 group-hover:text-white/30 transition-colors duration-500`}></i>
@@ -435,7 +457,7 @@ export default function Projects() {
               </button>
             </div>
 
-            <div className="overflow-y-auto flex-1 pr-2 space-y-6 custom-scrollbar">
+            <ScopedSmoothScroll className="overflow-y-auto flex-1 pr-2 space-y-6 custom-scrollbar">
               {/* Video Hero */}
               {openDrawer && (
                 <div className="w-full aspect-video rounded-xl overflow-hidden bg-black/50 border border-white/5 mb-6 flex-shrink-0">
@@ -443,7 +465,7 @@ export default function Projects() {
                     src={
                       openDrawer === 'zerothreat' ? '/videos/zerothreat.webm' :
                         openDrawer === 'retroOS' ? '/videos/RetroOS_Project.webm' :
-                          openDrawer === 'ICPCHUE' ? '/videos/ICPCHUE.webm' :
+                          openDrawer === 'ICPCHUE' ? '/videos/icpchue2.webm' :
                             openDrawer === 'yousefdev' ? '/videos/yousefdev.webm' :
                               openDrawer === 'panoblue' ? '/videos/panoblue.webm' :
                                 openDrawer === 'fazzah' ? '/videos/fazzah.webm' : ''
@@ -453,6 +475,7 @@ export default function Projects() {
                     muted
                     playsInline
                     className="w-full h-full object-cover"
+                    title={`${openDrawer} detailed showcase video`}
                   />
                 </div>
               )}
@@ -595,30 +618,81 @@ export default function Projects() {
                 <>
                   {/* Header */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-2">ICPC HUE Platform</h4>
-                    <p className="text-sm text-gray-400">December 8, 2025 • Lead Full-Stack Developer & Co-Founder</p>
+                    <h4 className="text-xl font-display font-bold text-white mb-2"><i className="fas fa-rocket mr-2"></i>Project: ICPC HUE Ecosystem</h4>
+                    <p className="text-sm text-gray-400 font-bold">Role: Lead Software & Security Engineer</p>
+                    <p className="text-sm text-gray-400 mt-1">Timeline: Nov 2025 – Present</p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {['Next.js 16', 'React 19', 'Express.js', 'PostgreSQL', 'Docker', 'TypeScript'].map((tech) => (
+                        <span key={tech} className="px-2 py-1 bg-white/10 rounded-md text-[10px] text-white border border-white/10 uppercase tracking-tighter">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
                   {/* Overview */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-info-circle mr-2"></i>Overview</h4>
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-info-circle mr-2"></i>Project Overview</h4>
                     <p className="text-sm text-gray-300 leading-relaxed">
-                      ICPC HUE is a competitive programming community established at Horus University. Recognizing the lack of a dedicated ICPC chapter in our faculty, I collaborated with my team to build this initiative from the ground up. Over the course of three semesters (Summer Year 1 to Fall Year 2), we developed the branding, curriculum, and digital infrastructure to support our fellow students.
+                      ICPC HUE is a high-performance competitive programming ecosystem built for the Faculty of AI at Horus University. Moving beyond generic landing pages, I engineered a custom Online Judge (OJ), a secure recruitment pipeline, and a student dashboard that scales to hundreds of concurrent users.
                     </p>
                   </div>
 
-                  {/* Technical Contributions */}
+                  {/* Security */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-tools mr-2"></i>Technical Contributions</h4>
-                    <p className="text-sm text-gray-300 leading-relaxed mb-4">
-                      I led the development of ICPCHUE.XYZ, a comprehensive platform serving the community:
-                    </p>
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-shield-alt mr-2"></i>Hardened Security Infrastructure (A+ Rated)</h4>
+                    <p className="text-sm text-gray-300 mb-4">Instead of relying on third-party security, I implemented a Defense-in-Depth model that achieved an A+ SSL Rating from Qualys SSL Labs.</p>
                     <ul className="space-y-3 text-sm text-gray-300">
-                      <li><strong className="text-white">Modern Landing Page:</strong> Built with Next.js and React for a high-performance, clean user interface.</li>
-                      <li><strong className="text-white">Secure Registration:</strong> Implemented a robust candidate application system using Supabase for database management. Security was prioritized using reCAPTCHA, Cloudflare, and Fail2Ban to prevent DDoS attacks and spam.</li>
-                      <li><strong className="text-white">Gamified Dashboard:</strong> Created an interactive student dashboard featuring live 3D assets and "Easter eggs" to increase user motivation. Features include session file downloads, quiz submissions, and a real-time skills tracker.</li>
-                      <li><strong className="text-white">Performance & Security:</strong> The platform is fully responsive for mobile and desktop. Sensitive data is protected via client-side encryption using CryptoJS.</li>
+                      <li><strong className="text-white">Zero-Trust Auth:</strong> Stateless JWT management with Bcrypt high-iteration hashing.</li>
+                      <li><strong className="text-white">Infrastructure Hardening:</strong> Nonce-based Content Security Policy (CSP), Cloudflare WAF Layer 7 protection, and DNSSEC implementation.</li>
+                      <li><strong className="text-white">Compliance:</strong> Fully compliant with OWASP Top 10 standards and PCI DSS 4.0.1.</li>
                     </ul>
+                  </div>
+
+                  {/* The Judge */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-gavel mr-2"></i>Custom Execution Engine (The Judge)</h4>
+                    <p className="text-sm text-gray-300 mb-4">To ensure academic integrity and system stability, I developed a proprietary code execution engine.</p>
+                    <ul className="space-y-3 text-sm text-gray-300">
+                      <li><strong className="text-white">Sandboxed Environment:</strong> Every submission runs in an isolated Docker (Alpine Linux) container with --network none flags to prevent data leaks.</li>
+                      <li><strong className="text-white">Resource Throttling:</strong> Strict CPU (1.0) and Memory (&lt;256MB) limits prevent DoS attacks via student code.</li>
+                      <li><strong className="text-white">Scale:</strong> Manually curated 100+ test cases across 26 problems with sub-second asynchronous grading.</li>
+                    </ul>
+                  </div>
+
+                  {/* Impact & Metrics */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-chart-line mr-2"></i>Objective Impact & Metrics</h4>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Performance</p>
+                        <p className="text-lg font-display font-bold text-white">1,395ms</p>
+                        <p className="text-[10px] text-gray-400">Avg Load Time</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Adoption</p>
+                        <p className="text-lg font-display font-bold text-white">300+</p>
+                        <p className="text-[10px] text-gray-400">Reg in 48h</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Reach</p>
+                        <p className="text-lg font-display font-bold text-white">3,840+</p>
+                        <p className="text-[10px] text-gray-400">Monthly Views</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Engagement</p>
+                        <p className="text-lg font-display font-bold text-white">52/48</p>
+                        <p className="text-[10px] text-gray-400">Gender Parity</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Design */}
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-palette mr-2"></i>Design Philosophy</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed">
+                      Built on a high-contrast Glassmorphism system, the UI utilizes reusable primitives and optimized WebM backgrounds to maintain a premium feel without sacrificing the 1.3s load time performance.
+                    </p>
                   </div>
 
                   {/* Visit Project Button */}
@@ -764,10 +838,10 @@ export default function Projects() {
                   </div>
                 </>
               )}
-            </div>
+            </ScopedSmoothScroll>
           </div>
         </>
       )}
-    </section>
+    </section >
   )
 }

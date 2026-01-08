@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Image from 'next/image'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -14,9 +15,9 @@ export default function Hero() {
   const [showGlitch, setShowGlitch] = useState(false)
 
   useEffect(() => {
-    // 5% chance to show clown on load
+    // 0.001% chance to show clown on load (Rare Easter Egg)
     const randomChance = Math.random()
-    if (randomChance < 0.05) {
+    if (randomChance < 0.00001) {
       setTimeout(() => {
         triggerClownMode()
       }, 2000)
@@ -27,7 +28,7 @@ export default function Hero() {
       (window as any).clown = () => {
         triggerClownMode()
       }
-      
+
       (window as any).clownOff = () => {
         setIsClown(false)
         setShowGlitch(false)
@@ -56,7 +57,8 @@ export default function Hero() {
           stagger: 0.2,
           duration: 1.2,
           ease: 'power4.out',
-          delay: 0.2
+          delay: 0.2,
+          force3D: true
         })
       }
 
@@ -67,7 +69,8 @@ export default function Hero() {
         rotateY: 180,
         duration: 1.5,
         ease: 'back.out(1.7)',
-        delay: 0.8
+        delay: 0.8,
+        force3D: true
       })
 
       // Continuous subtle wiggle animation
@@ -78,7 +81,8 @@ export default function Hero() {
           duration: 2,
           ease: 'sine.inOut',
           yoyo: true,
-          repeat: -1
+          repeat: -1,
+          force3D: true
         })
       }
 
@@ -109,11 +113,11 @@ export default function Hero() {
           className="text-5xl md:text-8xl font-display font-black leading-[0.9] md:leading-[0.85] mb-6 md:mb-8 tracking-tighter uppercase"
           style={{ perspective: '1000px' }}
         >
-          <div className="title-line text-gray-400 text-3xl md:text-5xl font-normal mb-2 md:mb-3">Hey, I'm</div>
+          <div className="title-line text-white/50 text-sm md:text-lg font-bold tracking-[0.2em] mb-4 uppercase">Hey, I'm</div>
           <div className="title-line">YOUSEF</div>
-          <div className="title-line text-2xl md:text-4xl font-medium mt-2 md:mt-3">
-            <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-600">
-              Developer
+          <div className="title-line text-[9px] md:text-[11px] font-bold mt-6 tracking-[0.4em] text-white/40 uppercase">
+            <span className="relative inline-block">
+              Cybersecurity Engineer & Full-Stack Developer
             </span>
           </div>
         </h1>
@@ -149,12 +153,12 @@ export default function Hero() {
             }
           }}
         >
-          <img
+          <Image
             src={isClown ? "/images/clown.webp" : "/images/hero.webp"}
             alt="Yousef - Developer"
-            width={800}
-            height={600}
-            className={`relative w-full h-full object-contain drop-shadow-2xl animate-wiggle hover:scale-105 transition-transform duration-300 ${showGlitch ? 'glitch-effect' : ''}`}
+            fill
+            priority
+            className={`relative object-contain drop-shadow-2xl animate-wiggle hover:scale-105 transition-transform duration-300 ${showGlitch ? 'glitch-effect' : ''}`}
             style={{
               transformStyle: 'preserve-3d',
               objectPosition: 'center top'

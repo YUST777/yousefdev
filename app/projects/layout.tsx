@@ -1,17 +1,19 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Projects - Portfolio Showcase',
-  description: 'Explore my portfolio of web development projects, cybersecurity solutions, and automation tools. Built with React, Next.js, TypeScript, and modern technologies.',
+  title: 'Projects - Cybersecurity Solutions & Hardened Web Systems',
+  description: 'A deep dive into my portfolio of cybersecurity tools, hardened web systems, and high-performance software engineering case studies. Built with security by design.',
   keywords: [
-    'Portfolio Projects',
-    'Web Development Projects',
-    'React Projects',
-    'Next.js Projects',
-    'Cybersecurity Projects',
-    'Software Projects',
-    'Project Showcase',
-    'Development Portfolio',
+    'Cybersecurity Portfolio',
+    'Hardened Web Systems',
+    'Security Engineering Projects',
+    'Software Architecture',
+    'AI-Driven Security',
+    'Online Judge Platform',
+    'React OS Simulation',
+    'Full-Stack Case Studies',
+    'Award-winning Software',
+    'Defense-in-Depth Implementation',
   ],
   openGraph: {
     title: 'Projects - yousefdev Portfolio',
@@ -58,4 +60,3 @@ export default function ProjectsLayout({
 }) {
   return <>{children}</>
 }
-

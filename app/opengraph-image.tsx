@@ -33,35 +33,69 @@ export default async function Image() {
         >
           <div
             style={{
-              fontSize: '120px',
-              fontWeight: 'bold',
-              color: '#ffffff',
+              padding: '2px',
+              background: 'linear-gradient(to bottom right, #ffffff33, #ffffff11)',
+              borderRadius: '24px',
+              display: 'flex',
               marginBottom: '40px',
-              letterSpacing: '-0.02em',
             }}
           >
-            yousefdev
+            <div
+              style={{
+                background: '#0a0a0a',
+                padding: '40px 80px',
+                borderRadius: '22px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                border: '1px solid #ffffff11',
+              }}
+            >
+              <div
+                style={{
+                  fontSize: '120px',
+                  fontWeight: 'bold',
+                  color: '#ffffff',
+                  letterSpacing: '-0.02em',
+                  marginBottom: '20px',
+                }}
+              >
+                yousefdev
+              </div>
+              <div
+                style={{
+                  height: '4px',
+                  width: '100px',
+                  background: '#facc15', // Yellow accent from design
+                  borderRadius: '2px',
+                }}
+              />
+            </div>
           </div>
           <div
             style={{
-              fontSize: '40px',
-              color: '#a0a0a0',
+              fontSize: '44px',
+              fontWeight: '700',
+              color: '#ffffff',
               textAlign: 'center',
               maxWidth: '900px',
-              lineHeight: '1.4',
+              lineHeight: '1.2',
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
             }}
           >
-            Full-Stack Developer & Cybersecurity Engineer
+            Cybersecurity Engineer & Full-Stack Developer
           </div>
           <div
             style={{
               fontSize: '28px',
-              color: '#666666',
-              marginTop: '40px',
+              color: '#888888',
+              marginTop: '30px',
               textAlign: 'center',
+              maxWidth: '700px',
             }}
           >
-            Building practical tools and applications
+            Architecting Hardened Systems & High-Performance Web Applications
           </div>
         </div>
       </div>
