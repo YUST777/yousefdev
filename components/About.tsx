@@ -197,7 +197,7 @@ export default function About() {
   }, [])
 
   const techIcons = [
-    { name: 'React', Icon: SiReact, hoverColor: '#61DAFB', spin: true },
+    { name: 'React', Icon: SiReact, hoverColor: '#61DAFB', spin: false },
     { name: 'Next.js', Icon: SiNextdotjs, hoverColor: '#fff', spin: false },
     { name: 'PostgreSQL', Icon: SiPostgresql, hoverColor: '#336791', spin: false },
     { name: 'Python', Icon: SiPython, hoverColor: '#3776AB', spin: false },
@@ -257,6 +257,7 @@ export default function About() {
                 </button>
               ))}
             </div>
+            <p className="text-[10px] text-gray-500 animate-pulse">Click me :)</p>
           </div>
         </div>
       </div>
