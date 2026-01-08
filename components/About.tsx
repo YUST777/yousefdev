@@ -265,22 +265,22 @@ export default function About() {
       {mounted && createPortal(
         <AnimatePresence>
           {selectedTech && (
-            <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+              onClick={() => setSelectedTech(null)}
+            >
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-black/50 z-[9999]"
-                onClick={() => setSelectedTech(null)}
-              />
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8, y: 30 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.8, y: 30 }}
-                transition={{ type: 'spring', damping: 20, stiffness: 400 }}
-                className="fixed z-[9999] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] max-w-sm pointer-events-none"
+                initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                className="w-full max-w-sm relative"
+                onClick={(e) => e.stopPropagation()}
               >
-                <div className="pointer-events-auto relative bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] rounded-3xl p-5 shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-white/5">
+                <div className="relative bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] rounded-3xl p-5 shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-white/5">
                   {/* Speech Bubble Tail - Visual only, centered */}
                   <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-[#0d0d0d] rotate-45 border-r border-b border-white/5"></div>
 
@@ -324,7 +324,7 @@ export default function About() {
                   <p className="text-[9px] text-gray-600 text-right mt-3">Click to visit project</p>
                 </div>
               </motion.div>
-            </>
+            </motion.div>
           )}
         </AnimatePresence>,
         document.body
