@@ -208,7 +208,7 @@ export default function BuildingPublicly() {
 
     return (
         <ReactFlowProvider>
-            <section className="w-full bg-black py-24 px-4 md:px-6 border-t border-white/5 relative z-10 overflow-hidden">
+            <section className="w-full bg-black py-20 md:py-32 px-4 md:px-6 border-t border-white/5 relative z-10 overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
@@ -220,11 +220,11 @@ export default function BuildingPublicly() {
                             transition={{ duration: 0.8 }}
                             className="text-left"
                         >
-                            <h2 className="text-2xl md:text-4xl font-display font-bold text-white mb-6 tracking-tight">
+                            <h2 className="text-3xl md:text-6xl font-display font-bold text-white mb-6 tracking-tighter">
                                 What am I working on now?
                             </h2>
 
-                            <p className="text-gray-400 text-base md:text-lg leading-relaxed mb-8 max-w-md font-light">
+                            <p className="text-gray-400 text-base md:text-lg leading-relaxed mb-8 max-w-md">
                                 Dive into the <strong className="text-white">ICPCHUE.XYZ</strong> platform infrastructure.
                                 A scalable, distributed system orchestrated to handle thousands of concurrent code submissions securely.
                             </p>
@@ -247,7 +247,7 @@ export default function BuildingPublicly() {
 
                         {/* RIGHT: Mini Map Preview */}
                         <motion.div
-                            className="relative w-full aspect-square lg:aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 group cursor-pointer"
+                            className="relative w-full aspect-video rounded-3xl overflow-hidden border border-white/10 group cursor-pointer"
                             onClick={() => setIsExpanded(true)}
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}

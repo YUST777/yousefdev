@@ -5,6 +5,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import dynamic from 'next/dynamic'
 import { AnimatePresence, motion } from 'framer-motion'
+import { createPortal } from 'react-dom'
 
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false })
 
@@ -48,6 +49,11 @@ export default function About() {
   const [codeDuck2Data, setCodeDuck2Data] = useState<any>(null)
   const [heartData, setHeartData] = useState<any>(null)
   const [selectedTech, setSelectedTech] = useState<string | null>(null)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     // Load Lottie JSON files
@@ -256,71 +262,73 @@ export default function About() {
       </div>
 
       {/* Tech Project Popup - Chat Bubble Style */}
-      <AnimatePresence>
-        {selectedTech && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 z-50"
-              onClick={() => setSelectedTech(null)}
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 30 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8, y: 30 }}
-              transition={{ type: 'spring', damping: 20, stiffness: 400 }}
-              className="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] max-w-sm"
-            >
-              {/* Chat Bubble */}
-              <div className="relative bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] rounded-3xl p-5 shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-white/5">
-                {/* Speech Bubble Tail */}
-                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-[#0d0d0d] rotate-45 border-r border-b border-white/5"></div>
+      {mounted && createPortal(
+        <AnimatePresence>
+          {selectedTech && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 bg-black/50 z-[9999]"
+                onClick={() => setSelectedTech(null)}
+              />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, y: 30 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.8, y: 30 }}
+                transition={{ type: 'spring', damping: 20, stiffness: 400 }}
+                className="fixed z-[9999] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] max-w-sm pointer-events-none"
+              >
+                <div className="pointer-events-auto relative bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] rounded-3xl p-5 shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-white/5">
+                  {/* Speech Bubble Tail - Visual only, centered */}
+                  <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-[#0d0d0d] rotate-45 border-r border-b border-white/5"></div>
 
-                {/* Header */}
-                <div className="flex items-center gap-3 mb-4 pb-3 border-b border-white/10">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-white/20 to-white/5 flex items-center justify-center">
-                    <HiCode className="text-lg text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-white font-bold text-sm">{selectedTech}</p>
-                    <p className="text-[10px] text-gray-500">Used in {techProjects[selectedTech]?.length || 0} project(s)</p>
-                  </div>
-                  <button
-                    onClick={() => setSelectedTech(null)}
-                    className="w-7 h-7 rounded-full bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white transition-colors flex items-center justify-center text-xs"
-                  >
-                    ✕
-                  </button>
-                </div>
-
-                {/* Project Messages */}
-                <div className="space-y-2">
-                  {techProjects[selectedTech]?.map((project, idx) => (
-                    <a
-                      key={project.name}
-                      href={project.link}
-                      target={project.link.startsWith('/') ? '_self' : '_blank'}
-                      rel="noopener noreferrer"
-                      className="block bg-white/5 hover:bg-white/10 rounded-2xl px-4 py-3 transition-all duration-200 group border border-transparent hover:border-white/10"
+                  {/* Header */}
+                  <div className="flex items-center gap-3 mb-4 pb-3 border-b border-white/10">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-white/20 to-white/5 flex items-center justify-center">
+                      <HiCode className="text-lg text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-white font-bold text-sm">{selectedTech}</p>
+                      <p className="text-[10px] text-gray-500">Used in {techProjects[selectedTech]?.length || 0} project(s)</p>
+                    </div>
+                    <button
+                      onClick={() => setSelectedTech(null)}
+                      className="w-7 h-7 rounded-full bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white transition-colors flex items-center justify-center text-xs"
                     >
-                      <div className="flex items-center justify-between">
-                        <h4 className="text-sm font-bold text-white">{project.name}</h4>
-                        <span className="text-[9px] text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">Open →</span>
-                      </div>
-                      <p className="text-xs text-gray-400 mt-1">{project.description}</p>
-                    </a>
-                  ))}
-                </div>
+                      ✕
+                    </button>
+                  </div>
 
-                {/* Timestamp */}
-                <p className="text-[9px] text-gray-600 text-right mt-3">Click to visit project</p>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+                  {/* Project Messages */}
+                  <div className="space-y-2">
+                    {techProjects[selectedTech]?.map((project, idx) => (
+                      <a
+                        key={project.name}
+                        href={project.link}
+                        target={project.link.startsWith('/') ? '_self' : '_blank'}
+                        rel="noopener noreferrer"
+                        className="block bg-white/5 hover:bg-white/10 rounded-2xl px-4 py-3 transition-all duration-200 group border border-transparent hover:border-white/10"
+                      >
+                        <div className="flex items-center justify-between">
+                          <h4 className="text-sm font-bold text-white">{project.name}</h4>
+                          <span className="text-[9px] text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">Open →</span>
+                        </div>
+                        <p className="text-xs text-gray-400 mt-1">{project.description}</p>
+                      </a>
+                    ))}
+                  </div>
+
+                  {/* Timestamp */}
+                  <p className="text-[9px] text-gray-600 text-right mt-3">Click to visit project</p>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   )
 }

@@ -62,8 +62,8 @@ export default function Services() {
   ]
 
   return (
-    <section ref={sectionRef} id="services" className="py-8 md:py-16 bg-dark relative z-10">
-      <div className="max-w-7xl mx-auto px-3 md:px-6">
+    <section ref={sectionRef} id="services" className="py-8 md:py-16 bg-dark relative z-10 px-3 md:px-6">
+      <div className="max-w-7xl mx-auto">
         <div className="bg-white text-black rounded-[2rem] md:rounded-[3rem] p-8 md:p-16 overflow-hidden relative">
           <div className="absolute top-[-20%] right-[-10%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-gray-100 rounded-full blur-[100px] opacity-60 pointer-events-none"></div>
 
