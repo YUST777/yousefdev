@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Image from 'next/image'
@@ -41,9 +41,33 @@ const testimonials: Testimonial[] = [
 
 export default function TestimonialSlider() {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [containerHeight, setContainerHeight] = useState<number | 'auto'>('auto')
   const sliderRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
+  const testimonialCardRef = useRef<HTMLDivElement>(null)
+  const innerContentRef = useRef<HTMLDivElement>(null)
+
+  // Measure and update container height when testimonial changes
+  const updateHeight = useCallback(() => {
+    if (innerContentRef.current) {
+      const newHeight = innerContentRef.current.offsetHeight
+      setContainerHeight(newHeight)
+    }
+  }, [])
+
+  // Update height when currentIndex changes
+  useEffect(() => {
+    // Small delay to allow content to render
+    const timeout = setTimeout(updateHeight, 50)
+    return () => clearTimeout(timeout)
+  }, [currentIndex, updateHeight])
+
+  // Also update on window resize
+  useEffect(() => {
+    window.addEventListener('resize', updateHeight)
+    return () => window.removeEventListener('resize', updateHeight)
+  }, [updateHeight])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -150,87 +174,96 @@ export default function TestimonialSlider() {
             ))}
           </div>
 
-          {/* Main Testimonial Display */}
-          <div className="relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-8 md:p-12 flex flex-col">
-            {/* Avatar and Client Info */}
-            <div className="flex items-center gap-4 mb-8">
-              <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden border border-white/20 bg-white/5 flex-shrink-0">
-                <Image
-                  src={testimonials[currentIndex].avatar}
-                  alt={`${testimonials[currentIndex].client} portrait`}
-                  fill
-                  className="object-cover"
-                />
+          {/* Main Testimonial Display - Animated Height Container */}
+          <div
+            ref={testimonialCardRef}
+            className="relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-md rounded-2xl border border-white/20 overflow-hidden"
+            style={{
+              height: containerHeight === 'auto' ? 'auto' : containerHeight,
+              transition: 'height 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
+            }}
+          >
+            <div ref={innerContentRef} className="p-8 md:p-12 flex flex-col">
+              {/* Avatar and Client Info */}
+              <div className="flex items-center gap-4 mb-8">
+                <div className="relative w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden border border-white/20 bg-white/5 flex-shrink-0">
+                  <Image
+                    src={testimonials[currentIndex].avatar}
+                    alt={`${testimonials[currentIndex].client} portrait`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div>
+                  <h3 className="text-xl md:text-2xl font-display font-bold text-white">
+                    {testimonials[currentIndex].client}
+                  </h3>
+                  <p className="text-xs md:text-sm text-gray-400 uppercase tracking-wider">
+                    {testimonials[currentIndex].project}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-xl md:text-2xl font-display font-bold text-white">
-                  {testimonials[currentIndex].client}
-                </h3>
-                <p className="text-xs md:text-sm text-gray-400 uppercase tracking-wider">
-                  {testimonials[currentIndex].project}
-                </p>
-              </div>
-            </div>
 
-            {/* Testimonial Text - Properly Sized */}
-            <blockquote className="text-base md:text-xl font-normal text-white/90 leading-relaxed mb-8 flex-grow">
-              "{testimonials[currentIndex].text}"
-            </blockquote>
+              {/* Testimonial Text - Properly Sized */}
+              <blockquote className="text-base md:text-xl font-normal text-white/90 leading-relaxed mb-8 flex-grow">
+                "{testimonials[currentIndex].text}"
+              </blockquote>
 
-            {/* Navigation */}
-            <div className="flex items-center justify-between pt-4 border-t border-white/10">
-              <div className="flex gap-2">
-                {testimonials.map((_, index) => (
+              {/* Navigation */}
+              <div className="flex items-center justify-between pt-4 border-t border-white/10">
+                <div className="flex gap-2">
+                  {testimonials.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentIndex(index)}
+                      className={`min-h-[44px] min-w-[44px] flex items-center justify-center rounded-full transition-all duration-300`}
+                      aria-label={`Go to testimonial ${index + 1}`}
+                    >
+                      <span className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex ? 'w-12 bg-white' : 'w-2 bg-white/30'}`} />
+                    </button>
+                  ))}
+                </div>
+
+                <div className="flex gap-3">
                   <button
-                    key={index}
-                    onClick={() => setCurrentIndex(index)}
-                    className={`min-h-[44px] min-w-[44px] flex items-center justify-center rounded-full transition-all duration-300`}
-                    aria-label={`Go to testimonial ${index + 1}`}
+                    onClick={prevTestimonial}
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-all duration-300 hover:scale-110"
+                    aria-label="Previous testimonial"
                   >
-                    <span className={`h-2 rounded-full transition-all duration-300 ${index === currentIndex ? 'w-12 bg-white' : 'w-2 bg-white/30'}`} />
+                    <svg
+                      className="w-5 h-5 md:w-6 md:h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 19l-7-7 7-7"
+                      />
+                    </svg>
                   </button>
-                ))}
-              </div>
-
-              <div className="flex gap-3">
-                <button
-                  onClick={prevTestimonial}
-                  className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-all duration-300 hover:scale-110"
-                  aria-label="Previous testimonial"
-                >
-                  <svg
-                    className="w-5 h-5 md:w-6 md:h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                  <button
+                    onClick={nextTestimonial}
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-all duration-300 hover:scale-110"
+                    aria-label="Next testimonial"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </button>
-                <button
-                  onClick={nextTestimonial}
-                  className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 transition-all duration-300 hover:scale-110"
-                  aria-label="Next testimonial"
-                >
-                  <svg
-                    className="w-5 h-5 md:w-6 md:h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
+                    <svg
+                      className="w-5 h-5 md:w-6 md:h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
