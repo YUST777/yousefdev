@@ -63,12 +63,22 @@ export const metadata: Metadata = {
     siteName: 'yousefdev',
     title: 'yousefdev - Full-Stack Developer & Cybersecurity Engineer',
     description: 'Full-stack developer and cybersecurity engineer building practical tools and applications with React, Next.js, and TypeScript. Expert in web development, security solutions, and automation.',
+    images: [
+      {
+        url: 'https://yousefdev.xyz/images/og-preview-v2.png',
+        width: 1200,
+        height: 630,
+        alt: 'yousefdev - Full-Stack Developer & Cybersecurity Engineer',
+        type: 'image/png',
+      },
+    ],
     emails: ['contact@yousefdev.xyz'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'yousefdev - Full-Stack Developer & Cybersecurity Engineer',
     description: 'Full-stack developer and cybersecurity engineer building practical tools and applications with React, Next.js, and TypeScript.',
+    images: ['https://yousefdev.xyz/images/og-preview-v2.png'],
     creator: '@yousefdev',
     site: '@yousefdev',
   },
@@ -302,7 +312,7 @@ export default function RootLayout({
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'Any',
     url: 'https://yousefdev.xyz',
-    screenshot: 'https://yousefdev.xyz/opengraph-image.png',
+    screenshot: 'https://yousefdev.xyz/images/og-preview-v2.png',
     author: {
       '@type': 'Person',
       name: 'yousefdev',
