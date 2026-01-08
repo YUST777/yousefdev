@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic'
 
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false })
 
-gsap.registerPlugin(ScrollTrigger)
+import { SiReact, SiNextdotjs, SiPostgresql, SiPython, SiTailwindcss } from "react-icons/si"
 
 const bioText = "I'm Yousef, a Level 2 AI & Cybersecurity student based in Egypt and a passionate Full-Stack Developer. Since June 2024, I've been building real projects to sharpen my skills — from custom judge systems to web platforms. I love learning by doing, and I'm always exploring new technologies to solve interesting problems."
 
@@ -199,6 +199,42 @@ export default function About() {
             </span>
           </div>
 
+          {/* Tech Stack */}
+          <div className="mt-8 pt-8 border-t border-white/10 w-full">
+            <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mb-6 text-center">Tech Stack</p>
+            <div className="flex flex-wrap justify-center gap-6 md:gap-8 items-center">
+              {/* React */}
+              <div className="group flex flex-col items-center gap-2 cursor-pointer transition-all duration-300 hover:-translate-y-1">
+                <SiReact className="w-8 h-8 md:w-10 md:h-10 text-gray-400 group-hover:text-[#61DAFB] transition-colors duration-300 animate-[spin_10s_linear_infinite]" />
+                <span className="text-[10px] text-gray-500 uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">React</span>
+              </div>
+
+              {/* Next.js */}
+              <div className="group flex flex-col items-center gap-2 cursor-pointer transition-all duration-300 hover:-translate-y-1">
+                <SiNextdotjs className="w-8 h-8 md:w-10 md:h-10 text-gray-400 group-hover:text-white transition-colors duration-300" />
+                <span className="text-[10px] text-gray-500 uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">Next.js</span>
+              </div>
+
+              {/* PostgreSQL */}
+              <div className="group flex flex-col items-center gap-2 cursor-pointer transition-all duration-300 hover:-translate-y-1">
+                <SiPostgresql className="w-8 h-8 md:w-10 md:h-10 text-gray-400 group-hover:text-[#336791] transition-colors duration-300" />
+                <span className="text-[10px] text-gray-500 uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">PostgreSQL</span>
+              </div>
+
+              {/* Python */}
+              <div className="group flex flex-col items-center gap-2 cursor-pointer transition-all duration-300 hover:-translate-y-1">
+                <SiPython className="w-8 h-8 md:w-10 md:h-10 text-gray-400 group-hover:text-[#3776AB] transition-colors duration-300" />
+                <span className="text-[10px] text-gray-500 uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">Python</span>
+              </div>
+
+              {/* Tailwind */}
+              <div className="group flex flex-col items-center gap-2 cursor-pointer transition-all duration-300 hover:-translate-y-1">
+                <SiTailwindcss className="w-8 h-8 md:w-10 md:h-10 text-gray-400 group-hover:text-[#38B2AC] transition-colors duration-300" />
+                <span className="text-[10px] text-gray-500 uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">Tailwind</span>
+              </div>
+            </div>
+          </div>
+
           {/* Stats Row */}
           <div
             ref={statsRowRef}
@@ -217,6 +253,7 @@ export default function About() {
               <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest">Commitment</p>
             </div>
           </div>
+
         </div>
       </div>
     </section>
