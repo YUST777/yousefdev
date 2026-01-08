@@ -37,27 +37,27 @@ export default function Services() {
   const services = [
     {
       number: '01',
-      title: 'E-Commerce Development',
-      description: 'Full-featured e-commerce platforms with shopping carts, multi-payment gateways (Stripe, PayPal, Apple Pay), product catalogs, and AI-powered features. Built with Next.js 16, React, and TypeScript for optimal performance.',
-      tags: ['E-Commerce', 'Payment Gateways', 'Next.js']
+      title: 'Hardened Security Engineering',
+      description: ' Designing compliant, zero-trust architectures with secure execution environments. Specialized in OWASP standards, threat modeling, and building defense-in-depth security infrastructure.',
+      tags: ['Zero Trust', 'OWASP', 'Sandboxing']
     },
     {
       number: '02',
-      title: 'Landing Pages & Web Development',
-      description: 'Modern, responsive landing pages and web applications with multi-language support, advanced animations (GSAP), and optimized performance. Perfect for businesses needing professional online presence.',
-      tags: ['Landing Pages', 'Multi-Language', 'GSAP']
+      title: 'Scalable Full-Stack Ecosystems',
+      description: 'Architecting high-performance platforms using Next.js 15+, Docker, and PostgreSQL. Expert in building resilient, containerized systems that scale to thousands of users with sub-second latency.',
+      tags: ['Next.js 16', 'Docker', 'System Design']
     },
     {
       number: '03',
-      title: 'Cybersecurity Solutions',
-      description: 'Secure web applications with JWT authentication, SQL injection protection, XSS prevention, rate limiting, and comprehensive security headers. Building applications with security-first approach.',
-      tags: ['Security', 'Authentication', 'Protection']
+      title: 'Complex Interactive Interfaces',
+      description: 'Engineering desktop-class web applications with custom windowing systems and fluid state management. creating immersive, WebGL-powered user experiences that push the boundaries of browser capabilities.',
+      tags: ['RetroOS', 'GSAP', 'React 19']
     },
     {
       number: '04',
-      title: 'Interactive Web Applications',
-      description: 'Fully interactive web applications with desktop environments, terminal emulators, file systems, and complex UI interactions. Built with modern React, TypeScript, and state management solutions.',
-      tags: ['Interactive UI', 'React', 'TypeScript']
+      title: 'AI & Automation Solutions',
+      description: 'Integrating intelligent agents and automated workflows into business logic. From malware detection models to smart recruitment pipelines, leveraging AI to solve complex operational challenges.',
+      tags: ['AI Integration', 'Automation', 'Python']
     }
   ]
 

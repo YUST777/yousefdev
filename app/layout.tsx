@@ -302,7 +302,7 @@ export default function RootLayout({
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'Any',
     url: 'https://yousefdev.xyz',
-    screenshot: 'https://yousefdev.xyz/opengraph-image.webp',
+    screenshot: 'https://yousefdev.xyz/opengraph-image.png',
     author: {
       '@type': 'Person',
       name: 'yousefdev',
