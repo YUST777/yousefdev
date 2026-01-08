@@ -12,7 +12,7 @@ export default function Home() {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: 'yousefdev - Developer',
-    description: 'Full-stack developer and cybersecurity engineer building practical tools and applications.',
+    description: 'Full-stack developer building practical tools and applications.',
     url: 'https://yousefdev.xyz',
     mainEntity: {
       '@type': 'Person',

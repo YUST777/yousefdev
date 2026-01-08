@@ -203,7 +203,7 @@ export default function Projects() {
         {
           category: 'Expertise',
           svgIcon: 'lightbulb',
-          items: ['Full-stack development', 'Cybersecurity engineering', 'Automation systems']
+          items: ['Full-stack development', 'Web applications', 'Automation systems']
         }
       ]
     }
@@ -766,7 +766,7 @@ export default function Projects() {
                         <h5 className="text-sm font-bold text-white/80 mb-2"><i className="fas fa-bullseye mr-2"></i>Expertise</h5>
                         <ul className="space-y-1 text-sm text-gray-300">
                           <li>• Full-stack development</li>
-                          <li>• Cybersecurity engineering</li>
+                          <li>• Web applications</li>
                           <li>• Automation systems</li>
                         </ul>
                       </div>

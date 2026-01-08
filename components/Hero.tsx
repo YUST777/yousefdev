@@ -117,7 +117,7 @@ export default function Hero() {
           <div className="title-line">YOUSEF</div>
           <div className="title-line text-[9px] md:text-[11px] font-bold mt-6 tracking-[0.4em] text-white/40 uppercase">
             <span className="relative inline-block">
-              Cybersecurity Engineer & Full-Stack Developer
+              Full-Stack Developer
             </span>
           </div>
         </h1>

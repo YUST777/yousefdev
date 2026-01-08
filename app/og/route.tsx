@@ -47,7 +47,7 @@ export async function GET() {
               lineHeight: '1.4',
             }}
           >
-            Full-Stack Developer & Cybersecurity Engineer
+            Full-Stack Developer
           </div>
           <div
             style={{

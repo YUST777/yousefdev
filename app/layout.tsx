@@ -20,13 +20,13 @@ const syne = Syne({
 
 export const metadata: Metadata = {
   title: {
-    default: 'yousefdev - Cybersecurity Engineer & Full-Stack Developer',
+    default: 'yousefdev - Full-Stack Developer',
     template: '%s | yousefdev'
   },
-  description: 'yousefdev is a Lead Cybersecurity Engineer and Full-Stack Developer specializing in hardened web systems, secure execution engines, and production-grade architecture. Expert in Next.js, React, Node.js, and OWASP compliance.',
+  description: 'yousefdev is a Full-Stack Developer specializing in modern web applications, clean architecture, and production-grade systems. Expert in Next.js, React, Node.js, and TypeScript.',
   keywords: [
     'yousefdev',
-    'Cybersecurity Engineer',
+    'Full-Stack Developer',
     'Full-Stack Developer',
     'Lead Software Engineer',
     'Hardened Web Systems',
@@ -62,14 +62,14 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://yousefdev.xyz',
     siteName: 'yousefdev',
-    title: 'yousefdev - Full-Stack Developer & Cybersecurity Engineer',
-    description: 'Full-stack developer and cybersecurity engineer building practical tools and applications with React, Next.js, and TypeScript. Expert in web development, security solutions, and automation.',
+    title: 'yousefdev - Full-Stack Developer',
+    description: 'Full-stack developer building practical tools and applications with React, Next.js, and TypeScript. Expert in web development and automation.',
     images: [
       {
         url: 'https://yousefdev.xyz/images/og-preview-v2.png',
         width: 1200,
         height: 630,
-        alt: 'yousefdev - Full-Stack Developer & Cybersecurity Engineer',
+        alt: 'yousefdev - Full-Stack Developer',
         type: 'image/png',
       },
     ],
@@ -77,8 +77,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'yousefdev - Full-Stack Developer & Cybersecurity Engineer',
-    description: 'Full-stack developer and cybersecurity engineer building practical tools and applications with React, Next.js, and TypeScript.',
+    title: 'yousefdev - Full-Stack Developer',
+    description: 'Full-stack developer building practical tools and applications with React, Next.js, and TypeScript.',
     images: ['https://yousefdev.xyz/images/og-preview-v2.png'],
     creator: '@yousefdev',
     site: '@yousefdev',
@@ -136,8 +136,8 @@ export default function RootLayout({
     name: 'yousefdev',
     alternateName: 'Yousef',
     url: 'https://yousefdev.xyz',
-    jobTitle: ['Full-Stack Developer', 'Cybersecurity Engineer'],
-    description: 'Full-stack developer and cybersecurity engineer building practical tools and applications with clean design and solid architecture.',
+    jobTitle: 'Full-Stack Developer',
+    description: 'Full-stack developer building practical tools and applications with clean design and solid architecture.',
     image: 'https://yousefdev.xyz/icons/browser-icon.webp',
     sameAs: [
       'https://github.com/YUST777',
@@ -176,7 +176,7 @@ export default function RootLayout({
     name: 'yousefdev',
     alternateName: 'yousefdev Portfolio',
     url: 'https://yousefdev.xyz',
-    description: 'Full-stack developer and cybersecurity engineer building practical tools and applications',
+    description: 'Full-stack developer building practical tools and applications',
     publisher: {
       '@type': 'Person',
       name: 'yousefdev',
@@ -307,7 +307,7 @@ export default function RootLayout({
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
     name: 'yousefdev Portfolio',
-    description: 'The official portfolio and PWA of Yousef, a Cybersecurity Engineer and Full-Stack Developer.',
+    description: 'The official portfolio and PWA of Yousef, a Full-Stack Developer.',
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'Any',
     url: 'https://yousefdev.xyz',

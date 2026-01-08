@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
     return {
         name: 'yousefdev - Developer',
         short_name: 'yousefdev',
-        description: 'Full-stack developer and cybersecurity engineer building practical tools and applications.',
+        description: 'Full-stack developer building practical tools and applications.',
         start_url: '/',
         display: 'standalone',
         orientation: 'portrait-primary',
