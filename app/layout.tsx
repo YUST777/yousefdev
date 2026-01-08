@@ -1,7 +1,9 @@
-import type { Metadata } from 'next'
-import { Inter, Syne } from 'next/font/google'
+import { Outfit } from 'next/font/google'
+import LocalFont from 'next/font/local'
 import './globals.css'
-import FontAwesomeLoader from '@/components/FontAwesomeLoader'
+import { Metadata, Viewport } from 'next'
+import ThemeScript from './ThemeScript'
+import { Analytics } from "@vercel/analytics/next"
 import ClarityAnalytics from '@/components/ClarityAnalytics'
 import SmoothScroll from '@/components/SmoothScroll'
 
@@ -375,6 +377,7 @@ export default function RootLayout({
           <ClarityAnalytics />
           <div className="noise-overlay"></div>
           {children}
+          <Analytics />
         </SmoothScroll>
       </body>
     </html>
