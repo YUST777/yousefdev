@@ -372,7 +372,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webApplicationData) }}
         />
       </head>
-      <body className={`${inter.variable} ${syne.variable} font-sans antialiased selection:bg-white selection:text-black overflow-x-hidden`}>
+      <body className={`${outfit.variable} ${calSans.variable} font-sans antialiased selection:bg-white selection:text-black overflow-x-hidden`} suppressHydrationWarning>
         <SmoothScroll>
           <FontAwesomeLoader />
           <ClarityAnalytics />
