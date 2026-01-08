@@ -1,21 +1,21 @@
-import { Outfit } from 'next/font/google'
+import type { Metadata } from 'next'
+import { Inter, Syne } from 'next/font/google'
 import './globals.css'
-import { Metadata, Viewport } from 'next'
-import { Analytics } from "@vercel/analytics/next"
+import FontAwesomeLoader from '@/components/FontAwesomeLoader'
 import ClarityAnalytics from '@/components/ClarityAnalytics'
 import SmoothScroll from '@/components/SmoothScroll'
+import { Analytics } from "@vercel/analytics/next"
 
-
-const outfit = Outfit({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-outfit',
+  variable: '--font-inter',
+  weight: ['300', '400', '500', '600']
 })
 
-const calSans = Outfit({
+const syne = Syne({
   subsets: ['latin'],
-  variable: '--font-calsans',
-  weight: '600',
-  display: 'swap',
+  variable: '--font-syne',
+  weight: ['400', '700', '800']
 })
 
 export const metadata: Metadata = {
@@ -370,8 +370,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webApplicationData) }}
         />
       </head>
-      <body className={`${outfit.variable} ${calSans.variable} font-sans antialiased selection:bg-white selection:text-black overflow-x-hidden`} suppressHydrationWarning>
+      <body className={`${inter.variable} ${syne.variable} font-sans antialiased selection:bg-white selection:text-black overflow-x-hidden`}>
         <SmoothScroll>
+          <FontAwesomeLoader />
           <ClarityAnalytics />
           <div className="noise-overlay"></div>
           {children}
