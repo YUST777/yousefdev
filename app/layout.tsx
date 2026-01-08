@@ -63,22 +63,12 @@ export const metadata: Metadata = {
     siteName: 'yousefdev',
     title: 'yousefdev - Full-Stack Developer & Cybersecurity Engineer',
     description: 'Full-stack developer and cybersecurity engineer building practical tools and applications with React, Next.js, and TypeScript. Expert in web development, security solutions, and automation.',
-    images: [
-      {
-        url: 'https://yousefdev.xyz/icons/logo.webp',
-        width: 1200,
-        height: 630,
-        alt: 'yousefdev - Full-Stack Developer & Cybersecurity Engineer',
-        type: 'image/webp',
-      },
-    ],
     emails: ['contact@yousefdev.xyz'],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'yousefdev - Full-Stack Developer & Cybersecurity Engineer',
     description: 'Full-stack developer and cybersecurity engineer building practical tools and applications with React, Next.js, and TypeScript.',
-    images: ['https://yousefdev.xyz/icons/logo.webp'],
     creator: '@yousefdev',
     site: '@yousefdev',
   },
@@ -89,7 +79,7 @@ export const metadata: Metadata = {
       { url: '/images/favicon-32.webp', sizes: '32x32', type: 'image/webp' },
       { url: '/images/favicon-192.webp', sizes: '192x192', type: 'image/webp' },
       { url: '/images/favicon-512.webp', sizes: '512x512', type: 'image/webp' },
-      { url: '/icons/logo.webp', type: 'image/webp' },
+      { url: '/icons/browser-icon.webp', type: 'image/webp' },
     ],
     apple: [
       { url: '/images/favicon-192.webp', sizes: '192x192', type: 'image/webp' },
@@ -98,7 +88,6 @@ export const metadata: Metadata = {
       { url: '/icons/favicon.ico' },
     ],
   },
-  manifest: '/manifest.json',
   robots: {
     index: true,
     follow: true,
@@ -140,7 +129,7 @@ export default function RootLayout({
     url: 'https://yousefdev.xyz',
     jobTitle: ['Full-Stack Developer', 'Cybersecurity Engineer'],
     description: 'Full-stack developer and cybersecurity engineer building practical tools and applications with clean design and solid architecture.',
-    image: 'https://yousefdev.xyz/icons/logo.webp',
+    image: 'https://yousefdev.xyz/icons/browser-icon.webp',
     sameAs: [
       'https://github.com/YUST777',
     ],
@@ -304,6 +293,27 @@ export default function RootLayout({
     ]
   }
 
+  // WebApplication schema for PWA
+  const webApplicationData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'yousefdev Portfolio',
+    description: 'The official portfolio and PWA of Yousef, a Cybersecurity Engineer and Full-Stack Developer.',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Any',
+    url: 'https://yousefdev.xyz',
+    screenshot: 'https://yousefdev.xyz/opengraph-image.webp',
+    author: {
+      '@type': 'Person',
+      name: 'yousefdev',
+    },
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+  }
+
   return (
     <html lang="en" className="scroll-smooth">
       <head>
@@ -345,6 +355,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(webApplicationData) }}
         />
       </head>
       <body className={`${inter.variable} ${syne.variable} font-sans antialiased selection:bg-white selection:text-black overflow-x-hidden`}>

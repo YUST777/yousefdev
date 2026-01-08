@@ -28,8 +28,8 @@ export default function Footer() {
           </div>
 
           <div className="mt-12 md:mt-20 flex flex-wrap justify-center gap-6 md:gap-20 items-center">
-            <span className="text-base md:text-lg font-bold cursor-default" aria-label="GitHub">GitHub</span>
-            <span className="text-base md:text-lg font-bold" aria-label="Twitter / X">Twitter / X</span>
+            <a href="https://github.com/YUST777" target="_blank" rel="noopener noreferrer" className="text-base md:text-lg font-bold hover:line-through decoration-2 transition-all" aria-label="GitHub">GitHub</a>
+            <a href="https://www.linkedin.com/in/yousefmsm1/" target="_blank" rel="noopener noreferrer" className="text-base md:text-lg font-bold hover:line-through decoration-2 transition-all" aria-label="LinkedIn">LinkedIn</a>
             <a href="https://t.me/yousefmsm1" target="_blank" rel="noopener noreferrer" className="text-base md:text-lg font-bold hover:line-through decoration-2 transition-all" aria-label="Contact me on Telegram">Telegram</a>
           </div>
 
@@ -39,7 +39,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </footer >
   )
 }
 

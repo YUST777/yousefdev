@@ -17,7 +17,7 @@ export default function About() {
   const emoji1Ref = useRef<HTMLDivElement>(null)
   const emoji2Ref = useRef<HTMLDivElement>(null)
   const emoji3Ref = useRef<HTMLDivElement>(null)
-  const [tonData, setTonData] = useState<any>(null)
+  const [codingDuckData, setCodingDuckData] = useState<any>(null)
   const [duckData, setDuckData] = useState<any>(null)
   const [heartData, setHeartData] = useState<any>(null)
 
@@ -25,7 +25,7 @@ export default function About() {
     // Load Lottie JSON files
     fetch('/json/duck.json').then(r => r.json()).then(setDuckData)
     fetch('/json/heart.json').then(r => r.json()).then(setHeartData)
-    fetch('/json/ton.json').then(r => r.json()).then(setTonData)
+    fetch('/json/Coding Duck.json').then(r => r.json()).then(setCodingDuckData)
   }, [])
 
   useEffect(() => {
@@ -150,8 +150,8 @@ export default function About() {
   return (
     <section id="about" ref={aboutSectionRef} className="relative bg-dark min-h-[120vh] md:min-h-[150vh] flex flex-col justify-center items-center">
       {/* Floating Elements - Lottie Animations */}
-      <div ref={emoji1Ref} className="hidden md:block absolute top-10 left-10 w-40 h-40 opacity-30 pointer-events-none select-none" aria-label="Animated mascot: ton">
-        {tonData && <Lottie animationData={tonData} loop={true} />}
+      <div ref={emoji1Ref} className="hidden md:block absolute top-[30%] left-10 w-40 h-40 opacity-30 pointer-events-none select-none" aria-label="Animated mascot: coding duck">
+        {codingDuckData && <Lottie animationData={codingDuckData} loop={true} />}
       </div>
       <div ref={emoji2Ref} className="hidden md:block absolute bottom-20 right-10 w-32 h-32 opacity-30 pointer-events-none select-none" aria-label="Animated mascot: duck">
         {duckData && <Lottie animationData={duckData} loop={true} />}
