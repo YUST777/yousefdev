@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Syne } from 'next/font/google'
 import './globals.css'
-import FontAwesomeLoader from '@/components/FontAwesomeLoader'
 import ClarityAnalytics from '@/components/ClarityAnalytics'
 import SmoothScroll from '@/components/SmoothScroll'
 import { Analytics } from "@vercel/analytics/next"
@@ -333,9 +332,14 @@ export default function RootLayout({
         {/* Resource Hints for Performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://i.pravatar.cc" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.clarity.ms" />
         <link rel="dns-prefetch" href="https://telegram.org" />
         <link rel="dns-prefetch" href="https://tganalytics.xyz" />
+
+        {/* FontAwesome (Optimized Loading) */}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
         {/* Preload critical resources */}
         <link rel="preload" href="/icons/logo.webp" as="image" type="image/webp" />
@@ -374,7 +378,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${syne.variable} font-sans antialiased selection:bg-white selection:text-black overflow-x-hidden`}>
         <MapExpandedProvider>
           <SmoothScroll>
-            <FontAwesomeLoader />
+            {/* FontAwesome loaded in head */}
             <ClarityAnalytics />
             <div className="noise-overlay"></div>
             {children}
