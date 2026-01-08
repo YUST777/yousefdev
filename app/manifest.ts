@@ -34,17 +34,17 @@ export default function manifest(): MetadataRoute.Manifest {
                 purpose: 'any maskable' as any
             },
             {
-                src: '/images/favicon-512.webp',
-                sizes: '512x512',
-                type: 'image/webp',
-                purpose: 'any maskable' as any
+                src: '/android-chrome-192x192.png',
+                sizes: '192x192',
+                type: 'image/png',
+                purpose: 'any maskable' as any,
             },
             {
-                src: '/icons/browser-icon.webp',
-                sizes: 'any',
-                type: 'image/webp',
-                purpose: 'any maskable' as any
-            }
+                src: '/android-chrome-512x512.png',
+                sizes: '512x512',
+                type: 'image/png',
+                purpose: 'any maskable' as any,
+            },
         ],
         prefer_related_applications: false,
     }

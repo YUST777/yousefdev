@@ -34,7 +34,7 @@ export default function Footer() {
           </div>
 
           <div className="mt-16 md:mt-24 w-full flex flex-col md:flex-row justify-between items-center text-[10px] md:text-xs font-mono text-gray-500 border-t border-black/10 pt-6 md:pt-8 gap-4">
-            <p>© 2025 yousef. All Rights Reserved.</p>
+            <p>© 2026 yousef. All Rights Reserved.</p>
             <p>LOCAL TIME: <span>{time}</span></p>
           </div>
         </div>

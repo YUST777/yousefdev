@@ -17,8 +17,10 @@ export default function About() {
   const emoji1Ref = useRef<HTMLDivElement>(null)
   const emoji2Ref = useRef<HTMLDivElement>(null)
   const emoji3Ref = useRef<HTMLDivElement>(null)
+  const emoji4Ref = useRef<HTMLDivElement>(null)
   const [codingDuckData, setCodingDuckData] = useState<any>(null)
   const [duckData, setDuckData] = useState<any>(null)
+  const [codeDuck2Data, setCodeDuck2Data] = useState<any>(null)
   const [heartData, setHeartData] = useState<any>(null)
 
   useEffect(() => {
@@ -26,6 +28,7 @@ export default function About() {
     fetch('/json/duck.json').then(r => r.json()).then(setDuckData)
     fetch('/json/heart.json').then(r => r.json()).then(setHeartData)
     fetch('/json/Coding Duck.json').then(r => r.json()).then(setCodingDuckData)
+    fetch('/json/codeduck2.json').then(r => r.json()).then(setCodeDuck2Data)
   }, [])
 
   useEffect(() => {
@@ -126,8 +129,22 @@ export default function About() {
         force3D: true
       })
 
+      gsap.from(emoji4Ref.current, {
+        scrollTrigger: {
+          trigger: aboutSectionRef.current,
+          start: 'top bottom',
+          toggleActions: 'play none none reverse'
+        },
+        scale: 0,
+        opacity: 0,
+        duration: 1.5,
+        ease: 'back.out(1.7)',
+        delay: 0.5,
+        force3D: true
+      })
+
       // Floating emojis parallax
-      const emojiRefs = [emoji1Ref.current, emoji2Ref.current, emoji3Ref.current].filter(Boolean)
+      const emojiRefs = [emoji1Ref.current, emoji2Ref.current, emoji3Ref.current, emoji4Ref.current].filter(Boolean)
       if (emojiRefs.length > 0) {
         gsap.to(emojiRefs, {
           scrollTrigger: {
@@ -153,8 +170,11 @@ export default function About() {
       <div ref={emoji1Ref} className="hidden md:block absolute top-[30%] left-10 w-40 h-40 opacity-30 pointer-events-none select-none" aria-label="Animated mascot: coding duck">
         {codingDuckData && <Lottie animationData={codingDuckData} loop={true} />}
       </div>
-      <div ref={emoji2Ref} className="hidden md:block absolute bottom-20 right-10 w-32 h-32 opacity-30 pointer-events-none select-none" aria-label="Animated mascot: duck">
+      <div ref={emoji4Ref} className="hidden md:block absolute bottom-20 left-10 w-32 h-32 opacity-30 pointer-events-none select-none" aria-label="Animated mascot: duck">
         {duckData && <Lottie animationData={duckData} loop={true} />}
+      </div>
+      <div ref={emoji2Ref} className="hidden md:block absolute bottom-20 right-10 w-32 h-32 opacity-30 pointer-events-none select-none" aria-label="Animated mascot: code duck 2">
+        {codeDuck2Data && <Lottie animationData={codeDuck2Data} loop={true} />}
       </div>
       <div ref={emoji3Ref} className="hidden md:block absolute top-[40%] right-20 w-24 h-24 opacity-20 pointer-events-none select-none" aria-label="Animated mascot: heart">
         {heartData && <Lottie animationData={heartData} loop={true} />}

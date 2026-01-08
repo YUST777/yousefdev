@@ -45,7 +45,6 @@ export default function ScopedSmoothScroll({ children, className }: ScopedSmooth
         <div
             ref={wrapperRef}
             className={`relative ${className || ''}`}
-            data-lenis-prevent
         >
             {children}
         </div>

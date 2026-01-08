@@ -219,9 +219,14 @@ export default function Projects() {
           <div className="w-full md:w-auto">
             <h2 className="text-3xl md:text-8xl font-display font-black text-white tracking-tighter text-center md:text-left">PROJECTS</h2>
           </div>
-          <span className="hidden md:block border border-white/20 px-8 py-3 rounded-full text-sm tracking-widest uppercase cursor-default">
+          <a
+            href="https://github.com/YUST777"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:block border border-white/20 px-8 py-3 rounded-full text-sm tracking-widest uppercase hover:bg-white/10 transition-colors"
+          >
             View GitHub
-          </span>
+          </a>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[350px] md:auto-rows-[450px]">
@@ -401,9 +406,14 @@ export default function Projects() {
         </div>
 
         <div className="mt-8 text-center md:hidden">
-          <span className="border border-white/20 px-8 py-3 rounded-full text-sm tracking-widest uppercase w-full inline-block cursor-default">
+          <a
+            href="https://github.com/YUST777"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border border-white/20 px-8 py-3 rounded-full text-sm tracking-widest uppercase w-full inline-block hover:bg-white/10 transition-colors"
+          >
             View GitHub
-          </span>
+          </a>
         </div>
       </div>
 
@@ -460,23 +470,31 @@ export default function Projects() {
             <ScopedSmoothScroll className="overflow-y-auto flex-1 pr-2 space-y-6 custom-scrollbar">
               {/* Video Hero */}
               {openDrawer && (
-                <div className="w-full aspect-video rounded-xl overflow-hidden bg-black/50 border border-white/5 mb-6 flex-shrink-0">
-                  <video
-                    src={
-                      openDrawer === 'zerothreat' ? '/videos/zerothreat.webm' :
-                        openDrawer === 'retroOS' ? '/videos/RetroOS_Project.webm' :
-                          openDrawer === 'ICPCHUE' ? '/videos/icpchue2.webm' :
+                <div className="w-full aspect-video rounded-xl overflow-hidden bg-black/50 border border-white/5 mb-6 flex-shrink-0 relative">
+                  {openDrawer === 'ICPCHUE' ? (
+                    <iframe
+                      src="https://www.youtube.com/embed/tH--wuGCMuM?autoplay=1&mute=1&loop=1&playlist=tH--wuGCMuM"
+                      className="absolute inset-0 w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  ) : (
+                    <video
+                      src={
+                        openDrawer === 'zerothreat' ? '/videos/zerothreat.webm' :
+                          openDrawer === 'retroOS' ? '/videos/RetroOS_Project.webm' :
                             openDrawer === 'yousefdev' ? '/videos/yousefdev.webm' :
                               openDrawer === 'panoblue' ? '/videos/panoblue.webm' :
                                 openDrawer === 'fazzah' ? '/videos/fazzah.webm' : ''
-                    }
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover"
-                    title={`${openDrawer} detailed showcase video`}
-                  />
+                      }
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover"
+                      title={`${openDrawer} detailed showcase video`}
+                    />
+                  )}
                 </div>
               )}
 

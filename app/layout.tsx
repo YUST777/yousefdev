@@ -84,18 +84,16 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/icons/favicon.ico', sizes: 'any' },
-      { url: '/images/favicon-16.webp', sizes: '16x16', type: 'image/webp' },
-      { url: '/images/favicon-32.webp', sizes: '32x32', type: 'image/webp' },
-      { url: '/images/favicon-192.webp', sizes: '192x192', type: 'image/webp' },
-      { url: '/images/favicon-512.webp', sizes: '512x512', type: 'image/webp' },
-      { url: '/icons/browser-icon.webp', type: 'image/webp' },
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.png', type: 'image/png' },
+      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
     ],
     apple: [
-      { url: '/images/favicon-192.webp', sizes: '192x192', type: 'image/webp' },
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
-    shortcut: [
-      { url: '/icons/favicon.ico' },
+    other: [
+      { rel: 'apple-touch-icon', url: '/apple-touch-icon.png' },
     ],
   },
   robots: {
