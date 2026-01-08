@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { motion } from 'framer-motion'
 import BentoTilt from './BentoTilt'
 import ProjectModal from './ProjectModal'
 import { useLenis } from './SmoothScroll'
@@ -229,18 +230,30 @@ export default function Projects() {
                   className={`${project.span} rounded-2xl overflow-hidden relative group cursor-pointer`}
                 >
                   {/* Clickable overlay for mobile touch */}
-                  <button
-                    onClick={() => {
-                      setSelectedProject(project)
-                      setIsModalOpen(true)
-                    }}
-                    className="absolute inset-0 z-50 w-full h-full bg-transparent cursor-pointer"
-                    aria-label={`View ${project.title || 'project'} details`}
-                  />
-                  <div
+                  <motion.div
                     ref={el => { revealRefs.current[index + 1] = el }}
-                    className="w-full h-full"
+                    className="w-full h-full relative"
+                    initial="idle"
+                    whileHover="hover"
                   >
+                    <button
+                      onClick={() => {
+                        setSelectedProject(project)
+                        setIsModalOpen(true)
+                      }}
+                      className="absolute inset-0 z-50 w-full h-full bg-transparent cursor-pointer"
+                      aria-label={`View ${project.title || 'project'} details`}
+                    />
+                    <motion.div
+                      variants={{
+                        idle: { scale: 0, opacity: 0 },
+                        hover: { scale: 1, opacity: 1 }
+                      }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className="absolute top-4 right-4 z-40 w-12 h-12 bg-white rounded-full flex items-center justify-center text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+                    >
+                      <i className="fas fa-arrow-right -rotate-45 text-xl"></i>
+                    </motion.div>
                     <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
                       {project.video ? (
                         <video
@@ -260,7 +273,7 @@ export default function Projects() {
                         <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500 pointer-events-none"></div>
                       )}
                     </div>
-                  </div>
+                  </motion.div>
                 </BentoTilt>
               )
             }
@@ -323,42 +336,54 @@ export default function Projects() {
                 className={`${project.span} rounded-2xl overflow-hidden relative group cursor-pointer`}
               >
                 {/* Clickable overlay for mobile touch */}
-                <button
-                  onClick={() => {
-                    if (project.video === '/videos/zerothreat.webm') {
-                      setOpenDrawer('zerothreat')
-                      return
-                    }
-                    if (project.video === '/videos/giftscharts.webm') {
-                      setOpenDrawer('giftsCharts')
-                      return
-                    }
-                    if (project.video === '/videos/icpchue2.webm' || project.video === '/videos/ICPCHUE.webm') {
-                      setOpenDrawer('ICPCHUE')
-                      return
-                    }
-                    if (project.video === '/videos/yousefdev.webm') {
-                      setOpenDrawer('yousefdev')
-                      return
-                    }
-                    if (project.video === '/videos/fazzah.webm') {
-                      setOpenDrawer('fazzah')
-                      return
-                    }
-                    if (project.video === '/videos/panoblue.webm') {
-                      setOpenDrawer('panoblue')
-                      return
-                    }
-                    setSelectedProject(project)
-                    setIsModalOpen(true)
-                  }}
-                  className="absolute inset-0 z-50 w-full h-full bg-transparent cursor-pointer"
-                  aria-label={`View ${project.title || 'project'} details`}
-                />
-                <div
+                <motion.div
                   ref={el => { revealRefs.current[index + 1] = el }}
-                  className="w-full h-full"
+                  className="w-full h-full relative"
+                  initial="idle"
+                  whileHover="hover"
                 >
+                  <button
+                    onClick={() => {
+                      if (project.video === '/videos/zerothreat.webm') {
+                        setOpenDrawer('zerothreat')
+                        return
+                      }
+                      if (project.video === '/videos/giftscharts.webm') {
+                        setOpenDrawer('giftsCharts')
+                        return
+                      }
+                      if (project.video === '/videos/icpchue2.webm' || project.video === '/videos/ICPCHUE.webm') {
+                        setOpenDrawer('ICPCHUE')
+                        return
+                      }
+                      if (project.video === '/videos/yousefdev.webm') {
+                        setOpenDrawer('yousefdev')
+                        return
+                      }
+                      if (project.video === '/videos/fazzah.webm') {
+                        setOpenDrawer('fazzah')
+                        return
+                      }
+                      if (project.video === '/videos/panoblue.webm') {
+                        setOpenDrawer('panoblue')
+                        return
+                      }
+                      setSelectedProject(project)
+                      setIsModalOpen(true)
+                    }}
+                    className="absolute inset-0 z-50 w-full h-full bg-transparent cursor-pointer"
+                    aria-label={`View ${project.title || 'project'} details`}
+                  />
+                  <motion.div
+                    variants={{
+                      idle: { scale: 0, opacity: 0 },
+                      hover: { scale: 1, opacity: 1 }
+                    }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className="absolute top-4 right-4 z-40 w-12 h-12 bg-white rounded-full flex items-center justify-center text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+                  >
+                    <i className="fas fa-arrow-right -rotate-45 text-xl"></i>
+                  </motion.div>
                   <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
                     {project.video ? (
                       <video
@@ -389,7 +414,7 @@ export default function Projects() {
                       <p className="text-gray-300 text-xs md:text-sm font-light">{project.description}</p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </BentoTilt>
             )
           })}
