@@ -60,8 +60,8 @@ export default function Testimonials() {
   ]
 
   return (
-    <section ref={sectionRef} className="py-20 md:py-40 border-t border-white/5 bg-black">
-      <div className="max-w-7xl mx-auto px-6">
+    <section ref={sectionRef} className="py-20 md:py-40 border-t border-white/5 bg-black px-4 md:px-6">
+      <div className="max-w-7xl mx-auto">
         <div
           ref={el => { revealRefs.current[0] = el }}
           className="flex items-center gap-4 mb-12 md:mb-20"

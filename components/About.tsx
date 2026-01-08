@@ -303,7 +303,7 @@ export default function About() {
 
                   {/* Project Messages */}
                   <div className="space-y-2">
-                    {techProjects[selectedTech]?.map((project, idx) => (
+                    {techProjects[selectedTech]?.map((project) => (
                       <a
                         key={project.name}
                         href={project.link}

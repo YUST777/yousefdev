@@ -201,8 +201,8 @@ export default function Projects() {
   ]
 
   return (
-    <section ref={sectionRef} id="projects" className="py-20 md:py-32 bg-dark">
-      <div className="max-w-7xl mx-auto px-6">
+    <section ref={sectionRef} id="projects" className="py-20 md:py-32 bg-dark px-4 md:px-6">
+      <div className="max-w-7xl mx-auto">
         <div
           ref={headerRef}
           className="flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end mb-12 md:mb-20 px-0 md:px-4"
@@ -471,7 +471,9 @@ export default function Projects() {
                   {openDrawer === 'zerothreat' ? 'Zero Threat - Cybersecurity Website Project' :
                     openDrawer === 'giftsCharts' ? 'Gifts Charts - Telegram Analytics Bot' :
                       openDrawer === 'ICPCHUE' ? 'ICPCHUE - Creative Web Project' :
-                        openDrawer === 'yousefdev' ? 'yousefdev - Building Practical Solutions' : ''}
+                        openDrawer === 'yousefdev' ? 'yousefdev - Building Practical Solutions' :
+                          openDrawer === 'panoblue' ? 'PanoBlue - Panorama Viewer' :
+                            openDrawer === 'fazzah' ? 'Fazzah - Web Application' : ''}
                 </h3>
               </div>
               <button

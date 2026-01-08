@@ -13,6 +13,7 @@ import ReactFlow, {
 } from 'reactflow'
 import dagre from 'dagre'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 import {
     SiGithub,
     SiNextdotjs,
@@ -232,7 +233,14 @@ export default function BuildingPublicly() {
                             <div className="flex flex-wrap gap-4">
                                 <a href="https://icpchue.xyz/devlog" target="_blank" rel="noopener noreferrer"
                                     className="group flex items-center gap-2.5 px-6 py-3 bg-gradient-to-r from-[#f29d37] to-[#f5c75d] text-black font-bold text-sm rounded-full hover:scale-105 hover:shadow-[0_0_30px_rgba(242,157,55,0.4)] transition-all duration-300 border border-white/20">
-                                    <img src="/images/icpchue-logo.webp" alt="ICPCHUE" className="w-4 h-4 object-contain" />
+                                    <div className="relative w-4 h-4">
+                                        <Image
+                                            src="/images/icpchue-logo.webp"
+                                            alt="ICPCHUE"
+                                            fill
+                                            className="object-contain"
+                                        />
+                                    </div>
                                     <span>Dev Log</span>
                                 </a>
                                 <button

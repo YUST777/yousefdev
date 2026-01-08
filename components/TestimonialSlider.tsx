@@ -122,7 +122,7 @@ export default function TestimonialSlider() {
   return (
     <section
       ref={sliderRef}
-      className="relative min-h-screen w-full bg-black flex items-center justify-center overflow-hidden py-12 md:py-16"
+      className="relative min-h-screen w-full bg-black flex items-center justify-center overflow-hidden py-12 md:py-16 px-4 md:px-6"
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
@@ -135,7 +135,7 @@ export default function TestimonialSlider() {
         ></div>
       </div>
 
-      <div ref={contentRef} className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+      <div ref={contentRef} className="relative z-10 max-w-7xl mx-auto w-full">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-display font-black text-white mb-3 tracking-tight uppercase">

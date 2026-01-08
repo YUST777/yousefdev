@@ -17,8 +17,8 @@ export default function Footer() {
   }, [])
 
   return (
-    <footer id="contact" className="bg-white text-black py-20 md:py-32 rounded-t-[2rem] md:rounded-t-[3rem] relative overflow-hidden mt-10 md:mt-20">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <footer id="contact" className="bg-white text-black py-20 md:py-32 rounded-t-[2rem] md:rounded-t-[3rem] relative overflow-hidden mt-10 md:mt-20 px-4 md:px-6">
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col items-center text-center">
           <p className="text-xs md:text-sm font-mono mb-6 md:mb-8 uppercase tracking-widest animate-pulse">Ready for new projects</p>
           <div className="group relative inline-block">

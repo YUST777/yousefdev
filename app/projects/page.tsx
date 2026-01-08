@@ -362,7 +362,7 @@ export default function ProjectsPage() {
                     {openDrawer.toUpperCase()}
                   </p>
                   <h3 className="text-2xl md:text-4xl font-display font-black text-white">
-                    {openDrawer === 'fazzah' ? 'FAZAAH - Outerwear Studio' :
+                    {openDrawer === 'fazzah' ? 'Fazzah - Outerwear Studio' :
                       openDrawer === 'panoblue' ? 'PanoBlue - Freight Solutions' :
                         openDrawer === 'zerothreat' ? 'Zero Threat - AI-Driven Cybersecurity' :
                           openDrawer === 'retroos' ? 'retroOS - React OS Simulation' :
