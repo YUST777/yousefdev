@@ -5,6 +5,7 @@ import FontAwesomeLoader from '@/components/FontAwesomeLoader'
 import ClarityAnalytics from '@/components/ClarityAnalytics'
 import SmoothScroll from '@/components/SmoothScroll'
 import { Analytics } from "@vercel/analytics/next"
+import { MapExpandedProvider } from '@/context/MapExpandedContext'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -371,13 +372,15 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${syne.variable} font-sans antialiased selection:bg-white selection:text-black overflow-x-hidden`}>
-        <SmoothScroll>
-          <FontAwesomeLoader />
-          <ClarityAnalytics />
-          <div className="noise-overlay"></div>
-          {children}
-          <Analytics />
-        </SmoothScroll>
+        <MapExpandedProvider>
+          <SmoothScroll>
+            <FontAwesomeLoader />
+            <ClarityAnalytics />
+            <div className="noise-overlay"></div>
+            {children}
+            <Analytics />
+          </SmoothScroll>
+        </MapExpandedProvider>
       </body>
     </html>
   )

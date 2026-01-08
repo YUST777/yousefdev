@@ -37,32 +37,32 @@ export default function Services() {
   const services = [
     {
       number: '01',
-      title: 'Hardened Security Engineering',
-      description: ' Designing compliant, zero-trust architectures with secure execution environments. Specialized in OWASP standards, threat modeling, and building defense-in-depth security infrastructure.',
-      tags: ['Zero Trust', 'OWASP', 'Sandboxing']
+      title: 'Full-Stack Development',
+      description: 'Building reliable and scalable web applications. I focus on clean code, good performance, and creating platforms that solve real problems for users.',
+      tags: ['Next.js', 'React', 'PostgreSQL']
     },
     {
       number: '02',
-      title: 'Scalable Full-Stack Ecosystems',
-      description: 'Architecting high-performance platforms using Next.js 15+, Docker, and PostgreSQL. Expert in building resilient, containerized systems that scale to thousands of users with sub-second latency.',
-      tags: ['Next.js 16', 'Docker', 'System Design']
+      title: 'Cybersecurity & Safety',
+      description: 'Creating tools to help people stay safe online. From educational platforms like Zero Threat to secure system design, I aim to make security accessible.',
+      tags: ['Zero Trust', 'Education', 'Security']
     },
     {
       number: '03',
-      title: 'Complex Interactive Interfaces',
-      description: 'Engineering desktop-class web applications with custom windowing systems and fluid state management. creating immersive, WebGL-powered user experiences that push the boundaries of browser capabilities.',
-      tags: ['RetroOS', 'GSAP', 'React 19']
+      title: 'Competitive Programming Tools',
+      description: 'Developing specialized platforms for algorithmic training. My work on ICPCHUE includes custom judge systems and recruitment pipelines for university teams.',
+      tags: ['Algorithms', 'Online Judges', 'Education']
     },
     {
       number: '04',
-      title: 'AI & Automation Solutions',
-      description: 'Integrating intelligent agents and automated workflows into business logic. From malware detection models to smart recruitment pipelines, leveraging AI to solve complex operational challenges.',
-      tags: ['AI Integration', 'Automation', 'Python']
+      title: 'Automation & Bots',
+      description: 'Writing scripts and bots to automate daily tasks. Whether it\'s managing data or tracking market changes, I use Python to save time and improve efficiency.',
+      tags: ['Python', 'Automation', 'Bots']
     }
   ]
 
   return (
-    <section ref={sectionRef} id="services" className="py-8 md:py-16 bg-dark relative z-20">
+    <section ref={sectionRef} id="services" className="py-8 md:py-16 bg-dark relative z-10">
       <div className="max-w-7xl mx-auto px-3 md:px-6">
         <div className="bg-white text-black rounded-[2rem] md:rounded-[3rem] p-8 md:p-16 overflow-hidden relative">
           <div className="absolute top-[-20%] right-[-10%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-gray-100 rounded-full blur-[100px] opacity-60 pointer-events-none"></div>

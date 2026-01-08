@@ -116,35 +116,25 @@ export default function Projects() {
   const projectsData = [
     {
       id: 2,
-      title: 'retroOS',
-      description: 'Advanced React OS simulation with custom windowing & file systems.',
-      fullDescription: 'A technical showcase of complex state management and UI engineering, featuring an interactive windowing system, functional terminal, and virtual file system built entirely with React and Next.js.',
-      tag: 'UI/UX',
-      icon: 'fa-desktop',
+      title: 'Gifts Charts',
+      description: 'Real-time Telegram sticker & gift price tracking bot.',
+      fullDescription: 'A sophisticated Telegram bot for tracking live sticker prices and gift collections, featuring real-time data fetching, premium subscription systems, and automated image generation.',
+      tag: 'Automation',
+      icon: 'fa-robot',
       span: 'md:col-span-1 md:row-span-1',
       delay: 'delay-100',
-      video: '/videos/RetroOS_Project.webm',
-      technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Zustand', 'React Draggable'],
+      video: '/videos/giftscharts.webm',
+      technologies: ['Python', 'Telegram API', 'Docker', 'PostgreSQL', 'Flask'],
       features: [
         {
-          category: 'Desktop Environment',
-          svgIcon: 'desktop',
-          items: ['Interactive desktop', 'Window management', 'Drag and drop', 'Multiple wallpapers']
-        },
-        {
-          category: 'Terminal',
-          svgIcon: 'code',
-          items: ['Full terminal emulator', 'File system commands', 'Process management', 'Command history']
-        },
-        {
-          category: 'File System',
-          svgIcon: 'wallet',
-          items: ['Hierarchical structure', 'CRUD operations', 'Trash and restore', 'File editor']
-        },
-        {
-          category: 'OS Concepts',
+          category: 'Core Features',
           svgIcon: 'chart',
-          items: ['Process management', 'Memory tracking', 'User sessions', 'Resource allocation']
+          items: ['Live Price Tracking', 'Premium Subscriptions', 'Admin Dashboard', 'Auto-Updates']
+        },
+        {
+          category: 'Architecture',
+          svgIcon: 'server',
+          items: ['Microservices', 'Docker Containerized', 'Async Database', 'CDN Service']
         }
       ]
     },
@@ -339,8 +329,8 @@ export default function Projects() {
                       setOpenDrawer('zerothreat')
                       return
                     }
-                    if (project.video === '/videos/RetroOS_Project.webm') {
-                      setOpenDrawer('retroOS')
+                    if (project.video === '/videos/giftscharts.webm') {
+                      setOpenDrawer('giftsCharts')
                       return
                     }
                     if (project.video === '/videos/icpchue2.webm' || project.video === '/videos/ICPCHUE.webm') {
@@ -441,7 +431,7 @@ export default function Projects() {
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-gray-400">
                   {openDrawer === 'zerothreat' ? 'Zero Threat' :
-                    openDrawer === 'retroOS' ? 'retroOS' :
+                    openDrawer === 'giftsCharts' ? 'Gifts Charts' :
                       openDrawer === 'ICPCHUE' ? 'ICPCHUE' :
                         openDrawer === 'yousefdev' ? (
                           <span className="font-mono">
@@ -454,7 +444,7 @@ export default function Projects() {
                 </p>
                 <h3 className="text-2xl md:text-4xl font-display font-black text-white">
                   {openDrawer === 'zerothreat' ? 'Zero Threat - Cybersecurity Website Project' :
-                    openDrawer === 'retroOS' ? 'retroOS - Retro Operating System UI' :
+                    openDrawer === 'giftsCharts' ? 'Gifts Charts - Telegram Analytics Bot' :
                       openDrawer === 'ICPCHUE' ? 'ICPCHUE - Creative Web Project' :
                         openDrawer === 'yousefdev' ? 'yousefdev - Building Practical Solutions' : ''}
                 </h3>
@@ -482,7 +472,7 @@ export default function Projects() {
                     <video
                       src={
                         openDrawer === 'zerothreat' ? '/videos/zerothreat.webm' :
-                          openDrawer === 'retroOS' ? '/videos/RetroOS_Project.webm' :
+                          openDrawer === 'giftsCharts' ? '/videos/giftscharts.webm' :
                             openDrawer === 'yousefdev' ? '/videos/yousefdev.webm' :
                               openDrawer === 'panoblue' ? '/videos/panoblue.webm' :
                                 openDrawer === 'fazzah' ? '/videos/fazzah.webm' : ''
@@ -584,49 +574,76 @@ export default function Projects() {
                 </>
               )}
 
-              {openDrawer === 'retroOS' && (
+              {openDrawer === 'giftsCharts' && (
                 <>
                   {/* Header */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-2">RetroOS</h4>
-                    <p className="text-sm text-gray-400"><i className="fas fa-trophy mr-2"></i>Operating Systems Course Project & Hackathon Winner</p>
-                    <p className="text-sm text-gray-400 mt-1">Tech Stack: Next.js, React</p>
+                    <h4 className="text-xl font-display font-bold text-white mb-2">Gifts Charts – Telegram Analytics Bot</h4>
+                    <p className="text-sm text-gray-400"><i className="fas fa-robot mr-2"></i>Live Sticker & Gift Price Tracker</p>
+                    <p className="text-sm text-gray-400 mt-1">Status: <span className="text-green-400 font-bold">Live & Active</span></p>
                   </div>
 
                   {/* Overview */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-info-circle mr-2"></i>Overview</h4>
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-bullseye mr-2"></i>The Purpose</h4>
                     <p className="text-sm text-gray-300 leading-relaxed">
-                      RetroOS is a web-based simulation designed to trigger nostalgia by faithfully recreating the iconic Windows XP user interface. Originally developed as a project for my Operating Systems university course, it serves as a visual mimic of an OS environment entirely within the browser.
+                      Telegrams digital asset market is moving fast. <strong className="text-white">Gifts Charts</strong> bridges the gap between chaos and clarity by providing real-time price tracking for Stickers and unique Gifts. It empowers traders and collectors with instant data, helping them make informed decisions on the fly.
                     </p>
                   </div>
 
-                  {/* The Experience */}
+                  {/* The Cool Stuff */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-laptop-code mr-2"></i>The Experience</h4>
-                    <p className="text-sm text-gray-300 leading-relaxed">
-                      While it doesn't run on a low-level kernel, the application uses advanced React state management to simulate windowing systems, taskbars, and file navigation. The attention to detail in the UI/UX design made the project stand out immediately.
-                    </p>
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-fire mr-2"></i>What Makes It Cool?</h4>
+                    <ul className="space-y-4 text-sm text-gray-300">
+                      <li className="flex gap-3">
+                        <i className="fas fa-bolt text-yellow-400 mt-1"></i>
+                        <div>
+                          <strong className="text-white block">Real-Time Market Pulse</strong>
+                          Connected directly to public APIs, it monitors price fluctuations 24/7. No more guessing—users get the exact floor price in both USD and TON instantly.
+                        </div>
+                      </li>
+                      <li className="flex gap-3">
+                        <i className="fas fa-image text-purple-400 mt-1"></i>
+                        <div>
+                          <strong className="text-white block">Auto-Generated Visuals</strong>
+                          Instead of boring text lists, the bot generates <strong className="text-white">beautiful, shareable price cards</strong> on demand using a custom image processing engine. Perfect for sharing in trading groups.
+                        </div>
+                      </li>
+                      <li className="flex gap-3">
+                        <i className="fas fa-gem text-blue-400 mt-1"></i>
+                        <div>
+                          <strong className="text-white block">Built-in Economy</strong>
+                          Includes a fully functional <strong>Premium Subscription</strong> system. Users can pay via Telegram Stars to unlock exclusive signals, "Goodies" tracking, and ad-free experiences.
+                        </div>
+                      </li>
+                    </ul>
                   </div>
 
-                  {/* Key Achievement */}
+                  {/* Technical Highlights */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-trophy mr-2"></i>Key Achievement</h4>
-                    <p className="text-sm text-gray-300 leading-relaxed">
-                      We took this project to a hackathon, where its unique concept and execution earned us a <strong className="text-white">$150 cash prize</strong>. It was a wild experience turning a course assignment into a winning hackathon entry.
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-code-branch mr-2"></i>Under The Hood</h4>
+                    <p className="text-sm text-gray-300 leading-relaxed mb-3">
+                      Built for speed and reliability using a microservice architecture:
                     </p>
+                    <div className="flex flex-wrap gap-2">
+                      {['Python 3.11', 'Async Orchestration', 'Docker', 'PostgreSQL', 'Image Processing'].map((tech) => (
+                        <span key={tech} className="px-2 py-1 bg-white/10 rounded-md text-[10px] text-white border border-white/10 uppercase tracking-tighter">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
-                  {/* Visit Project Button */}
+                  {/* Visit Bot Button */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
                     <a
-                      href="https://retroos.yousefdev.xyz/"
+                      href="https://t.me/giftsChartBot"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
+                      className="w-full bg-[#24A1DE] hover:bg-[#208bbd] text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg shadow-blue-900/20"
                     >
-                      <span>Visit retroOS</span>
-                      <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>
+                      <span>Start Bot</span>
+                      <i className="fab fa-telegram-plane group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"></i>
                     </a>
                   </div>
                 </>
@@ -638,9 +655,9 @@ export default function Projects() {
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-2"><i className="fas fa-rocket mr-2"></i>Project: ICPC HUE Ecosystem</h4>
                     <p className="text-sm text-gray-400 font-bold">Role: Lead Software & Security Engineer</p>
-                    <p className="text-sm text-gray-400 mt-1">Timeline: Nov 2025 – Present</p>
+                    <p className="text-sm text-gray-400 mt-1">Status: <span className="text-green-400 font-bold">Deployed & Scaling</span></p>
                     <div className="mt-4 flex flex-wrap gap-2">
-                      {['Next.js 16', 'React 19', 'Express.js', 'PostgreSQL', 'Docker', 'TypeScript'].map((tech) => (
+                      {['Next.js 16', 'React 19', 'PostgreSQL', 'Docker', 'Secure Arch'].map((tech) => (
                         <span key={tech} className="px-2 py-1 bg-white/10 rounded-md text-[10px] text-white border border-white/10 uppercase tracking-tighter">
                           {tech}
                         </span>
@@ -648,39 +665,45 @@ export default function Projects() {
                     </div>
                   </div>
 
-                  {/* Overview */}
+                  {/* The Vision */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-info-circle mr-2"></i>Project Overview</h4>
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-bullseye mr-2"></i>The Vision</h4>
                     <p className="text-sm text-gray-300 leading-relaxed">
-                      ICPC HUE is a high-performance competitive programming ecosystem built for the Faculty of AI at Horus University. Moving beyond generic landing pages, I engineered a custom Online Judge (OJ), a secure recruitment pipeline, and a student dashboard that scales to hundreds of concurrent users.
+                      We didn't just want another landing page. We built <strong className="text-white">ICPC HUE</strong> to be the beating heart of competitive programming at Horus University. It's a fully integrated ecosystem that handles everything from recruitment and training to secure, real-time code execution.
                     </p>
                   </div>
 
-                  {/* Security */}
+                  {/* Why It's Next Level */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-shield-alt mr-2"></i>Hardened Security Infrastructure (A+ Rated)</h4>
-                    <p className="text-sm text-gray-300 mb-4">Instead of relying on third-party security, I implemented a Defense-in-Depth model that achieved an A+ SSL Rating from Qualys SSL Labs.</p>
-                    <ul className="space-y-3 text-sm text-gray-300">
-                      <li><strong className="text-white">Zero-Trust Auth:</strong> Stateless JWT management with Bcrypt high-iteration hashing.</li>
-                      <li><strong className="text-white">Infrastructure Hardening:</strong> Nonce-based Content Security Policy (CSP), Cloudflare WAF Layer 7 protection, and DNSSEC implementation.</li>
-                      <li><strong className="text-white">Compliance:</strong> Fully compliant with OWASP Top 10 standards and PCI DSS 4.0.1.</li>
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-fire mr-2"></i>Why It's Next Level</h4>
+                    <ul className="space-y-4 text-sm text-gray-300">
+                      <li className="flex gap-3">
+                        <i className="fas fa-shield-alt text-green-400 mt-1"></i>
+                        <div>
+                          <strong className="text-white block">Fortress-Grade Security</strong>
+                          Achieved an <strong className="text-white">A+ Rating on SSL Labs</strong> through a Defense-in-Depth strategy. We utilize Zero-Trust Auth, Cloudflare WAF, and strict Content Security Policies to keep student data safe.
+                        </div>
+                      </li>
+                      <li className="flex gap-3">
+                        <i className="fas fa-gavel text-orange-400 mt-1"></i>
+                        <div>
+                          <strong className="text-white block">The "Judge" Engine</strong>
+                          A custom-built, sandboxed execution engine. Every line of student code runs in an isolated, network-gapped Docker container with strict resource limits—preventing Cheating and DoS attacks while delivering sub-second grading.
+                        </div>
+                      </li>
+                      <li className="flex gap-3">
+                        <i className="fas fa-bolt text-yellow-400 mt-1"></i>
+                        <div>
+                          <strong className="text-white block">Performance First</strong>
+                          Despite the heavy logic, the platform loads in <strong className="text-white">under 1.4 seconds</strong>. We optimized everything from database queries to WebM background assets to ensure a snappy experience.
+                        </div>
+                      </li>
                     </ul>
                   </div>
 
-                  {/* The Judge */}
+                  {/* Impact Stats */}
                   <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-gavel mr-2"></i>Custom Execution Engine (The Judge)</h4>
-                    <p className="text-sm text-gray-300 mb-4">To ensure academic integrity and system stability, I developed a proprietary code execution engine.</p>
-                    <ul className="space-y-3 text-sm text-gray-300">
-                      <li><strong className="text-white">Sandboxed Environment:</strong> Every submission runs in an isolated Docker (Alpine Linux) container with --network none flags to prevent data leaks.</li>
-                      <li><strong className="text-white">Resource Throttling:</strong> Strict CPU (1.0) and Memory (&lt;256MB) limits prevent DoS attacks via student code.</li>
-                      <li><strong className="text-white">Scale:</strong> Manually curated 100+ test cases across 26 problems with sub-second asynchronous grading.</li>
-                    </ul>
-                  </div>
-
-                  {/* Impact & Metrics */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-chart-line mr-2"></i>Objective Impact & Metrics</h4>
+                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-chart-line mr-2"></i>Real World Impact</h4>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Performance</p>
@@ -698,19 +721,11 @@ export default function Projects() {
                         <p className="text-[10px] text-gray-400">Monthly Views</p>
                       </div>
                       <div>
-                        <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Engagement</p>
-                        <p className="text-lg font-display font-bold text-white">52/48</p>
-                        <p className="text-[10px] text-gray-400">Gender Parity</p>
+                        <p className="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Scale</p>
+                        <p className="text-lg font-display font-bold text-white">26+</p>
+                        <p className="text-[10px] text-gray-400">Problems Hosted</p>
                       </div>
                     </div>
-                  </div>
-
-                  {/* Design */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-                    <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-palette mr-2"></i>Design Philosophy</h4>
-                    <p className="text-sm text-gray-300 leading-relaxed">
-                      Built on a high-contrast Glassmorphism system, the UI utilizes reusable primitives and optimized WebM backgrounds to maintain a premium feel without sacrificing the 1.3s load time performance.
-                    </p>
                   </div>
 
                   {/* Visit Project Button */}
@@ -719,7 +734,7 @@ export default function Projects() {
                       href="https://icpchue.xyz"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
+                      className="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg shadow-white/10"
                     >
                       <span>Visit ICPCHUE</span>
                       <i className="fas fa-external-link-alt group-hover:translate-x-1 transition-transform"></i>

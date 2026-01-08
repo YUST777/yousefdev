@@ -4,12 +4,37 @@ import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import dynamic from 'next/dynamic'
+import { AnimatePresence, motion } from 'framer-motion'
 
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false })
 
 import { SiReact, SiNextdotjs, SiPostgresql, SiPython, SiTailwindcss } from "react-icons/si"
+import { HiCode } from "react-icons/hi"
 
 const bioText = "I'm Yousef, a Level 2 AI & Cybersecurity student based in Egypt and a passionate Full-Stack Developer. Since June 2024, I've been building real projects to sharpen my skills — from custom judge systems to web platforms. I love learning by doing, and I'm always exploring new technologies to solve interesting problems."
+
+// Tech to Project Mapping
+const techProjects: Record<string, { name: string; description: string; link: string; color: string }[]> = {
+  React: [
+    { name: 'ICPCHUE', description: 'Hardened, sandboxed online judge platform.', link: 'https://icpchue.xyz', color: '#61DAFB' },
+    { name: 'Zero Threat', description: 'National award-winning AI-driven security ecosystem.', link: 'https://zerothreat.yousefdev.xyz', color: '#61DAFB' },
+  ],
+  'Next.js': [
+    { name: 'ICPCHUE', description: 'Hardened, sandboxed online judge platform.', link: 'https://icpchue.xyz', color: '#000' },
+    { name: 'Zero Threat', description: 'National award-winning AI-driven security ecosystem.', link: 'https://zerothreat.yousefdev.xyz', color: '#000' },
+  ],
+  PostgreSQL: [
+    { name: 'ICPCHUE', description: 'Hardened, sandboxed online judge platform.', link: 'https://icpchue.xyz', color: '#336791' },
+    { name: 'Gifts Charts', description: 'High-throughput database for live market data.', link: 'https://t.me/giftsChartBot', color: '#336791' },
+  ],
+  Python: [
+    { name: 'Gifts Charts', description: 'Telegram bot engine handling live API polling.', link: 'https://t.me/giftsChartBot', color: '#3776AB' },
+  ],
+  Tailwind: [
+    { name: 'ICPCHUE', description: 'Hardened, sandboxed online judge platform.', link: 'https://icpchue.xyz', color: '#38B2AC' },
+    { name: 'Zero Threat', description: 'National award-winning AI-driven security ecosystem.', link: 'https://zerothreat.yousefdev.xyz', color: '#38B2AC' },
+  ],
+}
 
 export default function About() {
   const statsRowRef = useRef<HTMLDivElement>(null)
@@ -22,6 +47,7 @@ export default function About() {
   const [duckData, setDuckData] = useState<any>(null)
   const [codeDuck2Data, setCodeDuck2Data] = useState<any>(null)
   const [heartData, setHeartData] = useState<any>(null)
+  const [selectedTech, setSelectedTech] = useState<string | null>(null)
 
   useEffect(() => {
     // Load Lottie JSON files
@@ -164,8 +190,16 @@ export default function About() {
     return () => ctx.revert()
   }, [])
 
+  const techIcons = [
+    { name: 'React', Icon: SiReact, hoverColor: '#61DAFB', spin: true },
+    { name: 'Next.js', Icon: SiNextdotjs, hoverColor: '#fff', spin: false },
+    { name: 'PostgreSQL', Icon: SiPostgresql, hoverColor: '#336791', spin: false },
+    { name: 'Python', Icon: SiPython, hoverColor: '#3776AB', spin: false },
+    { name: 'Tailwind', Icon: SiTailwindcss, hoverColor: '#38B2AC', spin: false },
+  ]
+
   return (
-    <section id="about" ref={aboutSectionRef} className="relative bg-dark min-h-[120vh] md:min-h-[150vh] flex flex-col justify-center items-center">
+    <section id="about" ref={aboutSectionRef} className="relative bg-dark py-12 md:py-16">
       {/* Floating Elements - Lottie Animations */}
       <div ref={emoji1Ref} className="hidden md:block absolute top-[30%] left-10 w-40 h-40 opacity-30 pointer-events-none select-none" role="img" aria-label="Animated mascot: coding duck">
         {codingDuckData && <Lottie animationData={codingDuckData} loop={true} />}
@@ -180,8 +214,8 @@ export default function About() {
         {heartData && <Lottie animationData={heartData} loop={true} />}
       </div>
 
-      {/* Sticky Container */}
-      <div className="sticky top-20 md:top-0 h-auto md:h-screen flex flex-col items-center justify-center max-w-4xl mx-auto px-4 md:px-6 text-center z-10 py-20 md:py-0">
+      {/* Content Container - No longer sticky */}
+      <div className="flex flex-col items-center justify-center max-w-4xl mx-auto px-4 md:px-6 text-center z-10">
         {/* Massive Headline */}
         <h2 className="text-5xl md:text-9xl font-display font-black mb-8 md:mb-12 tracking-widest text-white select-none uppercase">
           ABOUT ME
@@ -200,62 +234,94 @@ export default function About() {
           </div>
 
           {/* Tech Stack */}
-          <div className="mt-8 pt-8 border-t border-white/10 w-full">
+          <div className="mt-8 pt-8 pb-6 border-t border-white/10 w-full">
             <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest mb-6 text-center">Tech Stack</p>
-            <div className="flex flex-wrap justify-center gap-6 md:gap-8 items-center">
-              {/* React */}
-              <div className="group flex flex-col items-center gap-2 cursor-pointer transition-all duration-300 hover:-translate-y-1">
-                <SiReact className="w-8 h-8 md:w-10 md:h-10 text-gray-400 group-hover:text-[#61DAFB] transition-colors duration-300 animate-[spin_10s_linear_infinite]" />
-                <span className="text-[10px] text-gray-500 uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">React</span>
-              </div>
-
-              {/* Next.js */}
-              <div className="group flex flex-col items-center gap-2 cursor-pointer transition-all duration-300 hover:-translate-y-1">
-                <SiNextdotjs className="w-8 h-8 md:w-10 md:h-10 text-gray-400 group-hover:text-white transition-colors duration-300" />
-                <span className="text-[10px] text-gray-500 uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">Next.js</span>
-              </div>
-
-              {/* PostgreSQL */}
-              <div className="group flex flex-col items-center gap-2 cursor-pointer transition-all duration-300 hover:-translate-y-1">
-                <SiPostgresql className="w-8 h-8 md:w-10 md:h-10 text-gray-400 group-hover:text-[#336791] transition-colors duration-300" />
-                <span className="text-[10px] text-gray-500 uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">PostgreSQL</span>
-              </div>
-
-              {/* Python */}
-              <div className="group flex flex-col items-center gap-2 cursor-pointer transition-all duration-300 hover:-translate-y-1">
-                <SiPython className="w-8 h-8 md:w-10 md:h-10 text-gray-400 group-hover:text-[#3776AB] transition-colors duration-300" />
-                <span className="text-[10px] text-gray-500 uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">Python</span>
-              </div>
-
-              {/* Tailwind */}
-              <div className="group flex flex-col items-center gap-2 cursor-pointer transition-all duration-300 hover:-translate-y-1">
-                <SiTailwindcss className="w-8 h-8 md:w-10 md:h-10 text-gray-400 group-hover:text-[#38B2AC] transition-colors duration-300" />
-                <span className="text-[10px] text-gray-500 uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-6">Tailwind</span>
-              </div>
+            <div className="flex flex-wrap justify-center gap-6 md:gap-8 items-center mb-4">
+              {techIcons.map(({ name, Icon, hoverColor, spin }) => (
+                <button
+                  key={name}
+                  onClick={() => setSelectedTech(name)}
+                  className="group flex flex-col items-center gap-2 cursor-pointer transition-all duration-300 hover:-translate-y-1 focus:outline-none"
+                  aria-label={`View projects using ${name}`}
+                >
+                  <Icon
+                    className={`w-8 h-8 md:w-10 md:h-10 text-gray-400 group-hover:text-[${hoverColor}] transition-colors duration-300 ${spin ? 'animate-[spin_10s_linear_infinite]' : ''}`}
+                    style={{ '--hover-color': hoverColor } as React.CSSProperties}
+                  />
+                </button>
+              ))}
             </div>
           </div>
-
-          {/* Stats Row */}
-          <div
-            ref={statsRowRef}
-            className="mt-8 md:mt-12 grid grid-cols-3 gap-4 md:gap-8 border-t border-white/10 pt-6 md:pt-8 opacity-0 transition-opacity duration-500"
-          >
-            <div>
-              <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-1 md:mb-2">06+</h3>
-              <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest">Projects</p>
-            </div>
-            <div>
-              <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-1 md:mb-2">16</h3>
-              <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest">Repos</p>
-            </div>
-            <div>
-              <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-1 md:mb-2">100%</h3>
-              <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-widest">Commitment</p>
-            </div>
-          </div>
-
         </div>
       </div>
+
+      {/* Tech Project Popup - Chat Bubble Style */}
+      <AnimatePresence>
+        {selectedTech && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 z-50"
+              onClick={() => setSelectedTech(null)}
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: 30 }}
+              transition={{ type: 'spring', damping: 20, stiffness: 400 }}
+              className="fixed z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] max-w-sm"
+            >
+              {/* Chat Bubble */}
+              <div className="relative bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] rounded-3xl p-5 shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-white/5">
+                {/* Speech Bubble Tail */}
+                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-[#0d0d0d] rotate-45 border-r border-b border-white/5"></div>
+
+                {/* Header */}
+                <div className="flex items-center gap-3 mb-4 pb-3 border-b border-white/10">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-white/20 to-white/5 flex items-center justify-center">
+                    <HiCode className="text-lg text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-white font-bold text-sm">{selectedTech}</p>
+                    <p className="text-[10px] text-gray-500">Used in {techProjects[selectedTech]?.length || 0} project(s)</p>
+                  </div>
+                  <button
+                    onClick={() => setSelectedTech(null)}
+                    className="w-7 h-7 rounded-full bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white transition-colors flex items-center justify-center text-xs"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                {/* Project Messages */}
+                <div className="space-y-2">
+                  {techProjects[selectedTech]?.map((project, idx) => (
+                    <a
+                      key={project.name}
+                      href={project.link}
+                      target={project.link.startsWith('/') ? '_self' : '_blank'}
+                      rel="noopener noreferrer"
+                      className="block bg-white/5 hover:bg-white/10 rounded-2xl px-4 py-3 transition-all duration-200 group border border-transparent hover:border-white/10"
+                    >
+                      <div className="flex items-center justify-between">
+                        <h4 className="text-sm font-bold text-white">{project.name}</h4>
+                        <span className="text-[9px] text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">Open →</span>
+                      </div>
+                      <p className="text-xs text-gray-400 mt-1">{project.description}</p>
+                    </a>
+                  ))}
+                </div>
+
+                {/* Timestamp */}
+                <p className="text-[9px] text-gray-600 text-right mt-3">Click to visit project</p>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </section>
   )
 }
+

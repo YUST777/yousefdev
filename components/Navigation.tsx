@@ -3,14 +3,22 @@
 import { useState } from 'react'
 import StaggeredMenu from './StaggeredMenu'
 import Image from 'next/image'
+import { useMapExpanded } from '@/context/MapExpandedContext'
 
 export default function Navigation() {
+  const { isMapExpanded } = useMapExpanded()
+
   const menuItems = [
     { label: 'About', link: '#about', ariaLabel: 'Navigate to About section' },
     { label: 'Services', link: '#services', ariaLabel: 'Navigate to Services section' },
     { label: 'Projects', link: '#projects', ariaLabel: 'Navigate to Projects section' },
     { label: 'Contact', link: '#contact', ariaLabel: 'Navigate to Contact section' },
   ]
+
+  // Hide navigation when map is expanded
+  if (isMapExpanded) {
+    return null
+  }
 
   return (
     <>
@@ -57,5 +65,3 @@ export default function Navigation() {
     </>
   )
 }
-
-
