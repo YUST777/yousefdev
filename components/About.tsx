@@ -9,7 +9,7 @@ const Lottie = dynamic(() => import('lottie-react'), { ssr: false })
 
 gsap.registerPlugin(ScrollTrigger)
 
-const bioText = "I'm Yousef, a Full-Stack Developer based in Egypt. Since June 2024, I have specialized in building modern web applications with a focus on clean architecture and user experience. I create production-grade systems using React, Next.js, and Node.js, delivering high-performance solutions that combine solid engineering with intuitive design."
+const bioText = "I'm Yousef, a Level 2 AI & Cybersecurity student based in Egypt and a passionate Full-Stack Developer. Since June 2024, I've been building real projects to sharpen my skills — from custom judge systems to web platforms. I love learning by doing, and I'm always exploring new technologies to solve interesting problems."
 
 export default function About() {
   const statsRowRef = useRef<HTMLDivElement>(null)
