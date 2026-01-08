@@ -13,9 +13,11 @@ const outfit = Outfit({
   variable: '--font-outfit',
 })
 
-const calSans = LocalFont({
-  src: '../public/fonts/CalSans-SemiBold.woff2',
+const calSans = Outfit({
+  subsets: ['latin'],
   variable: '--font-calsans',
+  weight: '600',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
