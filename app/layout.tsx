@@ -1,8 +1,6 @@
 import { Outfit } from 'next/font/google'
-import LocalFont from 'next/font/local'
 import './globals.css'
 import { Metadata, Viewport } from 'next'
-import ThemeScript from './ThemeScript'
 import { Analytics } from "@vercel/analytics/next"
 import ClarityAnalytics from '@/components/ClarityAnalytics'
 import SmoothScroll from '@/components/SmoothScroll'
@@ -374,7 +372,6 @@ export default function RootLayout({
       </head>
       <body className={`${outfit.variable} ${calSans.variable} font-sans antialiased selection:bg-white selection:text-black overflow-x-hidden`} suppressHydrationWarning>
         <SmoothScroll>
-          <FontAwesomeLoader />
           <ClarityAnalytics />
           <div className="noise-overlay"></div>
           {children}
