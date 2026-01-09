@@ -281,7 +281,7 @@ export default function BuildingPublicly() {
                             {/* Header / Controls */}
                             <div className="absolute top-0 left-0 right-0 z-50 p-6 flex justify-between items-start pointer-events-none">
                                 <div>
-                                    <h3 className="text-2xl font-display font-bold text-white uppercase tracking-tight">System Architecture</h3>
+                                    <h3 className="text-2xl font-display font-bold text-white uppercase tracking-tight">ICPC HUE ARCHITECTURE</h3>
                                     <p className="text-gray-400 text-xs font-mono">Interactive Mode • Scroll to Zoom</p>
                                 </div>
                                 <button
