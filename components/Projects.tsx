@@ -24,7 +24,6 @@ const VideoPlayer = ({ video, title, shouldAutoPlay = false }: { video: string, 
       onMouseLeave={() => {
         if (videoRef.current && !shouldAutoPlay) {
           videoRef.current.pause()
-          videoRef.current.currentTime = 0
         }
       }}
     >
