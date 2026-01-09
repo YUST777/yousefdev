@@ -127,17 +127,34 @@ export default function Hero() {
           ref={avatarRef}
           className="relative w-full max-w-xs md:max-w-lg mx-auto h-64 md:h-[22rem] group cursor-pointer"
           style={{ perspective: '1000px' }}
+          onMouseEnter={(e) => {
+            // Cache dimensions one time on enter
+            const rect = e.currentTarget.getBoundingClientRect();
+            e.currentTarget.dataset.cx = (rect.left + rect.width / 2).toString();
+            e.currentTarget.dataset.cy = (rect.top + rect.height / 2).toString();
+            e.currentTarget.dataset.w = rect.width.toString();
+            e.currentTarget.dataset.h = rect.height.toString();
+          }}
           onMouseMove={(e) => {
-            const rect = e.currentTarget.getBoundingClientRect()
-            const x = (e.clientX - rect.left) / rect.width - 0.5
-            const y = (e.clientY - rect.top) / rect.height - 0.5
-            const img = e.currentTarget.querySelector('img')
+            const el = e.currentTarget;
+            if (!el.dataset.w) return; // Guard clause
+
+            const cx = parseFloat(el.dataset.cx!);
+            const cy = parseFloat(el.dataset.cy!);
+            const w = parseFloat(el.dataset.w!);
+            const h = parseFloat(el.dataset.h!);
+
+            const x = (e.clientX - cx) / w;
+            const y = (e.clientY - cy) / h;
+
+            const img = el.querySelector('img')
             if (img) {
               gsap.to(img, {
                 rotateY: x * 20,
                 rotateX: -y * 20,
                 duration: 0.3,
-                ease: 'power2.out'
+                ease: 'power2.out',
+                overwrite: true
               })
             }
           }}
@@ -148,7 +165,8 @@ export default function Hero() {
                 rotateY: 0,
                 rotateX: 0,
                 duration: 0.5,
-                ease: 'elastic.out(1, 0.3)'
+                ease: 'elastic.out(1, 0.3)',
+                overwrite: true
               })
             }
           }}

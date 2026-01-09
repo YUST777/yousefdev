@@ -2,11 +2,11 @@ import dynamic from 'next/dynamic'
 import Navigation from '@/components/Navigation'
 import Hero from '@/components/Hero'
 import Marquee from '@/components/Marquee'
+import BuildingPubliclyWrapper from '@/components/BuildingPubliclyWrapper'
 
 const About = dynamic(() => import('@/components/About'))
 const Services = dynamic(() => import('@/components/Services'))
 const Projects = dynamic(() => import('@/components/Projects'))
-const BuildingPublicly = dynamic(() => import('@/components/BuildingPublicly'))
 const Footer = dynamic(() => import('@/components/Footer'))
 
 export default function Home() {
@@ -108,7 +108,7 @@ export default function Home() {
         <About />
         <Services />
         <Projects />
-        <BuildingPublicly />
+        <BuildingPubliclyWrapper />
         <Footer />
       </main>
     </>

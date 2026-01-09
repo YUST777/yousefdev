@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, useContext, useState, useMemo, ReactNode } from 'react'
 
 interface MapExpandedContextType {
     isMapExpanded: boolean
@@ -12,8 +12,11 @@ const MapExpandedContext = createContext<MapExpandedContextType | undefined>(und
 export function MapExpandedProvider({ children }: { children: ReactNode }) {
     const [isMapExpanded, setIsMapExpanded] = useState(false)
 
+    // Memoize to prevent new object reference on every parent render
+    const value = useMemo(() => ({ isMapExpanded, setIsMapExpanded }), [isMapExpanded])
+
     return (
-        <MapExpandedContext.Provider value={{ isMapExpanded, setIsMapExpanded }}>
+        <MapExpandedContext.Provider value={value}>
             {children}
         </MapExpandedContext.Provider>
     )

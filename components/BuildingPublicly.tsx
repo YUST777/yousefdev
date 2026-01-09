@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, memo, useState, useRef } from 'react'
+import { useEffect, memo } from 'react'
 import ReactFlow, {
     Background,
     Controls,
@@ -103,58 +103,60 @@ const initialEdges = [
 ]
 
 // --- Layout Helpers ---
+// Create graph once at module level
 const dagreGraph = new dagre.graphlib.Graph()
 dagreGraph.setDefaultEdgeLabel(() => ({}))
 
 const nodeWidth = 120
 const nodeHeight = 80
 
-const getLayoutedElements = (nodes: any[], edges: any[], direction = 'TB') => {
-    dagreGraph.setGraph({ rankdir: direction })
+// Pre-compute layout ONCE at module level (not in render)
+const computeLayout = () => {
+    dagreGraph.setGraph({ rankdir: 'TB' })
 
-    nodes.forEach((node) => {
+    initialNodes.forEach((node) => {
         dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight })
     })
 
-    edges.forEach((edge) => {
+    initialEdges.forEach((edge) => {
         dagreGraph.setEdge(edge.source, edge.target)
     })
 
     dagre.layout(dagreGraph)
 
-    nodes.forEach((node) => {
+    // Return NEW arrays with positions (don't mutate original)
+    const layoutedNodes = initialNodes.map((node) => {
         const nodeWithPosition = dagreGraph.node(node.id)
-        node.position = {
-            x: nodeWithPosition.x - nodeWidth / 2,
-            y: nodeWithPosition.y - nodeHeight / 2,
-        }
-        node.style = {
-            width: nodeWidth,
-            height: nodeHeight,
-            background: '#0a0a0a',
-            border: '1px solid rgba(255,255,255,0.1)',
-            borderRadius: '12px',
-            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.5)',
-        }
-        if (['Frontend', 'Backend'].includes(node.id)) {
-            node.style.background = '#111'
-            node.style.border = '1px solid rgba(255,255,255,0.2)'
+        const isHighlighted = ['Frontend', 'Backend'].includes(node.id)
+        return {
+            ...node,
+            position: {
+                x: nodeWithPosition.x - nodeWidth / 2,
+                y: nodeWithPosition.y - nodeHeight / 2,
+            },
+            style: {
+                width: nodeWidth,
+                height: nodeHeight,
+                background: isHighlighted ? '#111' : '#0a0a0a',
+                border: isHighlighted ? '1px solid rgba(255,255,255,0.2)' : '1px solid rgba(255,255,255,0.1)',
+                borderRadius: '12px',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.5)',
+            },
         }
     })
 
-    return { nodes, edges }
+    return { nodes: layoutedNodes, edges: initialEdges }
 }
 
-const ArchitectureMap = ({ interactive = false }: { interactive?: boolean }) => {
-    const { nodes: layoutedNodes, edges: layoutedEdges } = useMemo(
-        () => getLayoutedElements(initialNodes, initialEdges),
-        []
-    )
-    const [nodes, , onNodesChange] = useNodesState(layoutedNodes)
-    const [edges, , onEdgesChange] = useEdgesState(layoutedEdges)
+// Compute layout once at module load
+const { nodes: precomputedNodes, edges: precomputedEdges } = computeLayout()
+
+const ArchitectureMap = memo(({ interactive = false }: { interactive?: boolean }) => {
+    const [nodes, , onNodesChange] = useNodesState(precomputedNodes)
+    const [edges, , onEdgesChange] = useEdgesState(precomputedEdges)
     const { fitView } = useReactFlow()
 
-    // Fit view on init and handle resize
+    // Fit view on init
     const onInit = () => {
         setTimeout(() => fitView({ padding: 0.2 }), 50)
     }
@@ -183,20 +185,12 @@ const ArchitectureMap = ({ interactive = false }: { interactive?: boolean }) => 
             {interactive && <Controls style={{ background: '#111', border: '1px solid #333', color: '#fff' }} />}
         </ReactFlow>
     )
-}
+})
+
+ArchitectureMap.displayName = 'ArchitectureMap'
 
 export default function BuildingPublicly() {
     const { isMapExpanded: isExpanded, setIsMapExpanded: setIsExpanded } = useMapExpanded()
-    const [remountKey, setRemountKey] = useState(0)
-
-    // Force remount preview when closing expanded modal
-    useEffect(() => {
-        if (!isExpanded) {
-            // Small delay to let the exit animation complete
-            const timer = setTimeout(() => setRemountKey(k => k + 1), 350)
-            return () => clearTimeout(timer)
-        }
-    }, [isExpanded])
 
     // Close on ESC
     useEffect(() => {
@@ -269,7 +263,7 @@ export default function BuildingPublicly() {
                             </div>
 
                             {/* Static Preview Map */}
-                            <ArchitectureMap key={`preview-${remountKey}`} interactive={false} />
+                            <ArchitectureMap interactive={false} />
                         </motion.div>
                     </div>
                 </div>

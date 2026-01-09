@@ -374,13 +374,14 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webApplicationData) }}
         />
+        {/* React Scan Performance Monitor */}
+        <script src="https://unpkg.com/react-scan/dist/auto.global.js" async />
       </head>
       <body className={`${inter.variable} ${syne.variable} font-sans antialiased selection:bg-white selection:text-black overflow-x-hidden`}>
         <MapExpandedProvider>
           <SmoothScroll>
             {/* FontAwesome loaded in head */}
             <ClarityAnalytics />
-            <div className="noise-overlay"></div>
             {children}
             <Analytics />
           </SmoothScroll>

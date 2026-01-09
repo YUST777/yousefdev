@@ -194,18 +194,18 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
   return (
     <div
       ref={modalRef}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-2 sm:p-4"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-2 sm:p-4"
       onClick={handleClose}
     >
       <div
         ref={contentRef}
-        className="relative w-full max-w-6xl max-h-[95vh] sm:max-h-[90vh] bg-white/5 backdrop-blur-2xl border border-white/20 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl"
+        className="relative w-full max-w-6xl max-h-[95vh] sm:max-h-[90vh] bg-[#0a0a0a] border border-white/20 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/30 flex items-center justify-center text-white hover:bg-white/20 hover:border-white/40 transition-all duration-300 hover:scale-110 shadow-lg"
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 border border-white/30 flex items-center justify-center text-white hover:bg-white/20 hover:border-white/40 transition-all duration-300 hover:scale-110 shadow-lg"
           aria-label="Close modal"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -263,7 +263,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
             {project.features && project.features.length > 0 && (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
                 {project.features.map((feature, index) => (
-                  <div key={index} className="bg-white/5 backdrop-blur-xl rounded-xl p-4 sm:p-6 border border-white/10 hover:border-blue-500/50 hover:bg-white/10 transition-all shadow-lg">
+                  <div key={index} className="bg-[#0f0f0f] rounded-xl p-4 sm:p-6 border border-white/10 hover:border-blue-500/50 hover:bg-white/10 transition-all shadow-lg">
                     <div className="flex items-center gap-3 mb-4">
                       {feature.svgIcon ? (
                         <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400">
@@ -341,7 +341,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
                   {project.technologies.map((tech, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-xs sm:text-sm font-bold text-white shadow-md"
+                      className="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 border border-white/20 rounded-full text-xs sm:text-sm font-bold text-white shadow-md"
                     >
                       {tech}
                     </span>

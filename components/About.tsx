@@ -3,11 +3,9 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import dynamic from 'next/dynamic'
 import { AnimatePresence, motion } from 'framer-motion'
 import { createPortal } from 'react-dom'
-
-const Lottie = dynamic(() => import('lottie-react'), { ssr: false })
+import LazyLottie from './LazyLottie'
 
 import { SiReact, SiNextdotjs, SiPostgresql, SiPython, SiTailwindcss } from "react-icons/si"
 import { HiCode } from "react-icons/hi"
@@ -44,23 +42,11 @@ export default function About() {
   const emoji2Ref = useRef<HTMLDivElement>(null)
   const emoji3Ref = useRef<HTMLDivElement>(null)
   const emoji4Ref = useRef<HTMLDivElement>(null)
-  const [codingDuckData, setCodingDuckData] = useState<any>(null)
-  const [duckData, setDuckData] = useState<any>(null)
-  const [codeDuck2Data, setCodeDuck2Data] = useState<any>(null)
-  const [heartData, setHeartData] = useState<any>(null)
   const [selectedTech, setSelectedTech] = useState<string | null>(null)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    // Load Lottie JSON files
-    fetch('/json/duck.json').then(r => r.json()).then(setDuckData)
-    fetch('/json/heart.json').then(r => r.json()).then(setHeartData)
-    fetch('/json/Coding Duck.json').then(r => r.json()).then(setCodingDuckData)
-    fetch('/json/codeduck2.json').then(r => r.json()).then(setCodeDuck2Data)
   }, [])
 
   useEffect(() => {
@@ -208,16 +194,16 @@ export default function About() {
     <section id="about" ref={aboutSectionRef} className="relative bg-dark py-12 md:py-16">
       {/* Floating Elements - Lottie Animations */}
       <div ref={emoji1Ref} className="hidden md:block absolute top-[30%] left-10 w-40 h-40 opacity-30 pointer-events-none select-none" role="img" aria-label="Animated mascot: coding duck">
-        {codingDuckData && <Lottie animationData={codingDuckData} loop={true} />}
+        <LazyLottie path="/json/Coding Duck.json" />
       </div>
       <div ref={emoji4Ref} className="hidden md:block absolute bottom-20 left-10 w-32 h-32 opacity-30 pointer-events-none select-none" role="img" aria-label="Animated mascot: duck">
-        {duckData && <Lottie animationData={duckData} loop={true} />}
+        <LazyLottie path="/json/duck.json" />
       </div>
       <div ref={emoji2Ref} className="hidden md:block absolute bottom-20 right-10 w-32 h-32 opacity-30 pointer-events-none select-none" role="img" aria-label="Animated mascot: code duck 2">
-        {codeDuck2Data && <Lottie animationData={codeDuck2Data} loop={true} />}
+        <LazyLottie path="/json/codeduck2.json" />
       </div>
       <div ref={emoji3Ref} className="hidden md:block absolute top-[40%] right-20 w-24 h-24 opacity-20 pointer-events-none select-none" role="img" aria-label="Animated mascot: heart">
-        {heartData && <Lottie animationData={heartData} loop={true} />}
+        <LazyLottie path="/json/heart.json" />
       </div>
 
       {/* Content Container - No longer sticky */}

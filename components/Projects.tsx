@@ -13,6 +13,36 @@ import ScopedSmoothScroll from './ScopedSmoothScroll'
 
 gsap.registerPlugin(ScrollTrigger)
 
+
+const VideoPlayer = ({ video, title, shouldAutoPlay = false }: { video: string, title?: string, shouldAutoPlay?: boolean }) => {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  return (
+    <div
+      className="absolute inset-0 w-full h-full bg-[#0a0a0a] group-hover:scale-105 transition-transform duration-700 ease-out"
+      onMouseEnter={() => !shouldAutoPlay && videoRef.current?.play()}
+      onMouseLeave={() => {
+        if (videoRef.current && !shouldAutoPlay) {
+          videoRef.current.pause()
+          videoRef.current.currentTime = 0
+        }
+      }}
+    >
+      <video
+        ref={videoRef}
+        src={shouldAutoPlay ? video : `${video}#t=0.001`}
+        preload="metadata"
+        autoPlay={shouldAutoPlay}
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover rounded-2xl pointer-events-none"
+        title={title}
+      />
+    </div>
+  )
+}
+
 export default function Projects() {
   const router = useRouter()
   const revealRefs = useRef<(HTMLDivElement | null)[]>([])
@@ -254,17 +284,9 @@ export default function Projects() {
                     >
                       <i className="fas fa-arrow-right -rotate-45 text-xl"></i>
                     </motion.div>
-                    <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
+                    <div className="w-full h-full bg-[#0a0a0a] border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
                       {project.video ? (
-                        <video
-                          src={project.video}
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          className="absolute inset-0 w-full h-full object-cover rounded-2xl pointer-events-none"
-                          title={`${project.title} project preview video`}
-                        />
+                        <VideoPlayer video={project.video} title={project.title} shouldAutoPlay={project.video === '/videos/yousefdev.webm'} />
                       ) : (
                         <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-black pointer-events-none" />
                       )}
@@ -283,7 +305,7 @@ export default function Projects() {
               return (
                 <BentoTilt
                   key={project.id}
-                  className={`${project.span} rounded-2xl overflow-hidden relative group cursor-pointer bg-white/5 backdrop-blur-xl border border-white/10 hover:border-white/30 shadow-2xl transition-all duration-300`}
+                  className={`${project.span} rounded-2xl overflow-hidden relative group cursor-pointer bg-[#0a0a0a] border border-white/10 hover:border-white/30 shadow-2xl transition-all duration-300`}
                 >
                   {/* Clickable overlay for mobile touch */}
                   <button
@@ -304,21 +326,13 @@ export default function Projects() {
                   >
                     {project.video ? (
                       <>
-                        <video
-                          src={project.video}
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          className="absolute inset-0 w-full h-full object-cover rounded-2xl pointer-events-none"
-                          title={`${project.title} archive preview video`}
-                        />
+                        <VideoPlayer video={project.video} title={project.title} shouldAutoPlay={project.video === '/videos/yousefdev.webm'} />
                         {project.video !== '/videos/moreprojects.webm' && (
                           <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500 pointer-events-none"></div>
                         )}
                       </>
                     ) : (
-                      <div className="bg-white/5 backdrop-blur-xl flex flex-col items-center justify-center h-full text-center p-4 border border-white/10 w-full h-full pointer-events-none">
+                      <div className="bg-[#0a0a0a] flex flex-col items-center justify-center h-full text-center p-4 border border-white/10 w-full h-full pointer-events-none">
                         <i className={`fas ${project.icon} w-10 h-10 text-white/40 mb-4 group-hover:text-white/60 transition-colors`}></i>
                         <h3 className="text-lg md:text-xl font-display font-bold text-white">{project.title}</h3>
                         <p className="text-white/60 mt-2 text-[10px] md:text-xs uppercase tracking-widest">{project.description}</p>
@@ -386,15 +400,7 @@ export default function Projects() {
                   </motion.div>
                   <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
                     {project.video ? (
-                      <video
-                        src={project.video}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="absolute inset-0 w-full h-full object-cover rounded-2xl pointer-events-none"
-                        title={`${project.title} showcase video`}
-                      />
+                      <VideoPlayer video={project.video} title={project.title} shouldAutoPlay={project.video === '/videos/yousefdev.webm'} />
                     ) : (
                       <i className={`fas ${project.icon} text-8xl md:text-9xl text-white/20 group-hover:text-white/30 transition-colors duration-500`}></i>
                     )}
@@ -446,11 +452,11 @@ export default function Projects() {
       {openDrawer && (
         <>
           <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+            className="fixed inset-0 bg-black/80 z-40"
             onClick={() => setOpenDrawer(null)}
           />
           <div
-            className="fixed inset-x-0 bottom-0 z-50 bg-black/90 backdrop-blur-2xl border-t border-white/20 rounded-t-3xl px-6 md:px-10 pb-10 pt-6 transition-transform duration-500 shadow-2xl max-h-[90vh] overflow-hidden flex flex-col translate-y-0"
+            className="fixed inset-x-0 bottom-0 z-50 bg-[#0a0a0a] border-t border-white/20 rounded-t-3xl px-6 md:px-10 pb-10 pt-6 transition-transform duration-500 shadow-2xl max-h-[90vh] overflow-hidden flex flex-col translate-y-0"
           >
             <div className="flex items-center justify-between mb-6 flex-shrink-0">
               <div>
@@ -519,7 +525,7 @@ export default function Projects() {
               {openDrawer === 'zerothreat' && (
                 <>
                   {/* Header */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-2">Zero Threat – AI-Driven Cybersecurity Suite</h4>
                     <p className="text-sm text-gray-400"><i className="fas fa-calendar-alt mr-2"></i>August 1 – August 28, 2025</p>
                     <p className="text-sm text-gray-400 mt-1"><i className="fas fa-trophy mr-2"></i>3rd Place at the National Student Forum (Al-Multaqy Al-Qammy), Tanta University</p>
@@ -527,7 +533,7 @@ export default function Projects() {
                   </div>
 
                   {/* The Achievement */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-trophy mr-2"></i>The Achievement</h4>
                     <p className="text-sm text-gray-300 leading-relaxed">
                       This project secured 3rd place in a national competition featuring <strong className="text-white">20 universities from across Egypt</strong>. As freshmen from a private university, my team competed against and outperformed 4th and 5th-year Engineering and Computer Science seniors. Our project was evaluated and commended by the Dean of Computer Science and a Professor of Cybersecurity at Tanta University.
@@ -535,7 +541,7 @@ export default function Projects() {
                   </div>
 
                   {/* The Solution */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-lightbulb mr-2"></i>The Solution</h4>
                     <p className="text-sm text-gray-300 leading-relaxed">
                       Zero Threat is a comprehensive security ecosystem combining a web platform, a browser extension, and a Windows application.
@@ -543,7 +549,7 @@ export default function Projects() {
                   </div>
 
                   {/* My Contribution */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-globe mr-2"></i>My Contribution (The Web Platform)</h4>
                     <p className="text-sm text-gray-300 leading-relaxed mb-4">
                       I led the development of the web interface using Next.js and React, focusing on a high-performance UI with smooth animations. Key features I implemented include:
@@ -556,7 +562,7 @@ export default function Projects() {
                   </div>
 
                   {/* The Windows Agent */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-desktop mr-2"></i>The Windows Agent</h4>
                     <p className="text-sm text-gray-300 leading-relaxed">
                       Developed by my teammate Abdelrahman Mohsen, the desktop client utilizes the YARA protocol and AI integration. In our benchmarks, it achieved a <strong className="text-white">90% detection rate</strong> across 90 test subjects, outperforming many traditional signature-based antivirus solutions.
@@ -564,7 +570,7 @@ export default function Projects() {
                   </div>
 
                   {/* Official Documentation */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-file-alt mr-2"></i>Official Documentation</h4>
                     <p className="text-sm text-gray-400 mb-4">Official posts from Tanta University and Horus University:</p>
                     <ul className="space-y-3 text-sm">
@@ -587,7 +593,7 @@ export default function Projects() {
                   </div>
 
                   {/* Visit Project Button */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <a
                       href="https://zerothreat.yousefdev.xyz/"
                       target="_blank"
@@ -604,14 +610,14 @@ export default function Projects() {
               {openDrawer === 'giftsCharts' && (
                 <>
                   {/* Header */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-2">Gifts Charts – Telegram Analytics Bot</h4>
                     <p className="text-sm text-gray-400"><i className="fas fa-robot mr-2"></i>Live Sticker & Gift Price Tracker</p>
                     <p className="text-sm text-gray-400 mt-1">Status: <span className="text-green-400 font-bold">Live & Active</span></p>
                   </div>
 
                   {/* Overview */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-bullseye mr-2"></i>The Purpose</h4>
                     <p className="text-sm text-gray-300 leading-relaxed">
                       Telegrams digital asset market is moving fast. <strong className="text-white">Gifts Charts</strong> bridges the gap between chaos and clarity by providing real-time price tracking for Stickers and unique Gifts. It empowers traders and collectors with instant data, helping them make informed decisions on the fly.
@@ -619,7 +625,7 @@ export default function Projects() {
                   </div>
 
                   {/* The Cool Stuff */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-fire mr-2"></i>What Makes It Cool?</h4>
                     <ul className="space-y-4 text-sm text-gray-300">
                       <li className="flex gap-3">
@@ -647,7 +653,7 @@ export default function Projects() {
                   </div>
 
                   {/* Technical Highlights */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-code-branch mr-2"></i>Under The Hood</h4>
                     <p className="text-sm text-gray-300 leading-relaxed mb-3">
                       Built for speed and reliability using a microservice architecture:
@@ -662,7 +668,7 @@ export default function Projects() {
                   </div>
 
                   {/* Visit Bot Button */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <a
                       href="https://t.me/giftsChartBot"
                       target="_blank"
@@ -679,7 +685,7 @@ export default function Projects() {
               {openDrawer === 'ICPCHUE' && (
                 <>
                   {/* Header */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-2"><i className="fas fa-rocket mr-2"></i>Project: ICPC HUE Ecosystem</h4>
                     <p className="text-sm text-gray-400 font-bold">Role: Lead Software & Security Engineer</p>
                     <p className="text-sm text-gray-400 mt-1">Status: <span className="text-green-400 font-bold">Deployed & Scaling</span></p>
@@ -693,7 +699,7 @@ export default function Projects() {
                   </div>
 
                   {/* The Vision */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-bullseye mr-2"></i>The Vision</h4>
                     <p className="text-sm text-gray-300 leading-relaxed">
                       We didn't just want another landing page. We built <strong className="text-white">ICPC HUE</strong> to be the beating heart of competitive programming at Horus University. It's a fully integrated ecosystem that handles everything from recruitment and training to secure, real-time code execution.
@@ -701,7 +707,7 @@ export default function Projects() {
                   </div>
 
                   {/* Why It's Next Level */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-fire mr-2"></i>Why It's Next Level</h4>
                     <ul className="space-y-4 text-sm text-gray-300">
                       <li className="flex gap-3">
@@ -729,7 +735,7 @@ export default function Projects() {
                   </div>
 
                   {/* Impact Stats */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-chart-line mr-2"></i>Real World Impact</h4>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
@@ -756,7 +762,7 @@ export default function Projects() {
                   </div>
 
                   {/* Visit Project Button */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <a
                       href="https://icpchue.xyz"
                       target="_blank"
@@ -773,7 +779,7 @@ export default function Projects() {
               {openDrawer === 'yousefdev' && (
                 <>
                   {/* Description */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4">About Project</h4>
                     <p className="text-sm text-gray-300 leading-relaxed">
                       A developer focused on building practical tools and applications. Creating clean, well-architected solutions with a focus on user experience and impact.
@@ -781,7 +787,7 @@ export default function Projects() {
                   </div>
 
                   {/* Technologies */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-tools mr-2"></i>Expertise</h4>
                     <div className="flex flex-wrap gap-2">
                       {['Full-Stack Development', 'Cybersecurity', 'Automation'].map((tech) => (
@@ -793,7 +799,7 @@ export default function Projects() {
                   </div>
 
                   {/* Features */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-star mr-2"></i>Services</h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
@@ -820,13 +826,13 @@ export default function Projects() {
               {openDrawer === 'panoblue' && (
                 <>
                   {/* Header */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-2">PanoBlue – Import/Export Corporate Platform</h4>
                     <p className="text-sm text-gray-400">Role: Frontend Developer & UI Designer</p>
                   </div>
 
                   {/* Overview */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-info-circle mr-2"></i>Overview</h4>
                     <p className="text-sm text-gray-300 leading-relaxed">
                       PanoBlue is an established import/export company that needed to modernize its digital presence to compete in the international market. The client required a shift away from restrictive WordPress templates to a fully custom, unique web solution.
@@ -834,7 +840,7 @@ export default function Projects() {
                   </div>
 
                   {/* Key Contributions */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-tools mr-2"></i>Key Contributions</h4>
                     <ul className="space-y-3 text-sm text-gray-300">
                       <li><strong className="text-white">Custom Architecture:</strong> Migrated the client from a generic template to a bespoke codebase, allowing for limitless customization and improved performance.</li>
@@ -844,7 +850,7 @@ export default function Projects() {
                   </div>
 
                   {/* Visit Project Button */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <a
                       href="https://panoblue.yousefdev.xyz/"
                       target="_blank"
@@ -861,13 +867,13 @@ export default function Projects() {
               {openDrawer === 'fazzah' && (
                 <>
                   {/* Header */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-2">Fazzah – Streetwear E-Commerce Store</h4>
                     <p className="text-sm text-gray-400">Role: Full-Stack Shopify Developer</p>
                   </div>
 
                   {/* Overview */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-info-circle mr-2"></i>Overview</h4>
                     <p className="text-sm text-gray-300 leading-relaxed">
                       Fazzah is a modern streetwear brand launched to capitalize on the rising demand for high-quality hoodies and apparel. The client needed a rapid-deployment e-commerce solution to enter the market quickly without sacrificing quality.
@@ -875,7 +881,7 @@ export default function Projects() {
                   </div>
 
                   {/* Key Contributions */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <h4 className="text-xl font-display font-bold text-white mb-4"><i className="fas fa-tools mr-2"></i>Key Contributions</h4>
                     <ul className="space-y-3 text-sm text-gray-300">
                       <li><strong className="text-white">End-to-End Development:</strong> Built a comprehensive landing page and storefront using the Shopify ecosystem.</li>
@@ -885,7 +891,7 @@ export default function Projects() {
                   </div>
 
                   {/* Visit Project Button */}
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                  <div className="bg-[#0f0f0f] border border-white/10 rounded-2xl p-6">
                     <a
                       href="https://fazzah.yousefdev.xyz/"
                       target="_blank"

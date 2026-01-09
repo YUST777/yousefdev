@@ -18,12 +18,11 @@ export default function Services() {
             scrollTrigger: {
               trigger: item,
               start: 'top bottom-=100',
-              toggleActions: 'play none none reverse'
+              once: true
             },
             opacity: 0,
-            y: 100,
-            rotateX: -15,
-            duration: 1,
+            y: 50,
+            duration: 0.8,
             ease: 'power3.out',
             delay: index * 0.1
           })
@@ -75,7 +74,6 @@ export default function Services() {
                 key={index}
                 ref={el => { serviceItemsRef.current[index] = el }}
                 className="service-reveal flex flex-col md:flex-row gap-4 md:gap-12 items-center md:items-start text-center md:text-left border-b border-gray-200 pb-10 md:pb-12 last:border-b-0"
-                style={{ perspective: '1000px' }}
               >
                 <span className="text-3xl md:text-5xl font-display font-bold text-gray-300">{service.number}</span>
                 <div className="w-full">
