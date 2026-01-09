@@ -376,6 +376,7 @@ export default function RootLayout({
         />
         {/* React Scan Performance Monitor */}
         <script src="https://unpkg.com/react-scan/dist/auto.global.js" async />
+        <link rel="preload" href="/images/hero.webp" as="image" fetchPriority="high" />
       </head>
       <body className={`${inter.variable} ${syne.variable} font-sans antialiased selection:bg-white selection:text-black overflow-x-hidden`}>
         <MapExpandedProvider>

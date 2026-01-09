@@ -38,8 +38,7 @@ const techProjects: Record<string, { name: string; description: string; link: st
 export default function About() {
   const statsRowRef = useRef<HTMLDivElement>(null)
   const aboutSectionRef = useRef<HTMLElement>(null)
-  const emoji1Ref = useRef<HTMLDivElement>(null)
-  const emoji2Ref = useRef<HTMLDivElement>(null)
+
   const emoji3Ref = useRef<HTMLDivElement>(null)
   const emoji4Ref = useRef<HTMLDivElement>(null)
   const [selectedTech, setSelectedTech] = useState<string | null>(null)
@@ -99,37 +98,9 @@ export default function About() {
       })
 
       // Emoji flying animations
-      gsap.from(emoji2Ref.current, {
-        scrollTrigger: {
-          trigger: aboutSectionRef.current,
-          start: 'top bottom',
-          toggleActions: 'play none none reverse'
-        },
-        x: window.innerWidth,
-        rotation: 720,
-        scale: 0,
-        opacity: 0,
-        duration: 1.5,
-        ease: 'power2.out',
-        delay: 0.2,
-        force3D: true
-      })
 
-      gsap.from(emoji1Ref.current, {
-        scrollTrigger: {
-          trigger: aboutSectionRef.current,
-          start: 'top bottom',
-          toggleActions: 'play none none reverse'
-        },
-        x: -window.innerWidth,
-        rotation: -720,
-        scale: 0,
-        opacity: 0,
-        duration: 2,
-        ease: 'power2.out',
-        delay: 0.1,
-        force3D: true
-      })
+
+
 
       gsap.from(emoji3Ref.current, {
         scrollTrigger: {
@@ -162,7 +133,7 @@ export default function About() {
       })
 
       // Floating emojis parallax
-      const emojiRefs = [emoji1Ref.current, emoji2Ref.current, emoji3Ref.current, emoji4Ref.current].filter(Boolean)
+      const emojiRefs = [emoji3Ref.current, emoji4Ref.current].filter(Boolean)
       if (emojiRefs.length > 0) {
         gsap.to(emojiRefs, {
           scrollTrigger: {
@@ -193,17 +164,11 @@ export default function About() {
   return (
     <section id="about" ref={aboutSectionRef} className="relative bg-dark py-12 md:py-16">
       {/* Floating Elements - Lottie Animations */}
-      <div ref={emoji1Ref} className="hidden md:block absolute top-[30%] left-10 w-40 h-40 opacity-30 pointer-events-none select-none" role="img" aria-label="Animated mascot: coding duck">
+      <div ref={emoji3Ref} className="hidden md:block absolute top-[10%] right-10 w-48 h-48 opacity-30 pointer-events-none select-none" role="img" aria-label="Animated mascot: coding duck">
         <LazyLottie path="/json/Coding Duck.json" />
       </div>
-      <div ref={emoji4Ref} className="hidden md:block absolute bottom-20 left-10 w-32 h-32 opacity-30 pointer-events-none select-none" role="img" aria-label="Animated mascot: duck">
+      <div ref={emoji4Ref} className="hidden md:block absolute bottom-10 left-10 w-40 h-40 opacity-30 pointer-events-none select-none" role="img" aria-label="Animated mascot: duck">
         <LazyLottie path="/json/duck.json" />
-      </div>
-      <div ref={emoji2Ref} className="hidden md:block absolute bottom-20 right-10 w-32 h-32 opacity-30 pointer-events-none select-none" role="img" aria-label="Animated mascot: code duck 2">
-        <LazyLottie path="/json/codeduck2.json" />
-      </div>
-      <div ref={emoji3Ref} className="hidden md:block absolute top-[40%] right-20 w-24 h-24 opacity-20 pointer-events-none select-none" role="img" aria-label="Animated mascot: heart">
-        <LazyLottie path="/json/heart.json" />
       </div>
 
       {/* Content Container - No longer sticky */}

@@ -286,7 +286,7 @@ export default function Projects() {
                     </motion.div>
                     <div className="w-full h-full bg-[#0a0a0a] border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
                       {project.video ? (
-                        <VideoPlayer video={project.video} title={project.title} shouldAutoPlay={project.video === '/videos/yousefdev.webm'} />
+                        <VideoPlayer video={project.video} title={project.title} shouldAutoPlay={project.video === '/videos/yousefdev.webm' || project.video === '/videos/moreprojects.webm'} />
                       ) : (
                         <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-black pointer-events-none" />
                       )}
@@ -326,7 +326,7 @@ export default function Projects() {
                   >
                     {project.video ? (
                       <>
-                        <VideoPlayer video={project.video} title={project.title} shouldAutoPlay={project.video === '/videos/yousefdev.webm'} />
+                        <VideoPlayer video={project.video} title={project.title} shouldAutoPlay={project.video === '/videos/yousefdev.webm' || project.video === '/videos/moreprojects.webm'} />
                         {project.video !== '/videos/moreprojects.webm' && (
                           <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500 pointer-events-none"></div>
                         )}
@@ -400,7 +400,7 @@ export default function Projects() {
                   </motion.div>
                   <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
                     {project.video ? (
-                      <VideoPlayer video={project.video} title={project.title} shouldAutoPlay={project.video === '/videos/yousefdev.webm'} />
+                      <VideoPlayer video={project.video} title={project.title} shouldAutoPlay={project.video === '/videos/yousefdev.webm' || project.video === '/videos/moreprojects.webm'} />
                     ) : (
                       <i className={`fas ${project.icon} text-8xl md:text-9xl text-white/20 group-hover:text-white/30 transition-colors duration-500`}></i>
                     )}

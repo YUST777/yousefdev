@@ -7,12 +7,11 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
 
   // External packages for server components (moved from experimental in Next.js 16)
-  serverExternalPackages: ['better-sqlite3'],
-
   // Enable React Compiler for automatic memoization
-  experimental: {
-    reactCompiler: true,
-  },
+  reactCompiler: true,
+
+  // External packages for server components (moved from experimental in Next.js 16)
+  serverExternalPackages: ['better-sqlite3'],
 
   // Disable webpack cache to prevent disk writes
   webpack: (config, { dev, isServer }) => {

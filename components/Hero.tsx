@@ -46,31 +46,26 @@ export default function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title animation with 3D effect
+      // Title animation - now just a subtle finish to the CSS entrance
       if (titleRef.current) {
         const titleLines = titleRef.current.querySelectorAll('.title-line')
-        gsap.from(titleLines, {
-          opacity: 0,
-          y: 100,
-          rotateX: -90,
-          transformOrigin: 'top center',
-          stagger: 0.2,
-          duration: 1.2,
-          ease: 'power4.out',
-          delay: 0.2,
-          force3D: true
+        gsap.to(titleLines, {
+          opacity: 1,
+          y: 0,
+          stagger: 0.05,
+          duration: 0.5,
+          ease: 'power2.out',
+          delay: 0.1
         })
       }
 
-      // Avatar animation with scale and rotation
-      gsap.from(avatarRef.current, {
-        opacity: 0,
-        scale: 0.5,
-        rotateY: 180,
-        duration: 1.5,
-        ease: 'back.out(1.7)',
-        delay: 0.8,
-        force3D: true
+      // Avatar subtle entrance finish
+      gsap.to(avatarRef.current, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        ease: 'power2.out',
+        delay: 0.3
       })
 
       // Continuous subtle wiggle animation
@@ -113,9 +108,9 @@ export default function Hero() {
           className="text-5xl md:text-8xl font-display font-black leading-[0.9] md:leading-[0.85] mb-6 md:mb-8 tracking-tighter uppercase"
           style={{ perspective: '1000px' }}
         >
-          <div className="title-line text-white/50 text-sm md:text-lg font-bold tracking-[0.2em] mb-4 uppercase">Hey, I'm</div>
-          <div className="title-line">YOUSEF</div>
-          <div className="title-line text-[9px] md:text-[11px] font-bold mt-6 tracking-[0.4em] text-white/40 uppercase">
+          <div className="title-line hero-line-entrance text-white/50 text-sm md:text-lg font-bold tracking-[0.2em] mb-4 uppercase">Hey, I'm</div>
+          <div className="title-line hero-line-entrance">YOUSEF</div>
+          <div className="title-line hero-line-entrance text-[9px] md:text-[11px] font-bold mt-6 tracking-[0.4em] text-white/40 uppercase">
             <span className="relative inline-block">
               Full-Stack Developer
             </span>
@@ -125,7 +120,7 @@ export default function Hero() {
         {/* Hero Avatar with Wiggle */}
         <div
           ref={avatarRef}
-          className="relative w-full max-w-xs md:max-w-lg mx-auto h-64 md:h-[22rem] group cursor-pointer"
+          className="relative w-full max-w-xs md:max-w-lg mx-auto h-64 md:h-[22rem] group cursor-pointer head-pop"
           style={{ perspective: '1000px' }}
           onMouseEnter={(e) => {
             // Cache dimensions one time on enter
