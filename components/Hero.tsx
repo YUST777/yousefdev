@@ -46,34 +46,17 @@ export default function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title animation - now just a subtle finish to the CSS entrance
-      if (titleRef.current) {
-        const titleLines = titleRef.current.querySelectorAll('.title-line')
-        gsap.to(titleLines, {
-          opacity: 1,
-          y: 0,
-          stagger: 0.05,
-          duration: 0.5,
-          ease: 'power2.out',
-          delay: 0.1
-        })
-      }
+      // No entrance animations for LCP stability as requested
 
-      // Avatar subtle entrance finish
-      gsap.to(avatarRef.current, {
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        ease: 'power2.out',
-        delay: 0.3
-      })
 
-      // Continuous subtle wiggle animation
+      // Continuous subtle wiggle animation (GSAP is much better at this than CSS for perf)
       const img = avatarRef.current?.querySelector('img')
       if (img) {
         gsap.to(img, {
-          y: -10,
-          duration: 2,
+          y: -15,
+          x: 5,
+          rotation: 3,
+          duration: 3,
           ease: 'sine.inOut',
           yoyo: true,
           repeat: -1,
@@ -108,63 +91,18 @@ export default function Hero() {
           className="text-5xl md:text-8xl font-display font-black leading-[0.9] md:leading-[0.85] mb-6 md:mb-8 tracking-tighter uppercase"
           style={{ perspective: '1000px' }}
         >
-          <div className="title-line hero-line-entrance text-white/50 text-sm md:text-lg font-bold tracking-[0.2em] mb-4 uppercase">Hey, I'm</div>
-          <div className="title-line hero-line-entrance">YOUSEF</div>
-          <div className="title-line hero-line-entrance text-[9px] md:text-[11px] font-bold mt-6 tracking-[0.4em] text-white/40 uppercase">
+          <div className="title-line text-white/50 text-sm md:text-lg font-bold tracking-[0.2em] mb-4 uppercase">Hey, I'm</div>
+          <div className="title-line">YOUSEF</div>
+          <div className="title-line text-[9px] md:text-[11px] font-bold mt-6 tracking-[0.4em] text-white/40 uppercase">
             <span className="relative inline-block">
               Full-Stack Developer
             </span>
           </div>
         </h1>
 
-        {/* Hero Avatar with Wiggle */}
         <div
           ref={avatarRef}
-          className="relative w-full max-w-xs md:max-w-lg mx-auto h-64 md:h-[22rem] group cursor-pointer head-pop"
-          style={{ perspective: '1000px' }}
-          onMouseEnter={(e) => {
-            // Cache dimensions one time on enter
-            const rect = e.currentTarget.getBoundingClientRect();
-            e.currentTarget.dataset.cx = (rect.left + rect.width / 2).toString();
-            e.currentTarget.dataset.cy = (rect.top + rect.height / 2).toString();
-            e.currentTarget.dataset.w = rect.width.toString();
-            e.currentTarget.dataset.h = rect.height.toString();
-          }}
-          onMouseMove={(e) => {
-            const el = e.currentTarget;
-            if (!el.dataset.w) return; // Guard clause
-
-            const cx = parseFloat(el.dataset.cx!);
-            const cy = parseFloat(el.dataset.cy!);
-            const w = parseFloat(el.dataset.w!);
-            const h = parseFloat(el.dataset.h!);
-
-            const x = (e.clientX - cx) / w;
-            const y = (e.clientY - cy) / h;
-
-            const img = el.querySelector('img')
-            if (img) {
-              gsap.to(img, {
-                rotateY: x * 20,
-                rotateX: -y * 20,
-                duration: 0.3,
-                ease: 'power2.out',
-                overwrite: true
-              })
-            }
-          }}
-          onMouseLeave={(e) => {
-            const img = e.currentTarget.querySelector('img')
-            if (img) {
-              gsap.to(img, {
-                rotateY: 0,
-                rotateX: 0,
-                duration: 0.5,
-                ease: 'elastic.out(1, 0.3)',
-                overwrite: true
-              })
-            }
-          }}
+          className="relative w-full max-w-xs md:max-w-lg mx-auto h-64 md:h-[22rem] group"
         >
           <Image
             src={isClown ? "/images/clown.webp" : "/images/hero.webp"}
@@ -173,7 +111,7 @@ export default function Hero() {
             priority
             fetchPriority="high"
             sizes="(max-width: 768px) 280px, 352px"
-            className={`relative object-contain drop-shadow-2xl animate-wiggle hover:scale-105 transition-transform duration-300 ${showGlitch ? 'glitch-effect' : ''}`}
+            className={`relative object-contain transition-opacity duration-300 ${showGlitch ? 'glitch-effect' : ''}`}
             style={{
               transformStyle: 'preserve-3d',
               objectPosition: 'center top'
