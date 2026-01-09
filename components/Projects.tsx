@@ -17,6 +17,13 @@ gsap.registerPlugin(ScrollTrigger)
 const VideoPlayer = ({ video, title, shouldAutoPlay = false }: { video: string, title?: string, shouldAutoPlay?: boolean }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
 
+  useEffect(() => {
+    // If it's not autoplaying, we want to show the first frame as a thumbnail
+    if (videoRef.current && !shouldAutoPlay) {
+      videoRef.current.currentTime = 0.001
+    }
+  }, [shouldAutoPlay])
+
   return (
     <div
       className="absolute inset-0 w-full h-full bg-[#0a0a0a] group-hover:scale-105 transition-transform duration-700 ease-out"
@@ -29,8 +36,8 @@ const VideoPlayer = ({ video, title, shouldAutoPlay = false }: { video: string, 
     >
       <video
         ref={videoRef}
-        src={shouldAutoPlay ? video : `${video}#t=0.001`}
-        preload="metadata"
+        src={video}
+        preload="auto"
         autoPlay={shouldAutoPlay}
         loop
         muted
