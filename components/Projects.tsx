@@ -311,38 +311,55 @@ export default function Projects() {
                   key={project.id}
                   className={`${project.span} rounded-2xl overflow-hidden relative group cursor-pointer bg-[#0a0a0a] border border-white/10 hover:border-white/30 shadow-2xl transition-all duration-300`}
                 >
-                  {/* Clickable overlay for mobile touch */}
-                  <button
-                    onClick={() => {
-                      if (project.isArchive) {
-                        router.push('/projects')
-                        return
-                      }
-                      setSelectedProject(project)
-                      setIsModalOpen(true)
-                    }}
-                    className="absolute inset-0 z-50 w-full h-full bg-transparent cursor-pointer"
-                    aria-label={`View ${project.title || 'project'} details`}
-                  />
-                  <div
+                  <motion.div
                     ref={el => { revealRefs.current[index + 1] = el }}
-                    className="relative w-full h-full"
+                    className="w-full h-full relative"
+                    initial="idle"
+                    whileHover="hover"
                   >
-                    {project.video ? (
-                      <>
-                        <VideoPlayer video={project.video} title={project.title} shouldAutoPlay={project.video === '/videos/yousefdev.webm' || project.video === '/videos/moreprojects.webm'} />
-                        {project.video !== '/videos/moreprojects.webm' && (
-                          <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500 pointer-events-none"></div>
-                        )}
-                      </>
-                    ) : (
-                      <div className="bg-[#0a0a0a] flex flex-col items-center justify-center h-full text-center p-4 border border-white/10 w-full h-full pointer-events-none">
-                        <i className={`fas ${project.icon} w-10 h-10 text-white/40 mb-4 group-hover:text-white/60 transition-colors`}></i>
-                        <h3 className="text-lg md:text-xl font-display font-bold text-white">{project.title}</h3>
-                        <p className="text-white/60 mt-2 text-[10px] md:text-xs uppercase tracking-widest">{project.description}</p>
-                      </div>
-                    )}
-                  </div>
+                    {/* Clickable overlay for mobile touch */}
+                    <button
+                      onClick={() => {
+                        if (project.isArchive) {
+                          router.push('/projects')
+                          return
+                        }
+                        setSelectedProject(project)
+                        setIsModalOpen(true)
+                      }}
+                      className="absolute inset-0 z-50 w-full h-full bg-transparent cursor-pointer"
+                      aria-label={`View ${project.title || 'project'} details`}
+                    />
+
+                    {/* "Click Me" Hint Circle */}
+                    <motion.div
+                      variants={{
+                        idle: { scale: 0, opacity: 0 },
+                        hover: { scale: 1, opacity: 1 }
+                      }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className="absolute top-4 right-4 z-40 w-12 h-12 bg-white rounded-full flex items-center justify-center text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+                    >
+                      <i className="fas fa-hand-pointer text-xl"></i>
+                    </motion.div>
+
+                    <div className="relative w-full h-full">
+                      {project.video ? (
+                        <>
+                          <VideoPlayer video={project.video} title={project.title} shouldAutoPlay={project.video === '/videos/yousefdev.webm' || project.video === '/videos/moreprojects.webm'} />
+                          {project.video !== '/videos/moreprojects.webm' && (
+                            <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500 pointer-events-none"></div>
+                          )}
+                        </>
+                      ) : (
+                        <div className="bg-[#0a0a0a] flex flex-col items-center justify-center h-full text-center p-4 border border-white/10 w-full h-full pointer-events-none">
+                          <i className={`fas ${project.icon} w-10 h-10 text-white/40 mb-4 group-hover:text-white/60 transition-colors`}></i>
+                          <h3 className="text-lg md:text-xl font-display font-bold text-white">{project.title}</h3>
+                          <p className="text-white/60 mt-2 text-[10px] md:text-xs uppercase tracking-widest">{project.description}</p>
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
                 </BentoTilt>
               )
             }
