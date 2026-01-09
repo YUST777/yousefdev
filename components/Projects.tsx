@@ -14,26 +14,28 @@ import ScopedSmoothScroll from './ScopedSmoothScroll'
 gsap.registerPlugin(ScrollTrigger)
 
 
-const VideoPlayer = ({ video, title, shouldAutoPlay = false }: { video: string, title?: string, shouldAutoPlay?: boolean }) => {
+const VideoPlayer = ({ video, title, shouldAutoPlay = false, isHovered = false }: { video: string, title?: string, shouldAutoPlay?: boolean, isHovered?: boolean }) => {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
-    // If it's not autoplaying, we want to show the first frame as a thumbnail
-    if (videoRef.current && !shouldAutoPlay) {
+    if (shouldAutoPlay) return
+
+    if (isHovered) {
+      videoRef.current?.play().catch(() => { })
+    } else {
+      videoRef.current?.pause()
+    }
+  }, [isHovered, shouldAutoPlay])
+
+  // Use onLoadedData to set the initial frame safely
+  const handleLoadedData = () => {
+    if (videoRef.current && !shouldAutoPlay && videoRef.current.currentTime === 0) {
       videoRef.current.currentTime = 0.001
     }
-  }, [shouldAutoPlay])
+  }
 
   return (
-    <div
-      className="absolute inset-0 w-full h-full bg-[#0a0a0a] group-hover:scale-105 transition-transform duration-700 ease-out"
-      onMouseEnter={() => !shouldAutoPlay && videoRef.current?.play()}
-      onMouseLeave={() => {
-        if (videoRef.current && !shouldAutoPlay) {
-          videoRef.current.pause()
-        }
-      }}
-    >
+    <div className="absolute inset-0 w-full h-full bg-[#0a0a0a] group-hover:scale-105 transition-transform duration-700 ease-out">
       <video
         ref={videoRef}
         src={video}
@@ -42,6 +44,7 @@ const VideoPlayer = ({ video, title, shouldAutoPlay = false }: { video: string, 
         loop
         muted
         playsInline
+        onLoadedData={handleLoadedData}
         className="absolute inset-0 w-full h-full object-cover rounded-2xl pointer-events-none"
         title={title}
       />
@@ -57,6 +60,7 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<any>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [openDrawer, setOpenDrawer] = useState<string | null>(null)
+  const [hoveredVideoId, setHoveredVideoId] = useState<number | null>(null)
   const [typewriterText, setTypewriterText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
   const [hasMounted, setHasMounted] = useState(false)
@@ -271,6 +275,8 @@ export default function Projects() {
                     className="w-full h-full relative"
                     initial="idle"
                     whileHover="hover"
+                    onMouseEnter={() => setHoveredVideoId(project.id)}
+                    onMouseLeave={() => setHoveredVideoId(null)}
                   >
                     {project.video !== '/videos/yousefdev.webm' && (
                       <button
@@ -296,7 +302,12 @@ export default function Projects() {
                     )}
                     <div className="w-full h-full bg-[#0a0a0a] border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
                       {project.video ? (
-                        <VideoPlayer video={project.video} title={project.title} shouldAutoPlay={project.video === '/videos/yousefdev.webm' || project.video === '/videos/moreprojects.webm'} />
+                        <VideoPlayer
+                          video={project.video}
+                          title={project.title}
+                          shouldAutoPlay={project.video === '/videos/yousefdev.webm' || project.video === '/videos/moreprojects.webm'}
+                          isHovered={hoveredVideoId === project.id}
+                        />
                       ) : (
                         <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-black pointer-events-none" />
                       )}
@@ -322,6 +333,8 @@ export default function Projects() {
                     className="w-full h-full relative"
                     initial="idle"
                     whileHover="hover"
+                    onMouseEnter={() => setHoveredVideoId(project.id)}
+                    onMouseLeave={() => setHoveredVideoId(null)}
                   >
                     {/* Clickable overlay for mobile touch */}
                     <button
@@ -352,7 +365,12 @@ export default function Projects() {
                     <div className="relative w-full h-full">
                       {project.video ? (
                         <>
-                          <VideoPlayer video={project.video} title={project.title} shouldAutoPlay={project.video === '/videos/yousefdev.webm' || project.video === '/videos/moreprojects.webm'} />
+                          <VideoPlayer
+                            video={project.video}
+                            title={project.title}
+                            shouldAutoPlay={project.video === '/videos/yousefdev.webm' || project.video === '/videos/moreprojects.webm'}
+                            isHovered={hoveredVideoId === project.id}
+                          />
                           {project.video !== '/videos/moreprojects.webm' && (
                             <div className="absolute inset-0 bg-black/20 backdrop-blur-sm group-hover:bg-transparent group-hover:backdrop-blur-none transition-all duration-500 pointer-events-none"></div>
                           )}
@@ -382,6 +400,8 @@ export default function Projects() {
                   className="w-full h-full relative"
                   initial="idle"
                   whileHover="hover"
+                  onMouseEnter={() => setHoveredVideoId(project.id)}
+                  onMouseLeave={() => setHoveredVideoId(null)}
                 >
                   <button
                     onClick={() => {
@@ -427,7 +447,12 @@ export default function Projects() {
                   </motion.div>
                   <div className="w-full h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl relative">
                     {project.video ? (
-                      <VideoPlayer video={project.video} title={project.title} shouldAutoPlay={project.video === '/videos/yousefdev.webm' || project.video === '/videos/moreprojects.webm'} />
+                      <VideoPlayer
+                        video={project.video}
+                        title={project.title}
+                        shouldAutoPlay={project.video === '/videos/yousefdev.webm' || project.video === '/videos/moreprojects.webm'}
+                        isHovered={hoveredVideoId === project.id}
+                      />
                     ) : (
                       <i className={`fas ${project.icon} text-8xl md:text-9xl text-white/20 group-hover:text-white/30 transition-colors duration-500`}></i>
                     )}
